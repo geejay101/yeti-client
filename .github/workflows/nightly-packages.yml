@@ -18,6 +18,9 @@ jobs:
         with:
           node-version: '10'
 
+      - name: Install Yarn
+        run: npm install -g yarn
+
       - name: Build package
         run: make package
 
