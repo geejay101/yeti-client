@@ -13,7 +13,7 @@ export default {
 
     ua: {
       message: {
-        loginTitle: 'Логування',
+        loginTitle: 'Вхід',
         userName: "Ім'я користувача",
         userNameError: "Будь-ласка, введіть ім'я користувача",
         password: 'Пароль',

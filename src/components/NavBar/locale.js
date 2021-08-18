@@ -17,7 +17,7 @@ export default {
     },
     ua: {
       message: {
-        [ACCOUNT_INFO_ROUTE_NAMES.RATES]: 'Cтавки',
+        [ACCOUNT_INFO_ROUTE_NAMES.RATES]: 'Тарифи',
         [ACCOUNT_INFO_ROUTE_NAMES.CDRS]: 'CDRи',
         [ACCOUNT_INFO_ROUTE_NAMES.ACCOUNT]: 'Акаунт',
         [ACCOUNT_INFO_ROUTE_NAMES.NETWORKS]: 'Мережі',

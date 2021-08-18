@@ -5,6 +5,8 @@ TODO.list
 /coverage
 .scannerwork/
 
+/public/config.js
+
 # local env files
 .env.local
 .env.*.local
