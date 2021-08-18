@@ -34,6 +34,8 @@ clean:
 
 .PHONY: package
 package: chlog
+	@$(info:msg=Installing modules)
+	yarn install
 	@$(info:msg=Building JS)
 	yarn build
 	@$(info:msg=Building package)
