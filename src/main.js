@@ -25,7 +25,7 @@ const i18n = new VueI18n();
 Sentry.init({
   Vue,
   dsn: 'https://7725872f254e423f8d07b8b2b17b58f2@errors.yeti-switch.org/3',
-  environment: `${YETI_CONFIG.yeti.apiBaseUrl}`,
+  environment: location.hostname,
   denyUrls: [
     'http://localhost',
   ],
