@@ -4,7 +4,7 @@
 
 # yeti-client
 
-yeti-client it customer portal for [Yeti] system. yeti-client acts as SPA and communicating with **yeti-web** backend via RESR API. 
+Yeti-client it customer portal for Yeti system. yeti-client acts as SPA and communicating with **yeti-web** backend via RESY API. 
 
 ## Project setup
 ```
