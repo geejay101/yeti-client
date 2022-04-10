@@ -5,10 +5,10 @@ on:
     types: [ published ]
 
 jobs:
-  deb10:
-    name: Debian 10 release package building
+  deb11:
+    name: Debian 11 release package building
     runs-on: ubuntu-latest
-    container: switchyeti/yeti-client:build_buster
+    container: ghcr.io/yeti-switch/yeti-web/build-image:bullseye
 
     steps:
       - uses: actions/checkout@v2
@@ -35,6 +35,6 @@ jobs:
         env:
           PKG_API_BASE: ${{secrets.PKG_API_BASE}}
           PKG_TAG: ${{github.ref}} 
-        run: v=${PKG_TAG##*/};major_version=${v%\.[0-9]*};ci/deploy.sh buster $major_version main ../*.deb
+        run: v=${PKG_TAG##*/};major_version=${v%\.[0-9]*};ci/deploy.sh bullseye $major_version main ../*.deb
 
 

@@ -5,10 +5,10 @@ on:
     branches: [ master ]
 
 jobs:
-  deb10:
-    name: Debian 10 nightly package building
+  deb11:
+    name: Debian 11 nightly package building
     runs-on: ubuntu-latest
-    container: switchyeti/yeti-client:build_buster
+    container: ghcr.io/yeti-switch/yeti-web/build-image:bullseye
     steps:
       - uses: actions/checkout@v2
         with:
@@ -33,6 +33,6 @@ jobs:
       - name: Upload package to ${{github.ref}} repo
         env:
           PKG_API_BASE: ${{secrets.PKG_API_BASE}}
-        run: ci/deploy.sh buster nightly main ../*.deb
+        run: ci/deploy.sh bullseye nightly main ../*.deb
 
 
