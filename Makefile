@@ -3,6 +3,10 @@ pkg_name = yeti-client
 lintian_flag := $(if $(lintian),--lintian,--no-lintian)
 debian_host_release != lsb_release -sc
 
+version = $(shell ./ci/gen_version.sh)
+debian_version = $(shell echo $(version) | sed 's/_/~/' | sed 's/-master/~master/' | sed 's/-rc/~rc/')-1
+commit = $(shell git rev-parse HEAD)
+
 app_dir := /opt/yeti-client
 app_files := dist
 
@@ -46,8 +50,12 @@ ifeq "$(auto_chlog)" "no"
 	@$(info:msg=Skipping changelog generation)
 else
 	@$(info:msg=Generating changelog Supply auto_chlog=no to skip.)
-	@which changelog-gen || { $(err:msg=Failed to generate changelog. Did you install git-changelog package?) && false; }
-	changelog-gen -p "$(pkg_name)" -d "$(debian_host_release)" -A "s/_/~/g" "s/-master/~master/" "s/-rc/~rc/"
+	dch \
+                --create \
+                --package "$(pkg_name)" \
+                --newversion "$(debian_version)" \
+                --distribution "$(debian_host_release)" \
+                "Release $(version), commit: $(commit)"
 endif
 
 

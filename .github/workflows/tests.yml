@@ -20,3 +20,30 @@ jobs:
       - run: yarn install
       - run: yarn test
 
+  deb11_test_build:
+    name: Debian 11 test build
+    runs-on: ubuntu-latest
+    container: ghcr.io/yeti-switch/yeti-web/build-image:bullseye
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '10'
+
+      - name: Install Yarn
+        run: npm install -g yarn
+
+      - name: Build package
+        run: make package
+        env:
+          PACKAGE_TYPE: test
+
+      - name: Save deb package as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: deb-package
+          path: /__w/yeti-client/*.deb
+
