@@ -86,12 +86,6 @@ export default {
             type: NOTIFICATION_TYPES.SUCCESS,
             text: 'Login successful',
           });
-          // this[AUTH.ACTIONS.AUTH_REQUEST]({ login, password })
-          //   .then(() => this.$router.push(this.$route.query.redirect || '/'))
-          //   .then(() => this.$notify({
-          //     type: NOTIFICATION_TYPES.SUCCESS,
-          //     text: 'Login successful',
-          //   }));
         }
       });
     },

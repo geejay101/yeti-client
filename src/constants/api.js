@@ -44,7 +44,7 @@ export const RELATIONSHIPS = {
   [RESOURCES.AUTH]: {
     login: '',
     password: '',
-    jwt: '',
+    cookie_auth: '',
   },
   [RESOURCES.RATE]: {
     prefix: '',

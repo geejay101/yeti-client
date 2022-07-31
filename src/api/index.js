@@ -11,7 +11,7 @@ export default class JsonApi {
     req: (payload) => {
       if (payload.req.model === RESOURCES.AUTH) {
         payload.req.data = {
-          auth: payload.req.data.data.attributes,
+          auth: payload.req.data?.data.attributes,
         };
       }
 
@@ -50,12 +50,12 @@ export default class JsonApi {
     },
   });
 
-  static getNetworkAuthErrorMiddleware = (push, storeDispatch) => ({
+  static getNetworkAuthErrorMiddleware = (router, storeDispatch) => ({
     name: 'auth-redirect',
-    error: (payload) => {
+    error: async (payload) => {
       if (payload[0].title === 'Authorization failed') {
-        storeDispatch(AUTH.ACTIONS.LOGOUT);
-        push(GENERAL_PATHS.LOGIN);
+        await storeDispatch(AUTH.ACTIONS.LOGOUT);
+        router.push(GENERAL_PATHS.LOG_IN);
       }
 
       return payload;
@@ -100,9 +100,7 @@ export default class JsonApi {
 
   createResource(resourceName, data) { return this.instance.create(resourceName, data); }
 
-  setToken(token) {
-    this.instance.headers.Authorization = `Bearer ${token}`;
-  }
+  destroyResource(resourceName, id) { return this.instance.destroy(resourceName, id); }
 
   insertNetworkErrorMiddleware(notify, storeDispatch) {
     const middleware = JsonApi.getNetworkErrorMiddleware(notify, storeDispatch);

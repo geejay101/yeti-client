@@ -8,6 +8,7 @@ import { AUTH } from '@/constants';
 const mockInsertNetworkErrorMiddleware = jest.fn(() => true);
 const mockInsertNetworkAuthErrorMiddleware = jest.fn(() => true);
 const fakePush = jest.fn();
+const fakeRouteName = 'login';
 
 jest.mock('@/api', () => ({
   get apiInstance() {
@@ -20,6 +21,7 @@ jest.mock('@/api', () => ({
 
 const $router = {
   push: fakePush,
+  name: fakeRouteName,
 };
 
 const localVue = createLocalVue();
@@ -28,11 +30,13 @@ localVue.use(VueI18n);
 const i18n = new VueI18n({ locale: 'en', messages: { en: { message: { inputPlaceholder: 'Input', clear: 'Clear' } } } });
 
 describe('App', () => {
-  it('empty App will be displayed with no props passed', () => {
+  it('empty App will be displayed with no props passed', async () => {
     const localAuthMock = jest.fn();
     const store = new Vuex.Store({
       getters: {
         locale: () => 'en',
+        requestIsPending: () => 0,
+        isAuthenticated: () => false,
       },
       actions: {
         [AUTH.ACTIONS.LOCAL_AUTH]: localAuthMock,
@@ -52,6 +56,7 @@ describe('App', () => {
       },
     });
     expect(localAuthMock).toHaveBeenCalledTimes(1);
+    await localVue.nextTick();
     expect(mockInsertNetworkErrorMiddleware).toHaveBeenCalledTimes(1);
     expect(mockInsertNetworkAuthErrorMiddleware).toHaveBeenCalledTimes(1);
     wrapper.destroy();

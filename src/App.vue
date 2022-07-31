@@ -1,6 +1,15 @@
 <template>
   <div id="app">
     <notifications />
+    <div
+      v-if="isApplicationLoading"
+      class="loadmask"
+    >
+      <a-icon
+        type="loading"
+        class="loader"
+      />
+    </div>
     <main>
       <NavBar />
       <div class="working-area-wrapper">
@@ -33,12 +42,20 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['locale']),
+    ...mapGetters(['locale', 'requestIsPending', 'isAuthenticated']),
+    isApplicationLoading() {
+      return this.requestIsPending && this.$route.name === 'login';
+    },
   },
-  beforeCreate() {
+  watch: {
+    isAuthenticated() {
+      this.$router.push(this.$route.query.redirect || '/');
+    },
+  },
+  async beforeCreate() {
+    await this.$store.dispatch(AUTH.ACTIONS.LOCAL_AUTH);
     api.apiInstance.insertNetworkErrorMiddleware(this.$notify, this.$store.dispatch);
-    api.apiInstance.insertNetworkAuthErrorMiddleware(this.$router.push, this.$store.dispatch);
-    this.$store.dispatch(AUTH.ACTIONS.LOCAL_AUTH);
+    api.apiInstance.insertNetworkAuthErrorMiddleware(this.$router, this.$store.dispatch);
   },
   created() {
     this.$i18n.locale = this.locale;
@@ -51,6 +68,22 @@ export default {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   text-align: center;
   margin-top: 00px;
+}
+
+.loadmask {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background: #a3a3a3aa;
+  z-index: 2;
+}
+
+.loader {
+  font-size: 30px;
+  position: relative;
+  top: 40vh;
+  width: 30px;
+  height: 30px;
 }
 
 .filter {

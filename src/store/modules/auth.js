@@ -1,51 +1,38 @@
 import api from '@/api';
 import { RESOURCES, AUTH } from '@/constants';
-
-const YETI_TOKEN = 'yeti-token';
+import utils from '@/utils';
 
 const state = {
-  token: sessionStorage.getItem(YETI_TOKEN),
   status: '',
 };
 const getters = {
-  isAuthenticated: () => Boolean(state.token),
-  authStatus: () => state.status,
+  isAuthenticated: () => state.status === 'success',
 };
 export const actions = {
   [AUTH.ACTIONS.AUTH_REQUEST]: async ({ commit }, { login, password }) => {
-    const { data: { jwt } } = await api.apiInstance.createResource(RESOURCES.AUTH, {
-      login, password,
+    await utils.wrapWithAsyncRequestStatus(commit, async () => {
+      await api.apiInstance.createResource(RESOURCES.AUTH, {
+        login, password, cookie_auth: true,
+      });
+      commit(AUTH.MUTATIONS.AUTH_SUCCESS);
     });
-
-    api.apiInstance.setToken(jwt);
-    commit(AUTH.MUTATIONS.AUTH_SUCCESS, jwt);
-    sessionStorage.setItem(YETI_TOKEN, jwt);
   },
-  [AUTH.ACTIONS.LOCAL_AUTH]: ({ commit }) => {
-    const jwt = sessionStorage.getItem(YETI_TOKEN);
-
-    api.apiInstance.setToken(jwt);
-    if (jwt) {
-      commit(AUTH.MUTATIONS.AUTH_SUCCESS, jwt);
-    } else {
-      commit(AUTH.MUTATIONS.LOGOUT);
-    }
+  [AUTH.ACTIONS.LOCAL_AUTH]: async ({ commit }) => {
+    await utils.wrapWithAsyncRequestStatus(commit, async () => {
+      await api.apiInstance.findAllResources(RESOURCES.AUTH);
+      commit(AUTH.MUTATIONS.AUTH_SUCCESS);
+    });
   },
-  [AUTH.ACTIONS.LOGOUT]: ({ commit }) =>
-  // TODO Why Promise is used here
-    new Promise((resolve) => {
-      commit(AUTH.MUTATIONS.LOGOUT);
-      sessionStorage.removeItem(YETI_TOKEN);
-      resolve();
-    }),
+  [AUTH.ACTIONS.LOGOUT]: async ({ commit }) => {
+    await api.apiInstance.destroyResource(RESOURCES.AUTH);
+    commit(AUTH.MUTATIONS.LOGOUT);
+  },
 };
 export const mutations = {
-  [AUTH.MUTATIONS.AUTH_SUCCESS]: (currentState, token) => {
+  [AUTH.MUTATIONS.AUTH_SUCCESS]: (currentState) => {
     currentState.status = 'success';
-    currentState.token = token; // @todo probably not needed anymore
   },
   [AUTH.MUTATIONS.LOGOUT]: (currentState) => {
-    currentState.token = '';
     currentState.status = 'unauthorized';
   },
 };
