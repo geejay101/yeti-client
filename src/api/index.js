@@ -75,6 +75,7 @@ export default class JsonApi {
         apiUrl: `${YETI_CONFIG.yeti.apiBaseUrl}/api/rest/customer/v1`,
         pluralize: false,
       });
+      this.instance.axios.defaults.withCredentials = true;
     } catch (e) {
       throw new Error(`Api was not initialized due to error: ${e}. Please check your config file.`);
     }
