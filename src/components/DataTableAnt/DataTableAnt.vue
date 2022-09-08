@@ -171,6 +171,8 @@ export default {
   .ant-table-body {
     background-color: #ffffff;
   }
-
+  .ant-table-row {
+    background-color: #ffffff;
+  }
 }
 </style>

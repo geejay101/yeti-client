@@ -137,6 +137,18 @@ export default {
   background: url('../../assets/images/yeti.svg') top/50px no-repeat;
 }
 
+.ant-menu {
+    background: #222d32;
+}
+
+.ant-menu-item {
+  background: #222d32;
+}
+
+.ant-layout-sider-trigger {
+    background-color: #222d32;
+}
+
 .ant-menu-item > a {
   display: flex;
   align-items: center;

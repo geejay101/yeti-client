@@ -25,7 +25,6 @@
     </date-range-picker>
     <a-button
       variant="light"
-      size="large"
       :disabled="requestIsPending"
       @click="filterReset"
     >
@@ -108,6 +107,7 @@ export default {
   color: #495057;
   line-height: 1.5;
   font-weight: 400;
+  border-radius: 5px;
 }
 .time-range-filter .form-control {
   font-size: 0.9rem;

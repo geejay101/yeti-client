@@ -46,6 +46,15 @@ export const STATISTICS = {
   },
 };
 
+export const INVOICES = {
+  MUTATIONS: {
+    SET_INVOICES: 'setInvoices',
+  },
+  ACTIONS: {
+    GET_INVOICES: 'getInvoices',
+  },
+};
+
 export const RATES = {
   MUTATIONS: {
     SET_RATES: 'setRates',
