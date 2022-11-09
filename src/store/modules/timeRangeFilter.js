@@ -12,9 +12,6 @@ export const actions = {
   [TIME_RANGE_FILTER.ACTIONS.FILTER_SET]: ({ commit }, value) => {
     commit(TIME_RANGE_FILTER.MUTATIONS.SET_VALUE, value);
   },
-  [TIME_RANGE_FILTER.ACTIONS.FILTER_RESET]: ({ commit }) => {
-    commit(TIME_RANGE_FILTER.MUTATIONS.SET_VALUE, utils.getLast24Hours());
-  },
 };
 export const mutations = {
   [TIME_RANGE_FILTER.MUTATIONS.SET_VALUE]: (currentState, value) => {

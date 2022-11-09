@@ -3,10 +3,10 @@
     :fields="tableFields"
     :items="formattedNetworks"
     :get-data="getNetworks"
-    local-filter-enabled
-    :local-filter-term="networksFilter"
-    :on-local-filter="setNetworksFilter"
+    :active-filters="networksFilter"
+    :set-filter="setNetworksFilter"
     :rows="rows"
+    filterable
   />
 </template>
 

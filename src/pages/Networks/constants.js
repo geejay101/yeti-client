@@ -4,6 +4,7 @@ export const TABLE_HEADERS_ANT = [
     dataIndex: 'name',
     width: 300,
     visibleInOverview: true,
+    filter: 'string',
     customRender(name, row) {
       return <a
       router-link

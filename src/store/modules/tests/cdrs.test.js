@@ -3,6 +3,7 @@ import { mutations, actions } from '../cdrs';
 
 jest.mock('@/utils', () => ({
   wrapWithAsyncRequestStatus: jest.fn((commit, callback) => callback()),
+  constructFilter: jest.fn(() => {}),
 }));
 
 const mockFindAllResources = jest.fn(() => true);
@@ -38,8 +39,10 @@ describe('cdrs', () => {
 
   describe('actions', () => {
     let commit;
+    let dispatch;
     beforeEach(() => {
       commit = jest.fn();
+      dispatch = jest.fn();
     });
     afterEach(() => {
       commit = null;
@@ -48,7 +51,7 @@ describe('cdrs', () => {
     it(`${CDRS.ACTIONS.SET_CDRS_FILTER} calls appropriate mutation if filter value is present`, () => {
       const filter = { filterKey: 'filterValue' };
 
-      actions[CDRS.ACTIONS.SET_CDRS_FILTER]({ commit }, filter);
+      actions[CDRS.ACTIONS.SET_CDRS_FILTER]({ commit, dispatch }, filter);
 
       expect(commit).toHaveBeenCalledWith(CDRS.MUTATIONS.SAVE_CDRS_FILTER, filter);
     });
@@ -66,9 +69,10 @@ describe('cdrs', () => {
       const endDate = 'endDate';
       const rootGetters = { activeAccount: { id } };
       const rootState = { timeRangeFilter: { timeFilterValue: { startDate, endDate } } };
+      const state = { cdrFilter: {} };
       mockFindAllResources.mockReturnValue(CDRS_SAMPLE);
 
-      await actions[CDRS.ACTIONS.GET_CDRS]({ commit, rootGetters, rootState }, page);
+      await actions[CDRS.ACTIONS.GET_CDRS]({ commit, rootGetters, rootState, state }, page);
 
       expect(mockFindAllResources).toHaveBeenCalledWith(
         RESOURCES.CDR, {

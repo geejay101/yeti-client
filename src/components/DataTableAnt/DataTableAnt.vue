@@ -5,27 +5,18 @@
       class="dataTable"
     >
       <a-row
-        v-if="localFilterEnabled"
+        v-if="filterable"
         :gutter="[16, 16]"
       >
         <a-col
-          :span="6"
+          :span="24"
           class="gutter-row"
         >
-          <a-input-search
-            v-model="localFilter"
-            :placeholder="$t('message.inputPlaceholder')"
-            size="large"
-            @change="onFilterChange"
-          >
-            <a-button
-              slot="enterButton"
-              :disabled="!localFilter"
-              @mousedown.stop="clearLocalFilter"
-            >
-              {{ $t('message.clear') }}
-            </a-button>
-          </a-input-search>
+          <DataFilter
+            :fields="fields"
+            :active-filters="activeFilters"
+            @filterChange="onFilterChange"
+          />
         </a-col>
       </a-row>
       <a-table
@@ -41,7 +32,7 @@
         >
           <a-tag
             :key="badge"
-            :color="badge === 'No' || badge === 'false' ? 'volcano' : ''"
+            :color="badge === 'No' || badge === 'false' ? 'volcano' : 'green'"
           >
             {{ badge }}
           </a-tag>
@@ -53,7 +44,7 @@
           <a-descriptions>
             <a-descriptions-item
               v-for="(field) of fields"
-              :key="field"
+              :key="field.key"
               :label="field.title"
             >
               {{ record[field.key] }}
@@ -67,25 +58,32 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { debounce } from 'lodash';
 
 import locale from './locale';
+import DataFilter from './components/DataFilter/DataFilter';
 
 export default {
   name: 'DataTableAnt',
+  components: {
+    DataFilter,
+  },
   i18n: locale,
   props: {
-    localFilterEnabled: {
+    filterable: {
       type: Boolean,
       default: false,
     },
-    onLocalFilter: {
-      type: Function,
-      default: () => null,
+    activeFilters: {
+      type: Object,
+      default() {
+        return {};
+      },
     },
-    localFilterTerm: {
-      type: String,
-      default: null,
+    setFilter: {
+      type: Function,
+      default() {
+        return null;
+      },
     },
     rows: {
       type: Number,
@@ -118,9 +116,6 @@ export default {
   },
   data() {
     return {
-      // Dynamic data
-      localFilter: this.localFilterTerm || null,
-      searchText: '',
     };
   },
   computed: {
@@ -133,12 +128,8 @@ export default {
     },
   },
   methods: {
-    onFilterChange: debounce(function onInputChange(e) {
-      this.onLocalFilter(e.target.value);
-    }, 300),
-    clearLocalFilter() {
-      this.localFilter = '';
-      this.onLocalFilter(this.localFilter);
+    onFilterChange(filter) {
+      this.setFilter(filter);
     },
     onPaginationChange(page) {
       this.getData(page.current);
@@ -151,6 +142,12 @@ export default {
 .ant-table {
   td {
     white-space: nowrap;
+  }
+
+  .ant-table-row {
+    td {
+      padding: 10px;
+    }
   }
 
   table {

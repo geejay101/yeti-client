@@ -3,6 +3,7 @@ import { mutations, actions } from '../networks';
 
 jest.mock('@/utils', () => ({
   wrapWithAsyncRequestStatus: jest.fn((commit, callback) => callback()),
+  constructFilter: jest.fn(() => ({'nameCont': 'filterValue'})),
 }));
 
 const mockFindAllResources = jest.fn(() => true);
@@ -70,14 +71,14 @@ describe('networks', () => {
 
     it(`${NETWORKS.ACTIONS.GET_NETWORKS} fetches networks with enabled filter`, async () => {
       const page = '1';
-      const filterParams = { filterKey: 'filterValue' };
+      const filterParams = { nameCont: 'filterValue' };
       const state = { networksFilter: filterParams };
       mockFindAllResources.mockReturnValue(NETWORKS_SAMPLE);
 
       await actions[NETWORKS.ACTIONS.GET_NETWORKS]({ commit, state }, page);
 
       expect(mockFindAllResources).toHaveBeenCalledWith(
-        RESOURCES.NETWORKS, { page, include: 'network-type', filter: { nameCont: filterParams } },
+        RESOURCES.NETWORKS, { page, include: 'network-type', filter: filterParams },
       );
       expect(commit).toHaveBeenCalledWith(NETWORKS.MUTATIONS.SET_NETWORKS, NETWORKS_SAMPLE);
     });

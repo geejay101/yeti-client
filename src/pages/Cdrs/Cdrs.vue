@@ -4,6 +4,9 @@
     :items="formattedCdrs"
     :rows="rows"
     :get-data="getCdrs"
+    :active-filters="cdrFilter"
+    :set-filter="setCdrsFilter"
+    filterable
     expandable
   />
 </template>
@@ -25,7 +28,7 @@ export default {
     DataTableAnt,
   },
   computed: {
-    ...mapGetters(['activeAccount', 'cdrs']),
+    ...mapGetters(['activeAccount', 'cdrs', 'cdrFilter']),
     formattedCdrs() {
       return flow(utils.formatCdrs)(this.cdrs.items);
     },
@@ -52,7 +55,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions([CDRS.ACTIONS.GET_CDRS]),
+    ...mapActions([CDRS.ACTIONS.GET_CDRS, CDRS.ACTIONS.SET_CDRS_FILTER]),
   },
 };
 </script>

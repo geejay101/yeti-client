@@ -13,12 +13,20 @@ const getters = {
   cdrFilter: (currentState) => currentState.cdrFilter,
 };
 export const actions = {
-  [CDRS.ACTIONS.GET_CDRS]: ({ commit, rootState, rootGetters }, page) =>
+  [CDRS.ACTIONS.GET_CDRS]: ({
+    commit,
+    state: localState,
+    rootState,
+    rootGetters,
+  }, page) =>
     utils.wrapWithAsyncRequestStatus(commit, async () => {
+      const cdrFilter = utils.constructFilter(localState.cdrFilter);
+
       const filter = {
         accountIdEq: rootGetters.activeAccount.id,
         timeStartGteq: rootState.timeRangeFilter.timeFilterValue.startDate,
         timeStartLteq: rootState.timeRangeFilter.timeFilterValue.endDate,
+        ...cdrFilter,
       };
 
       const cdrs = await api.apiInstance.findAllResources(RESOURCES.CDR, {
@@ -28,9 +36,10 @@ export const actions = {
 
       commit(CDRS.MUTATIONS.SET_CDRS, cdrs);
     }),
-  [CDRS.ACTIONS.SET_CDRS_FILTER]: ({ commit }, filter) => {
+  [CDRS.ACTIONS.SET_CDRS_FILTER]: ({ commit, dispatch }, filter) => {
     if (filter) {
       commit(CDRS.MUTATIONS.SAVE_CDRS_FILTER, filter);
+      dispatch(CDRS.ACTIONS.GET_CDRS, 1);
     }
   },
 };

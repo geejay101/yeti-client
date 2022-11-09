@@ -31,17 +31,5 @@ describe('timeRangeFilter', () => {
 
       expect(commit).toHaveBeenCalledWith(TIME_RANGE_FILTER.MUTATIONS.SET_VALUE, value);
     });
-
-    it(`${TIME_RANGE_FILTER.ACTIONS.FILTER_RESET} sets filter value`, () => {
-      commit = jest.fn();
-      const value = 'current time';
-      jest.spyOn(utils, 'getLast24Hours').mockReturnValue('current time');
-
-      actions[TIME_RANGE_FILTER.ACTIONS.FILTER_RESET]({ commit });
-
-      expect(commit).toHaveBeenCalledWith(TIME_RANGE_FILTER.MUTATIONS.SET_VALUE, value);
-
-      jest.resetAllMocks();
-    });
   });
 });

@@ -1,6 +1,5 @@
 <template>
   <div class="time-range-filter">
-    {{ $t('message.timeInterval') }}
     <date-range-picker
       ref="picker"
       :date-range="timeFilterValue"
@@ -20,16 +19,10 @@
         slot-scope="picker"
         style="min-width: 250px;"
       >
+        <a-icon type="calendar" />
         {{ picker.startDate | date }} - {{ picker.endDate | date }}
       </div>
     </date-range-picker>
-    <a-button
-      variant="light"
-      :disabled="requestIsPending"
-      @click="filterReset"
-    >
-      {{ $t('message.reset') }}
-    </a-button>
   </div>
 </template>
 

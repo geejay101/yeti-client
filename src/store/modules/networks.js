@@ -4,7 +4,7 @@ import utils from '@/utils';
 
 const state = {
   networks: {},
-  networksFilter: '',
+  networksFilter: {},
 };
 const getters = {
   networks: (currentState) => ({
@@ -18,7 +18,8 @@ export const actions = {
       const queryParams = { page, include: 'network-type' };
 
       if (localState.networksFilter) {
-        queryParams.filter = { nameCont: localState.networksFilter };
+        const networksFilter = utils.constructFilter(localState.networksFilter);
+        queryParams.filter = { ...networksFilter };
       }
 
       const networks = await api.apiInstance.findAllResources(RESOURCES.NETWORKS, queryParams);

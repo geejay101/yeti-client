@@ -84,7 +84,6 @@ export const TIME_RANGE_FILTER = {
   },
   ACTIONS: {
     FILTER_SET: 'filterSet',
-    FILTER_RESET: 'filterReset',
   },
 };
 

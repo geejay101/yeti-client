@@ -19,7 +19,7 @@ describe('Networks page', () => {
     const store = new Vuex.Store({
       getters: {
         networks: () => ({ items: [] }),
-        networksFilter: () => '',
+        networksFilter: () => {},
       },
       modules: {
         networks: {
@@ -39,7 +39,7 @@ describe('Networks page', () => {
   });
 
   it('builds DataTableAnt with correct props', () => {
-    expect.assertions(3);
+    expect.assertions(2);
 
     const getNetworks = jest.fn();
     const store = new Vuex.Store({
@@ -60,7 +60,9 @@ describe('Networks page', () => {
           }],
           meta: { 'total-count': 500 },
         }),
-        networksFilter: () => 'alabama',
+        networksFilter: () => ({
+          name: 'alabama',
+        }),
       },
       modules: {
         networks: {
@@ -76,7 +78,6 @@ describe('Networks page', () => {
       localVue,
       i18n,
     });
-    expect(wrapper.findComponent(DataTableAnt).props('localFilterTerm')).toBe('alabama');
     expect(wrapper.findComponent(DataTableAnt).props('items').length).toBe(2);
     expect(wrapper.findComponent(DataTableAnt).props('rows')).toBe(500);
   });
