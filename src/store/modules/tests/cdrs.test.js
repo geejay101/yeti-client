@@ -79,7 +79,7 @@ describe('cdrs', () => {
           filter: {
             accountIdEq: id,
             timeStartGteq: startDate,
-            timeStartLteq: endDate,
+            timeStartLt: endDate,
           },
           page,
         },

@@ -25,7 +25,7 @@ export const actions = {
       const filter = {
         accountIdEq: rootGetters.activeAccount.id,
         timeStartGteq: rootState.timeRangeFilter.timeFilterValue.startDate,
-        timeStartLteq: rootState.timeRangeFilter.timeFilterValue.endDate,
+        timeStartLt: rootState.timeRangeFilter.timeFilterValue.endDate,
         ...cdrFilter,
       };
 
