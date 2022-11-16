@@ -4,19 +4,18 @@
     :data-source="dataSource"
     item-layout="vertical"
   >
-    <a-list-item
-      slot="renderItem"
-      slot-scope="item"
-    >
-      <a-row type="flex">
-        <a-col :span="4">
-          {{ item.key }}
-        </a-col>
-        <a-col>
-          {{ item.value }}
-        </a-col>
-      </a-row>
-    </a-list-item>
+    <template v-slot:renderItem="item">
+      <a-list-item>
+        <a-row type="flex">
+          <a-col :span="4">
+            {{ item.key }}
+          </a-col>
+          <a-col>
+            {{ item.value }}
+          </a-col>
+        </a-row>
+      </a-list-item>
+    </template>
   </a-list>
 </template>
 

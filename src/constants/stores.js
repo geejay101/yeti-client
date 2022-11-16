@@ -55,6 +55,17 @@ export const INVOICES = {
   },
 };
 
+export const PAYMENTS = {
+  MUTATIONS: {
+    SET_PAYMENTS: 'setPayments',
+    SAVE_PAYMENTS_FILTER: 'savePaymentsFilter',
+  },
+  ACTIONS: {
+    GET_PAYMENTS: 'getPayments',
+    SET_PAYMENTS_FILTER: 'setPaymentsFilter',
+  },
+};
+
 export const RATES = {
   MUTATIONS: {
     SET_RATES: 'setRates',

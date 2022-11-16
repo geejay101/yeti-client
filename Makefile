@@ -38,9 +38,9 @@ clean:
 .PHONY: package
 package: chlog
 	@$(info:msg=Installing modules)
-	yarn install
+	npm install
 	@$(info:msg=Building JS)
-	yarn build
+	npm run build
 	@$(info:msg=Building package)
 	dpkg-buildpackage -us -uc -b
 

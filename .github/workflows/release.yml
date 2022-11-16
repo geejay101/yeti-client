@@ -17,10 +17,7 @@ jobs:
 
       - uses: actions/setup-node@v2
         with:
-          node-version: '16'
-
-      - name: Install Yarn
-        run: npm install -g yarn
+          node-version: '17'
 
       - name: Build package
         run: make package
@@ -36,5 +33,3 @@ jobs:
           PKG_API_BASE: ${{secrets.PKG_API_BASE}}
           PKG_TAG: ${{github.ref}} 
         run: v=${PKG_TAG##*/};major_version=${v%\.[0-9]*};ci/deploy.sh bullseye $major_version main ../*.deb
-
-

@@ -24,11 +24,14 @@
           ]"
           :placeholder="$t('message.userName')"
         >
-          <a-icon
-            slot="prefix"
-            type="user"
-            style="color: rgba(0,0,0,.25)"
-          />
+          <template
+            v-slot:prefix
+          >
+            <a-icon
+              type="user"
+              style="color: rgba(0,0,0,.25)"
+            />
+          </template>
         </a-input>
       </a-form-item>
       <a-form-item>
@@ -40,11 +43,12 @@
           type="password"
           :placeholder="$t('message.password')"
         >
-          <a-icon
-            slot="prefix"
-            type="lock"
-            style="color: rgba(0,0,0,.25)"
-          />
+          <template v-slot:prefix>
+            <a-icon
+              type="lock"
+              style="color: rgba(0,0,0,.25)"
+            />
+          </template>
         </a-input>
       </a-form-item>
       <a-form-item>

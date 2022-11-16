@@ -2,7 +2,7 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import VueI18n from 'vue-i18n';
 import StatisticsCharts from '../StatisticsCharts.vue';
-import DataChart from '@/components/DataChart/DataChart';
+import DataChart from '@/components/DataChart/DataChart.vue';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);

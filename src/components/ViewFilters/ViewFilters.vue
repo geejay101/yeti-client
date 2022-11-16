@@ -8,8 +8,8 @@
 <script>
 import { ACCOUNT_INFO_ROUTE_NAMES } from '@/constants';
 
-import TimeRangeFilter from './components/TimeRangeFilter/TimeRangeFilter';
-import AccountsFilter from './components/AccountsFilter/AccountsFilter';
+import TimeRangeFilter from './components/TimeRangeFilter/TimeRangeFilter.vue';
+import AccountsFilter from './components/AccountsFilter/AccountsFilter.vue';
 
 export default {
   components: {
@@ -18,8 +18,11 @@ export default {
   },
   computed: {
     isTimeRangeEnabled() {
-      return this.$route.name === ACCOUNT_INFO_ROUTE_NAMES.CDRS
-        || this.$route.name === ACCOUNT_INFO_ROUTE_NAMES.STATISTICS;
+      return [
+        ACCOUNT_INFO_ROUTE_NAMES.CDRS,
+        ACCOUNT_INFO_ROUTE_NAMES.STATISTICS,
+        ACCOUNT_INFO_ROUTE_NAMES.PAYMENTS,
+      ].includes(this.$route.name);
     },
   },
 };

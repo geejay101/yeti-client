@@ -12,7 +12,7 @@ export const formatRates = (rates = []) =>
 
     item.rate = `${prettifyNullValue(item['initial-rate'])}/${prettifyNullValue(item['next-rate'])}`;
     item.key = index;
-    item['reject-calls'] = item['reject-calls'].toString();
+    item['reject-calls'] = Boolean(item['reject-calls']) ? 'Reject' : 'Allow';
 
     return item;
   });

@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 import VueI18n from 'vue-i18n';
 
 import NetworkDetails from '../NetworkDetails.vue';
-import VerticalListAnt from '@/components/VerticalListAnt/VerticalListAnt';
+import VerticalListAnt from '@/components/VerticalListAnt/VerticalListAnt.vue';
 import { COMMON_TABLE_ENTITY_EXCLUDED_FIELDS, NETWORK_DETAILS } from '@/constants';
 
 const localVue = createLocalVue();

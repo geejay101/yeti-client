@@ -3,7 +3,7 @@ export default {
     en: {
       tableMessage: {
         prefix: 'Prefix',
-        'reject-calls': 'Reject calls',
+        'reject-calls': 'Status',
         'billing-interval': 'Billing interval',
         rate: 'Rate',
         'connect-fee': 'Connect fee',
@@ -15,7 +15,7 @@ export default {
     ua: {
       tableMessage: {
         prefix: 'Префікс',
-        'reject-calls': 'Відбивати виклики',
+        'reject-calls': 'Статус',
         'billing-interval': 'Інтервал розрахунків',
         rate: 'Тариф',
         'connect-fee': "Оплата за з'єднання",

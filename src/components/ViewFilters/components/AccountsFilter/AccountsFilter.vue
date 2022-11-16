@@ -6,17 +6,20 @@
       :trigger="['click']"
       @visibleChange="visibleChange"
     >
-      <a-menu
-        slot="overlay"
-        @click="handleMenuClick"
+      <template
+        v-slot:overlay
       >
-        <a-menu-item
-          v-for="account in accounts"
-          :key="account.id"
+        <a-menu
+          @click="handleMenuClick"
         >
-          {{ account.name }}
-        </a-menu-item>
-      </a-menu>
+          <a-menu-item
+            v-for="account in accounts"
+            :key="account.id"
+          >
+            {{ account.name }}
+          </a-menu-item>
+        </a-menu>
+      </template>
       <a-button style="margin-left: 8px">
         <a-row
           type="flex"

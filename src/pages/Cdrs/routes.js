@@ -8,9 +8,9 @@ import {
   ACCOUNT_INFO_ROUTE_NAMES,
   GENERAL_ROUTE_NAMES,
 } from '@/constants/routing';
-import ViewFilters from '@/components/ViewFilters/ViewFilters';
+import ViewFilters from '@/components/ViewFilters/ViewFilters.vue';
 
-import Cdrs from './Cdrs';
+import Cdrs from './Cdrs.vue';
 
 export const routes = [
   {

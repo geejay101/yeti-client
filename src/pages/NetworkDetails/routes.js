@@ -8,7 +8,7 @@ import {
   NETWORK_DETAILS_ROUTE_NAME,
 } from '@/constants/routing';
 
-import NetworkDetails from './NetworkDetails';
+import NetworkDetails from './NetworkDetails.vue';
 
 export const routes = [
   {

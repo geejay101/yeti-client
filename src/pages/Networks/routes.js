@@ -8,7 +8,7 @@ import {
   ACCOUNT_INFO_ROUTE_NAMES,
 } from '@/constants/routing';
 
-import Networks from './Networks';
+import Networks from './Networks.vue';
 
 export const routes = [
   {

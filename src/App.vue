@@ -23,7 +23,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import NavBar from './components/NavBar/NavBar';
+import NavBar from './components/NavBar/NavBar.vue';
 import {
   AUTH, NOTIFICATION_TYPES, GENERAL_ROUTE_NAMES,
 } from './constants';

@@ -13,15 +13,12 @@
       @toggle="toggleIfNotLoading"
       @update="filterSet"
     >
-      >
-      <div
-        slot="input"
-        slot-scope="picker"
-        style="min-width: 250px;"
-      >
-        <a-icon type="calendar" />
-        {{ picker.startDate | date }} - {{ picker.endDate | date }}
-      </div>
+      <template v-slot:input="picker">
+        <div style="min-width: 250px;">
+          <a-icon type="calendar" />
+          {{ picker.startDate | date }} - {{ picker.endDate | date }}
+        </div>
+      </template>
     </date-range-picker>
   </div>
 </template>

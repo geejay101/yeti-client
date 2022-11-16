@@ -8,7 +8,7 @@ import {
   ACCOUNT_INFO_ROUTE_NAMES,
 } from '@/constants/routing';
 
-import Rates from './Rates';
+import Rates from './Rates.vue';
 
 export const routes = [
   {

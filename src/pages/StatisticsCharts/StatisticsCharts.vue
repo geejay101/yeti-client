@@ -21,7 +21,7 @@
 import { mapGetters, mapActions } from 'vuex';
 import { set } from 'lodash';
 
-import DataChart from '@/components/DataChart/DataChart';
+import DataChart from '@/components/DataChart/DataChart.vue';
 import { STATISTICS } from '@/constants';
 
 import { CHART_OPTIONS, INITIAL_DATASETS_SETTINGS } from './constants';

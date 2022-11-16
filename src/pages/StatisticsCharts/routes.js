@@ -9,8 +9,8 @@ import {
   GENERAL_ROUTE_NAMES,
 } from '@/constants/routing';
 
-import StatisticsCharts from './StatisticsCharts';
-import ViewFilters from '@/components/ViewFilters/ViewFilters';
+import StatisticsCharts from './StatisticsCharts.vue';
+import ViewFilters from '@/components/ViewFilters/ViewFilters.vue';
 
 export const routes = [
   {

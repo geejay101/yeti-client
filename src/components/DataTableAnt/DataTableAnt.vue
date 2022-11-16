@@ -26,17 +26,14 @@
         :loading="requestIsPending"
         @change="onPaginationChange"
       >
-        <span
-          slot="badge"
-          slot-scope="badge"
-        >
+        <template v-slot:badge="badge">
           <a-tag
             :key="badge"
             :color="badge === 'No' || badge === 'false' ? 'volcano' : 'green'"
           >
             {{ badge }}
           </a-tag>
-        </span>
+        </template>
         <template
           v-if="expandable"
           v-slot:expandedRowRender="record"
@@ -60,7 +57,7 @@
 import { mapGetters } from 'vuex';
 
 import locale from './locale';
-import DataFilter from './components/DataFilter/DataFilter';
+import DataFilter from './components/DataFilter/DataFilter.vue';
 
 export default {
   name: 'DataTableAnt',

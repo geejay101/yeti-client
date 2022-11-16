@@ -11,7 +11,7 @@ import { flow } from 'lodash';
 
 import { NETWORKS, COMMON_TABLE_ENTITY_EXCLUDED_FIELDS } from '@/constants';
 import utils from '@/utils';
-import VerticalListAnt from '@/components/VerticalListAnt/VerticalListAnt';
+import VerticalListAnt from '@/components/VerticalListAnt/VerticalListAnt.vue';
 
 import locale from './locale';
 

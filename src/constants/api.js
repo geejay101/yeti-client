@@ -10,11 +10,13 @@ export const RESOURCES = {
   ACTIVE_CALLS: 'chart-active-calls',
   ORIGINATED_CPS: 'chart-originated-cps',
   INVOICES: 'invoices',
+  PAYMENTS: 'payments',
 };
 
 export const SPARSE_FIELDS = {
   [RESOURCES.ACCOUNTS]: 'name',
-  [RESOURCES.CDR]: ['time-start',
+  [RESOURCES.CDR]: [
+    'time-start',
     'time-connect',
     'time-end',
     'duration',
@@ -162,6 +164,16 @@ export const RELATIONSHIPS = {
     reference: '',
     'start-date': '',
     'successful-calls-count': '',
+    account: {
+      jsonApi: 'hasOne',
+      type: 'accounts',
+      id: '',
+    },
+  },
+  [RESOURCES.PAYMENTS]: {
+    amount: '',
+    notes: '',
+    'created-at': '',
     account: {
       jsonApi: 'hasOne',
       type: 'accounts',

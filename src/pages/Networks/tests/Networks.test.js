@@ -2,7 +2,7 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import VueI18n from 'vue-i18n';
 
-import DataTableAnt from '@/components/DataTableAnt/DataTableAnt';
+import DataTableAnt from '@/components/DataTableAnt/DataTableAnt.vue';
 
 import Networks from '../Networks.vue';
 

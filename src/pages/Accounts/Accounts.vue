@@ -10,7 +10,7 @@ import { flow } from 'lodash';
 
 import { COMMON_TABLE_ENTITY_EXCLUDED_FIELDS, ACCOUNTS } from '@/constants';
 import utils from '@/utils';
-import VerticalListAnt from '@/components/VerticalListAnt/VerticalListAnt';
+import VerticalListAnt from '@/components/VerticalListAnt/VerticalListAnt.vue';
 
 import locale from './locale';
 

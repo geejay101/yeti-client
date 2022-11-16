@@ -5,7 +5,15 @@ import * as networks from './networks';
 import * as common from './common';
 import * as networkDetails from './networkDetails';
 import * as invoices from './invoices';
+import * as payments from './payments';
 
 export default {
-  ...cdrs, ...rates, ...account, ...networks, ...networkDetails, ...common, ...invoices,
+  ...cdrs,
+  ...rates,
+  ...account,
+  ...networks,
+  ...networkDetails,
+  ...common,
+  ...invoices,
+  ...payments,
 };

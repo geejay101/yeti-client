@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 import VueI18n from 'vue-i18n';
 
 import { ACCOUNT_DETAILS, COMMON_TABLE_ENTITY_EXCLUDED_FIELDS } from '@/constants';
-import VerticalListAnt from '@/components/VerticalListAnt/VerticalListAnt';
+import VerticalListAnt from '@/components/VerticalListAnt/VerticalListAnt.vue';
 import Accounts from '../Accounts.vue';
 
 const localVue = createLocalVue();

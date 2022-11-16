@@ -16,9 +16,9 @@ import { mapGetters, mapActions } from 'vuex';
 
 import { NETWORKS } from '@/constants';
 import utils from '@/utils';
-import DataTableAnt from '@/components/DataTableAnt/DataTableAnt';
+import DataTableAnt from '@/components/DataTableAnt/DataTableAnt.vue';
 
-import { TABLE_HEADERS_ANT } from './constants';
+import { TABLE_HEADERS_ANT } from './constants.jsx';
 import locale from './locale';
 
 export default {

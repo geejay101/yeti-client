@@ -25,22 +25,22 @@
         />
         {{ $t('message.addFilter') }}
       </a-tag>
-      <a-menu
-        slot="overlay"
-      >
-        <a-sub-menu
-          v-for="(field, index) in filterFields"
-          :key="index"
-          :title="field.title"
-        >
-          <component
-            :is="getFilterComponent(field.filter)"
-            :field="field"
-            class="filter"
-            @filterChange="onFilterChange"
-          />
-        </a-sub-menu>
-      </a-menu>
+      <template v-slot:overlay>
+        <a-menu>
+          <a-sub-menu
+            v-for="(field, index) in filterFields"
+            :key="index"
+            :title="field.title"
+          >
+            <component
+              :is="getFilterComponent(field.filter)"
+              :field="field"
+              class="filter"
+              @filterChange="onFilterChange"
+            />
+          </a-sub-menu>
+        </a-menu>
+      </template>
     </a-dropdown>
   </div>
 </template>
@@ -48,9 +48,9 @@
 <script>
 import { unset } from 'lodash';
 
-import BooleanFilter from './components/BooleanFilter/BooleanFilter';
-import StringFilter from './components/StringFilter/StringFilter';
-import IntegerFilter from './components/IntegerFilter/IntegerFilter';
+import BooleanFilter from './components/BooleanFilter/BooleanFilter.vue';
+import StringFilter from './components/StringFilter/StringFilter.vue';
+import IntegerFilter from './components/IntegerFilter/IntegerFilter.vue';
 
 import locale from './locale';
 

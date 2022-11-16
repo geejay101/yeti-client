@@ -12,8 +12,8 @@ import { get, flow } from 'lodash';
 import { mapGetters, mapActions } from 'vuex';
 import { INVOICES } from '@/constants';
 import utils from '@/utils';
-import DataTableAnt from '@/components/DataTableAnt/DataTableAnt';
-import { TABLE_HEADERS_ANT } from './constants';
+import DataTableAnt from '@/components/DataTableAnt/DataTableAnt.vue';
+import { TABLE_HEADERS_ANT } from './constants.jsx';
 import locale from './locale';
 
 export default {

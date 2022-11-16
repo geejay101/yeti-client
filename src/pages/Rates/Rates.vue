@@ -13,7 +13,7 @@ import { mapGetters, mapActions } from 'vuex';
 
 import utils from '@/utils';
 import { RATES } from '@/constants';
-import DataTableAnt from '@/components/DataTableAnt/DataTableAnt';
+import DataTableAnt from '@/components/DataTableAnt/DataTableAnt.vue';
 
 import { TABLE_HEADERS_ANT } from './constants';
 

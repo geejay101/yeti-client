@@ -9,8 +9,8 @@ import {
   GENERAL_ROUTE_NAMES,
 } from '@/constants/routing';
 
-import Invoices from './Invoices';
-import ViewFilters from '@/components/ViewFilters/ViewFilters';
+import Invoices from './Invoices.vue';
+import ViewFilters from '@/components/ViewFilters/ViewFilters.vue';
 
 export const routes = [
   {
