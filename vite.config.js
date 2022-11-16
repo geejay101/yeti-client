@@ -10,7 +10,7 @@ dotenv.config({
 });
 
 export default defineConfig({
-  plugins: [ createVuePlugin(), vueJsx({}) ],
+  plugins: [createVuePlugin(), vueJsx({})],
   server: {
     port: 8080,
     proxy: {
@@ -33,6 +33,9 @@ export default defineConfig({
   },
   build: {
     chunkSizeWarningLimit: 600,
-    cssCodeSplit: false
+    cssCodeSplit: false,
+    commonjsOptions: {
+      transformMixedEsModules: true
+    }
   }
 });
