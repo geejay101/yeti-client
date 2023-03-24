@@ -18,6 +18,9 @@ jobs:
         with:
           node-version: '18'
 
+      - name: set git safe directory
+        run: git config --global --add safe.directory '*'
+
       - name: Build package
         run: make package
         env:
