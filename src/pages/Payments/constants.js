@@ -17,4 +17,3 @@ export const TABLE_HEADERS_ANT = [
     filter: 'string',
   },
 ];
-  

@@ -1,5 +1,5 @@
-import * as cdrs from '../cdrs';
 import { CDR_ENTRY_FROM_API, CDR_ENTRY_IN_TABLE } from '@/constants';
+import * as cdrs from '../cdrs';
 
 describe('formatCdrs store helper', () => {
   it('formats cdrs data according to spec', () => {

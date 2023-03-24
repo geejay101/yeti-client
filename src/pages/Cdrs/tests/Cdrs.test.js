@@ -1,13 +1,10 @@
-import { shallowMount, createLocalVue } from '@vue/test-utils';
-import Vuex from 'vuex';
-import VueI18n from 'vue-i18n';
+import { shallowMount } from '@vue/test-utils';
+import { createStore } from 'vuex';
+import { createI18n } from 'vue-i18n';
 
 import Cdrs from '../Cdrs.vue';
 
-const localVue = createLocalVue();
-localVue.use(Vuex);
-localVue.use(VueI18n);
-const i18n = new VueI18n({ locale: 'en' });
+const i18n = createI18n({ locale: 'en' });
 
 describe('Cdrs page', () => {
   let getCdrs;
@@ -19,6 +16,7 @@ describe('Cdrs page', () => {
       getters: {
         activeAccount: () => ({ id: 'someId' }),
         cdrs: () => ({ items: [] }),
+        cdrFilter: () => ({}),
       },
       modules: {
         cdrs: {
@@ -38,12 +36,12 @@ describe('Cdrs page', () => {
   it('calls getCdrs on created, if account is set', () => {
     expect.assertions(1);
 
-    const store = new Vuex.Store(storeParams);
+    const store = createStore(storeParams);
 
     shallowMount(Cdrs, {
-      store,
-      localVue,
-      i18n,
+      global: {
+        plugins: [store, i18n],
+      },
     });
     expect(getCdrs).toHaveBeenCalled();
   });
@@ -51,7 +49,7 @@ describe('Cdrs page', () => {
   it('do not call getCdrs if account is not set', () => {
     expect.assertions(1);
 
-    const store = new Vuex.Store({
+    const store = createStore({
       ...storeParams,
       getters: {
         ...storeParams.getters,
@@ -60,9 +58,9 @@ describe('Cdrs page', () => {
     });
 
     shallowMount(Cdrs, {
-      store,
-      localVue,
-      i18n,
+      global: {
+        plugins: [store, i18n],
+      },
     });
     expect(getCdrs).toHaveBeenCalledTimes(0);
   });
@@ -70,8 +68,12 @@ describe('Cdrs page', () => {
   it('calls getCdrs if active account is changed', () => {
     expect.assertions(1);
 
-    const store = new Vuex.Store(storeParams);
-    const component = shallowMount(Cdrs, { store, localVue, i18n });
+    const store = createStore(storeParams);
+    const component = shallowMount(Cdrs, {
+      global: {
+        plugins: [store, i18n],
+      },
+    });
 
     component.vm.$options.watch.activeAccount.call(component.vm);
 

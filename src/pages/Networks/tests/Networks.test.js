@@ -1,22 +1,19 @@
-import { shallowMount, createLocalVue } from '@vue/test-utils';
-import Vuex from 'vuex';
-import VueI18n from 'vue-i18n';
+import { shallowMount } from '@vue/test-utils';
+import { createStore } from 'vuex';
+import { createI18n } from 'vue-i18n';
 
 import DataTableAnt from '@/components/DataTableAnt/DataTableAnt.vue';
 
 import Networks from '../Networks.vue';
 
-const localVue = createLocalVue();
-localVue.use(Vuex);
-localVue.use(VueI18n);
-const i18n = new VueI18n({ locale: 'en' });
+const i18n = createI18n({ locale: 'en' });
 
 describe('Networks page', () => {
   it('calls getNetworks endpoint on created, if active account is set', () => {
     expect.assertions(1);
 
     const getNetworks = jest.fn();
-    const store = new Vuex.Store({
+    const store = createStore({
       getters: {
         networks: () => ({ items: [] }),
         networksFilter: () => {},
@@ -31,9 +28,9 @@ describe('Networks page', () => {
     });
 
     shallowMount(Networks, {
-      store,
-      localVue,
-      i18n,
+      global: {
+        plugins: [store, i18n],
+      },
     });
     expect(getNetworks).toHaveBeenCalled();
   });
@@ -42,7 +39,7 @@ describe('Networks page', () => {
     expect.assertions(2);
 
     const getNetworks = jest.fn();
-    const store = new Vuex.Store({
+    const store = createStore({
       getters: {
         networks: () => ({
           items: [{
@@ -74,9 +71,9 @@ describe('Networks page', () => {
     });
 
     const wrapper = shallowMount(Networks, {
-      store,
-      localVue,
-      i18n,
+      global: {
+        plugins: [store, i18n],
+      },
     });
     expect(wrapper.findComponent(DataTableAnt).props('items').length).toBe(2);
     expect(wrapper.findComponent(DataTableAnt).props('rows')).toBe(500);

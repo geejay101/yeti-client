@@ -18,10 +18,12 @@ export const actions = {
       const requestParams = utils.constructChartDataRequest({ id, startDate, endDate });
 
       const activeCallsPromise = api.apiInstance.createResource(
-        RESOURCES.ACTIVE_CALLS, requestParams,
+        RESOURCES.ACTIVE_CALLS,
+        requestParams,
       );
       const originatedCpsPromise = api.apiInstance.createResource(
-        RESOURCES.ORIGINATED_CPS, requestParams,
+        RESOURCES.ORIGINATED_CPS,
+        requestParams,
       );
 
       await Promise.all([activeCallsPromise, originatedCpsPromise])

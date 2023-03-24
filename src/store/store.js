@@ -1,5 +1,4 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import { createStore } from 'vuex';
 
 import auth from './modules/auth';
 import timeRangeFilter from './modules/timeRangeFilter';
@@ -18,9 +17,7 @@ import uiState from './modules/ui-state';
 
 import { timeRangeWatcher } from './plugins/timeRangeWatcher';
 
-Vue.use(Vuex);
-
-export default new Vuex.Store({
+export default createStore({
   state: {},
   mutations: {},
   actions: {},

@@ -1,19 +1,15 @@
-import {
-  shallowMount, createLocalVue,
-} from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import {
   Layout,
 } from 'ant-design-vue';
-import VueI18n from 'vue-i18n';
+import { createI18n } from 'vue-i18n';
+import { ACCOUNT_INFO_ROUTE_NAMES } from '@/constants';
 
 import ViewFilters from '../ViewFilters.vue';
-import { ACCOUNT_INFO_ROUTE_NAMES } from '@/constants';
 import TimeRangeFilter from '../components/TimeRangeFilter/TimeRangeFilter.vue';
 import AccountsFilter from '../components/AccountsFilter/AccountsFilter.vue';
 
-const localVue = createLocalVue();
-localVue.use(VueI18n);
-const i18n = new VueI18n({
+const i18n = createI18n({
   locale: 'en',
   messages: {
     en: {
@@ -38,13 +34,14 @@ describe('ViewFilters', () => {
     const stubs = getStubs();
 
     const wrapper = shallowMount(ViewFilters, {
-      localVue,
-      stubs,
-      i18n,
-      mocks: { $route },
+      global: {
+        stubs,
+        plugins: [i18n],
+        mocks: { $route },
+      },
     });
     expect(wrapper.findAllComponents(AccountsFilter).length).toBe(1);
     expect(wrapper.findAllComponents(TimeRangeFilter).length).toBe(1);
-    wrapper.destroy();
+    wrapper.unmount();
   });
 });

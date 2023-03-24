@@ -1,15 +1,17 @@
+import { DownloadOutlined } from '@ant-design/icons-vue';
+
 export const TABLE_HEADERS_ANT = [
   {
     key: 'has-pdf',
     dataIndex: 'has-pdf',
     visibleInOverview: true,
-    customRender(name, row) {
+    customRender({ record }) {
       return <a
         download
-        disabled={!name}
-        href={`${row.links.self}/download`}
+        disabled={!record['has-pdf'] ?? null }
+        href={`${record.links.self}/download`}
       >
-        <a-icon type="download" />
+        <DownloadOutlined />
       </a>;
     },
   },

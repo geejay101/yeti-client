@@ -22,7 +22,7 @@ import { TABLE_HEADERS_ANT } from './constants.jsx';
 import locale from './locale';
 
 export default {
-  name: 'Networks',
+  name: 'NetworksPage',
   components: {
     DataTableAnt,
   },

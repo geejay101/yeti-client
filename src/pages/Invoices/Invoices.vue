@@ -17,7 +17,7 @@ import { TABLE_HEADERS_ANT } from './constants.jsx';
 import locale from './locale';
 
 export default {
-  name: 'Invoices',
+  name: 'InvoicesPage',
   components: {
     DataTableAnt,
   },

@@ -5,15 +5,15 @@
     >
       {{ field.title }}
     </p>
-    <a-form-model
+    <a-form
       ref="form"
       :model="form"
       :rules="rules"
-      @submit.prevent="filter"
+      @finish="filter"
     >
-      <a-form-model-item>
+      <a-form-item>
         <a-radio-group
-          v-model="form.modifier"
+          v-model:value="form.modifier"
         >
           <a-radio value="eq">
             {{ $t('message.eq') }}
@@ -25,24 +25,24 @@
             {{ $t('message.lt') }}
           </a-radio>
         </a-radio-group>
-      </a-form-model-item>
-      <a-form-model-item
-        prop="value"
+      </a-form-item>
+      <a-form-item
+        name="value"
       >
         <a-input-number
-          v-model="form.value"
+          v-model:value="form.value"
           :placeholder="field.title"
         />
-      </a-form-model-item>
-      <a-form-model-item>
+      </a-form-item>
+      <a-form-item>
         <a-button
           type="primary"
           html-type="submit"
         >
           {{ $t('message.applyFilter') }}
         </a-button>
-      </a-form-model-item>
-    </a-form-model>
+      </a-form-item>
+    </a-form>
   </div>
 </template>
 
@@ -60,6 +60,9 @@ export default {
       },
     },
   },
+  emits: [
+    'filterChange',
+  ],
   data() {
     return {
       form: {
@@ -77,17 +80,12 @@ export default {
   },
   methods: {
     filter() {
-      this.$refs.form.validate((valid) => {
-        if (valid) {
-          this.$emit('filterChange', {
-            modifier: this.form.modifier,
-            value: this.form.value,
-            field: this.field,
-          });
-          this.$refs.form.resetFields();
-        }
-        return valid;
+      this.$emit('filterChange', {
+        modifier: this.form.modifier,
+        value: this.form.value,
+        field: this.field,
       });
+      this.$refs.form.resetFields();
     },
   },
 };

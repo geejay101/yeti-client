@@ -3,7 +3,7 @@ import { mutations, actions } from '../networks';
 
 jest.mock('@/utils', () => ({
   wrapWithAsyncRequestStatus: jest.fn((commit, callback) => callback()),
-  constructFilter: jest.fn(() => ({'nameCont': 'filterValue'})),
+  constructFilter: jest.fn(() => ({ nameCont: 'filterValue' })),
 }));
 
 const mockFindAllResources = jest.fn(() => true);

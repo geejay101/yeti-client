@@ -1,9 +1,8 @@
-import Vue from 'vue';
+import { createApp } from 'vue';
 import { sync } from 'vuex-router-sync';
-import VueRouter from 'vue-router';
 import AntVue from 'ant-design-vue';
-import VueI18n from 'vue-i18n';
-import Notifications from 'vue-notification';
+import { createI18n } from 'vue-i18n';
+import Notifications from '@kyvg/vue3-notification';
 import * as Sentry from '@sentry/vue';
 import 'ant-design-vue/dist/antd.min.css';
 
@@ -11,19 +10,14 @@ import App from './App.vue';
 import { router } from './router';
 import store from './store/store';
 
-Vue.use(VueRouter);
-Vue.use(AntVue);
-Vue.use(Notifications);
-Vue.use(VueI18n);
+sync(store, router);
 
-Vue.config.productionTip = false;
+const i18n = createI18n();
 
-sync(store, router.instance);
-
-const i18n = new VueI18n();
+const app = createApp(App);
 
 Sentry.init({
-  Vue,
+  app,
   dsn: 'https://7725872f254e423f8d07b8b2b17b58f2@errors.yeti-switch.org/3',
   environment: window.location.hostname,
   denyUrls: [
@@ -31,12 +25,12 @@ Sentry.init({
   ],
 });
 
-new Vue({
-  render: (h) => h(App),
-  store,
-  router: router.instance,
-  i18n,
-}).$mount('#app');
+app.use(AntVue)
+  .use(Notifications)
+  .use(router)
+  .use(store)
+  .use(i18n)
+  .mount('#app');
 
 // Setting up page title
 document.head.querySelector('title').textContent = YETI_CONFIG.yeti.pageTitle;

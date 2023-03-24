@@ -1,21 +1,18 @@
-import { shallowMount, createLocalVue, mount } from '@vue/test-utils';
+import { shallowMount, mount } from '@vue/test-utils';
+import { createStore } from 'vuex';
+import { createI18n } from 'vue-i18n';
 import sinon from 'sinon';
-import Vuex from 'vuex';
-import VueI18n from 'vue-i18n';
-import {
+import AntVue, {
   Table, Tag, Row, Col, Input, Button,
 } from 'ant-design-vue';
 
 import DataTableAnt from '../DataTableAnt.vue';
 
-const localVue = createLocalVue();
-localVue.use(Vuex);
-localVue.use(VueI18n);
-const i18n = new VueI18n({ locale: 'en', messages: { en: { message: { inputPlaceholder: 'Input', clear: 'Clear' } } } });
+const i18n = createI18n({ locale: 'en', messages: { en: { message: { inputPlaceholder: 'Input', clear: 'Clear' } } } });
 
 describe('DataTableAnt', () => {
   it('empty table will be displayed with on props passed', () => {
-    const store = new Vuex.Store({
+    const store = createStore({
       getters: {
         requestIsPending: () => false,
       },
@@ -23,17 +20,19 @@ describe('DataTableAnt', () => {
 
     const wrapper = shallowMount(DataTableAnt, {
       store,
-      localVue,
-      stubs: {
-        'a-table': Table,
+      global: {
+        plugins: [AntVue, store],
+        stubs: {
+          'a-table': Table,
+        },
       },
     });
     expect(wrapper.find('.dataTable').element.style.overflow).toBe('visible');
-    wrapper.destroy();
+    wrapper.unmount();
   });
 
   it('no table will be displayed if request is in pending state', () => {
-    const store = new Vuex.Store({
+    const store = createStore({
       getters: {
         requestIsPending: () => true,
       },
@@ -41,27 +40,29 @@ describe('DataTableAnt', () => {
 
     const wrapper = shallowMount(DataTableAnt, {
       store,
-      localVue,
-      stubs: {
-        'a-table': Table,
+      global: {
+        plugins: [AntVue, store],
+        stubs: {
+          'a-table': Table,
+        },
       },
     });
     expect(wrapper.find('.dataTable').element.style.overflow).toBe('hidden');
-    wrapper.destroy();
+    wrapper.unmount();
   });
 
-  it.skip('will react to the changes', () => {  // TODO: write new filter tests
+  it.skip('will react to the changes', () => { // TODO: write new filter tests
     expect.assertions(1);
 
     const clock = sinon.useFakeTimers();
-    const store = new Vuex.Store({
+    const store = createStore({
       getters: {
         requestIsPending: () => false,
       },
     });
     const getDataMock = jest.fn();
     const onLocalFilterMock = jest.fn();
-    const propsData = {
+    const props = {
       fields: [
         {
           key: 'name',
@@ -114,17 +115,17 @@ describe('DataTableAnt', () => {
     };
 
     const wrapper = mount(DataTableAnt, {
-      store,
-      localVue,
-      propsData,
-      i18n,
-      stubs: {
-        'a-table': Table,
-        'a-tag': Tag,
-        'a-row': Row,
-        'a-col': Col,
-        'a-input-search': Input.Search,
-        'a-button': Button,
+      props,
+      global: {
+        plugins: [store, i18n],
+        stubs: {
+          'a-table': Table,
+          'a-tag': Tag,
+          'a-row': Row,
+          'a-col': Col,
+          'a-input-search': Input.Search,
+          'a-button': Button,
+        },
       },
     });
     const inputComponent = wrapper.findComponent(Input.Search);
@@ -139,7 +140,7 @@ describe('DataTableAnt', () => {
     inputComponent.findComponent(Button).vm.$emit('mousedown', { stopPropagation: () => null });
     expect(onLocalFilterMock).toHaveBeenCalledTimes(2);
 
-    wrapper.destroy();
+    wrapper.unmount();
     clock.restore();
   });
 });

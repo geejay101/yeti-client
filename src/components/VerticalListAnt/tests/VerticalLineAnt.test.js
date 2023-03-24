@@ -1,29 +1,28 @@
-import { shallowMount, createLocalVue, mount } from '@vue/test-utils';
-import { Row, Col, List } from 'ant-design-vue';
-
+import { shallowMount, mount } from '@vue/test-utils';
+import AntVue, { Row, Col, List } from 'ant-design-vue';
 import VerticalListAnt from '../VerticalListAnt.vue';
-
-const localVue = createLocalVue();
 
 describe('VerticalListAnt', () => {
   it('empty list will be displayed with on props passed', () => {
     expect.assertions(1);
 
     const wrapper = shallowMount(VerticalListAnt, {
-      localVue,
-      stubs: {
-        'a-list': List,
+      global: {
+        plugins: [AntVue],
+        stubs: {
+          'a-list': List,
+        },
       },
     });
 
     expect(wrapper.findComponent(List)).toBeTruthy();
-    wrapper.destroy();
+    wrapper.unmount();
   });
 
   it('will build list of items if correct prop was passed', () => {
     expect.assertions(1);
 
-    const propsData = {
+    const props = {
       dataSource: [{
         key: 'first',
         value: 'First item value',
@@ -33,17 +32,18 @@ describe('VerticalListAnt', () => {
       }],
     };
     const wrapper = mount(VerticalListAnt, {
-      localVue,
-      propsData,
-      stubs: {
-        'a-row': Row,
-        'a-col': Col,
-        'a-list': List,
-        'a-list-item': List.Item,
+      props,
+      global: {
+        stubs: {
+          'a-row': Row,
+          'a-col': Col,
+          'a-list': List,
+          'a-list-item': List.Item,
+        },
       },
     });
 
-    expect(wrapper.findAllComponents(List.Item).length).toBe(propsData.dataSource.length);
-    wrapper.destroy();
+    expect(wrapper.findAllComponents(List.Item).length).toBe(props.dataSource.length);
+    wrapper.unmount();
   });
 });

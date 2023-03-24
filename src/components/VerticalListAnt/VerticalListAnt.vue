@@ -4,7 +4,7 @@
     :data-source="dataSource"
     item-layout="vertical"
   >
-    <template v-slot:renderItem="item">
+    <template #renderItem="{item}">
       <a-list-item>
         <a-row type="flex">
           <a-col :span="4">
@@ -33,7 +33,7 @@ export default {
 };
 </script>
 
-<style lang="scss" >
+<style lang="scss">
   .ant-list {
     background-color: #ffffff;
   }

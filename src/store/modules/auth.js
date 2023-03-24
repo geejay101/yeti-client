@@ -5,9 +5,11 @@ import utils from '@/utils';
 const state = {
   status: '',
 };
+
 const getters = {
-  isAuthenticated: () => state.status === 'success',
+  isAuthenticated: (currentState) => currentState.status === 'success',
 };
+
 export const actions = {
   [AUTH.ACTIONS.AUTH_REQUEST]: async ({ commit }, { login, password }) => {
     await utils.wrapWithAsyncRequestStatus(commit, async () => {

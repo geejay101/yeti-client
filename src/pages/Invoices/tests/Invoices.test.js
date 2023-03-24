@@ -1,13 +1,10 @@
-import { shallowMount, createLocalVue } from '@vue/test-utils';
-import Vuex from 'vuex';
-import VueI18n from 'vue-i18n';
+import { shallowMount } from '@vue/test-utils';
+import { createStore } from 'vuex';
+import { createI18n } from 'vue-i18n';
 
 import Invoices from '../Invoices.vue';
 
-const localVue = createLocalVue();
-localVue.use(Vuex);
-localVue.use(VueI18n);
-const i18n = new VueI18n({ locale: 'en' });
+const i18n = createI18n({ locale: 'en' });
 
 describe('Invoices page', () => {
   let getInvoices;
@@ -38,12 +35,12 @@ describe('Invoices page', () => {
   it('calls getInvoices on created, if account is set', () => {
     expect.assertions(1);
 
-    const store = new Vuex.Store(storeParams);
+    const store = createStore(storeParams);
 
     shallowMount(Invoices, {
-      store,
-      localVue,
-      i18n,
+      global: {
+        plugins: [store, i18n],
+      },
     });
     expect(getInvoices).toHaveBeenCalled();
   });
@@ -51,7 +48,7 @@ describe('Invoices page', () => {
   it('do not call getInvoices if account is not set', () => {
     expect.assertions(1);
 
-    const store = new Vuex.Store({
+    const store = createStore({
       ...storeParams,
       getters: {
         ...storeParams.getters,
@@ -60,9 +57,9 @@ describe('Invoices page', () => {
     });
 
     shallowMount(Invoices, {
-      store,
-      localVue,
-      i18n,
+      global: {
+        plugins: [store, i18n],
+      },
     });
     expect(getInvoices).toHaveBeenCalledTimes(0);
   });
@@ -70,12 +67,15 @@ describe('Invoices page', () => {
   it('calls getInvoices if active account is changed', () => {
     expect.assertions(1);
 
-    const store = new Vuex.Store(storeParams);
-    const component = shallowMount(Invoices, { store, localVue, i18n });
+    const store = createStore(storeParams);
+    const component = shallowMount(Invoices, {
+      global: {
+        plugins: [store, i18n],
+      },
+    });
 
     component.vm.$options.watch.activeAccount.call(component.vm);
 
     expect(getInvoices).toHaveBeenCalledTimes(2);
   });
 });
-``

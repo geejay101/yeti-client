@@ -5,8 +5,7 @@
       v-if="isApplicationLoading"
       class="loadmask"
     >
-      <a-icon
-        type="loading"
+      <loading-outlined
         class="loader"
       />
     </div>
@@ -22,6 +21,8 @@
 </template>
 
 <script>
+import { LoadingOutlined } from '@ant-design/icons-vue';
+
 import { mapGetters } from 'vuex';
 import NavBar from './components/NavBar/NavBar.vue';
 import {
@@ -33,6 +34,7 @@ export default {
   name: 'App',
   components: {
     NavBar,
+    LoadingOutlined,
   },
   data() {
     return {
@@ -68,6 +70,10 @@ export default {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   text-align: center;
   margin-top: 00px;
+}
+
+a[disabled] {
+  pointer-events: none;
 }
 
 .loadmask {

@@ -1,7 +1,8 @@
 import { defineConfig } from 'vite';
-import { createVuePlugin } from 'vite-plugin-vue2';
+import vuePlugin from '@vitejs/plugin-vue';
 import { env } from 'process';
-import vueJsx from '@vitejs/plugin-vue2-jsx'
+import vueJsx from '@vitejs/plugin-vue-jsx'
+import eslint from 'vite-plugin-eslint'
 import path from 'path';
 import * as dotenv from 'dotenv';
 
@@ -10,7 +11,11 @@ dotenv.config({
 });
 
 export default defineConfig({
-  plugins: [createVuePlugin(), vueJsx({})],
+  plugins: [
+    vuePlugin(),
+    vueJsx({}),
+    eslint(),
+  ],
   server: {
     port: 8080,
     proxy: {

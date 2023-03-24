@@ -30,11 +30,11 @@ describe('wrapWithAsyncRequestStatus store helper', () => {
     expect(callback).toHaveBeenCalledTimes(1);
   });
 
-  it('should log an error if callback throws ir', async () => {
+  it('should log a warning if callback throws ir', async () => {
     // eslint-disable-next-line prefer-promise-reject-errors
     const callback = jest.fn(() => Promise.reject([new Error('Custom error')]));
     const commit = jest.fn();
-    const spy = jest.spyOn(global.console, 'error');
+    const spy = jest.spyOn(global.console, 'warn');
 
     const caller = async () =>
       commonStoreHelpers.wrapWithAsyncRequestStatus(commit, callback);

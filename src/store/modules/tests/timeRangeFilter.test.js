@@ -1,6 +1,5 @@
 import { TIME_RANGE_FILTER } from '@/constants';
 import { mutations, actions } from '../timeRangeFilter';
-import utils from '@/utils';
 
 describe('timeRangeFilter', () => {
   describe('mutations', () => {

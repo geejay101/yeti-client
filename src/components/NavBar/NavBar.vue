@@ -29,8 +29,8 @@
         :level="2"
       >
         <router-link :to="link.routePath">
-          <a-icon
-            :type="getIconType(link.routeName)"
+          <component
+            :is="getIconType(link.routeName)"
           />
           <span>{{ $t(`message.${link.routeName}`) }}</span>
         </router-link>
@@ -46,7 +46,7 @@
         href="#"
         @click="logoutHandler"
       >
-        <a-icon type="logout" />
+        <logout-outlined />
         <span>{{ $t('message.logout') }}</span>
       </a-menu-item>
     </a-menu>
@@ -54,6 +54,8 @@
 </template>
 
 <script>
+import { LogoutOutlined } from '@ant-design/icons-vue';
+
 import { mapGetters, mapActions } from 'vuex';
 import { AUTH, UI_STATE } from '@/constants';
 
@@ -63,6 +65,9 @@ import locale from './locale';
 export default {
   name: 'NavBar',
   i18n: locale,
+  components: {
+    LogoutOutlined,
+  },
   data() {
     return {
       selectedKeys: [''],
@@ -137,8 +142,8 @@ export default {
   background: url('../../assets/images/yeti.svg') top/50px no-repeat;
 }
 
-.ant-menu {
-    background: #222d32;
+.ant-menu.ant-menu-dark {
+    background: #222d32 !important;
 }
 
 .ant-menu-item {

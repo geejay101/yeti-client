@@ -6,13 +6,13 @@
     "jest": true
   },
   "parserOptions": {
-    "parser": "babel-eslint"
+    "parser": "@babel/eslint-parser"
   },
-  "extends": ["airbnb-base", "plugin:vue/recommended"],
+  "extends": ["airbnb-base", "plugin:vue/vue3-recommended"],
   "settings": {
     "import/resolver": {
       "node": {
-        "extensions": [".js", ".vue"],
+        "extensions": [".js", ".vue"]
       },
       "alias": {
         "map": [
@@ -27,7 +27,8 @@
     "import/prefer-default-export": "off",
     "no-param-reassign": ["error", { "props": false }],
     "no-underscore-dangle": ["error", { "allow": ["_cellVariants"] }],
-    "no-multiple-empty-lines": ["error", { "max": 1, "maxBOF": 0, "maxEOF": 1}]
+    "no-multiple-empty-lines": ["error", { "max": 1, "maxBOF": 0, "maxEOF": 1}],
+    "function-paren-newline": "off"
   },
   "globals": {
     "YETI_CONFIG": "readonly"

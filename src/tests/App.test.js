@@ -1,9 +1,10 @@
-import { shallowMount, createLocalVue } from '@vue/test-utils';
-import Vuex from 'vuex';
-import VueI18n from 'vue-i18n';
+import { shallowMount } from '@vue/test-utils';
+import { nextTick } from 'vue';
+import { createStore } from 'vuex';
+import { createI18n } from 'vue-i18n';
 
-import App from '../App.vue';
 import { AUTH } from '@/constants';
+import App from '../App.vue';
 
 const mockInsertNetworkErrorMiddleware = jest.fn(() => true);
 const mockInsertNetworkAuthErrorMiddleware = jest.fn(() => true);
@@ -24,15 +25,12 @@ const $router = {
   name: fakeRouteName,
 };
 
-const localVue = createLocalVue();
-localVue.use(Vuex);
-localVue.use(VueI18n);
-const i18n = new VueI18n({ locale: 'en', messages: { en: { message: { inputPlaceholder: 'Input', clear: 'Clear' } } } });
+const i18n = createI18n({ locale: 'en', messages: { en: { message: { inputPlaceholder: 'Input', clear: 'Clear' } } } });
 
 describe('App', () => {
   it('empty App will be displayed with no props passed', async () => {
     const localAuthMock = jest.fn();
-    const store = new Vuex.Store({
+    const store = createStore({
       getters: {
         locale: () => 'en',
         requestIsPending: () => 0,
@@ -45,20 +43,21 @@ describe('App', () => {
 
     const wrapper = shallowMount(App, {
       store,
-      localVue,
-      i18n,
-      stubs: {
-        notifications: { template: '<div></div>' },
-        'router-view': { template: '<div></div>' },
-      },
-      mocks: {
-        $router,
+      global: {
+        plugins: [i18n, store],
+        stubs: {
+          notifications: { template: '<div></div>' },
+          'router-view': { template: '<div></div>' },
+        },
+        mocks: {
+          $router,
+        },
       },
     });
     expect(localAuthMock).toHaveBeenCalledTimes(1);
-    await localVue.nextTick();
+    await nextTick();
     expect(mockInsertNetworkErrorMiddleware).toHaveBeenCalledTimes(1);
     expect(mockInsertNetworkAuthErrorMiddleware).toHaveBeenCalledTimes(1);
-    wrapper.destroy();
+    wrapper.unmount();
   });
 });

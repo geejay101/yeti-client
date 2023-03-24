@@ -1,13 +1,10 @@
-import { shallowMount, createLocalVue } from '@vue/test-utils';
-import Vuex from 'vuex';
-import VueI18n from 'vue-i18n';
-import StatisticsCharts from '../StatisticsCharts.vue';
+import { shallowMount } from '@vue/test-utils';
+import { createStore } from 'vuex';
+import { createI18n } from 'vue-i18n';
 import DataChart from '@/components/DataChart/DataChart.vue';
+import StatisticsCharts from '../StatisticsCharts.vue';
 
-const localVue = createLocalVue();
-localVue.use(Vuex);
-localVue.use(VueI18n);
-const i18n = new VueI18n({ locale: 'en' });
+const i18n = createI18n({ locale: 'en' });
 
 describe('StatisticsCharts page', () => {
   let storeParams;
@@ -40,8 +37,12 @@ describe('StatisticsCharts page', () => {
   it('calls getStatistics endpoint on created, if active account is set', () => {
     expect.assertions(1);
 
-    const store = new Vuex.Store(storeParams);
-    shallowMount(StatisticsCharts, { store, localVue, i18n });
+    const store = createStore(storeParams);
+    shallowMount(StatisticsCharts, {
+      global: {
+        plugins: [store, i18n],
+      },
+    });
     expect(getStatistics).toHaveBeenCalled();
   });
 
@@ -55,8 +56,12 @@ describe('StatisticsCharts page', () => {
         activeAccount: () => null,
       },
     };
-    const store = new Vuex.Store(adjustedStoreParams);
-    shallowMount(StatisticsCharts, { store, localVue, i18n });
+    const store = createStore(adjustedStoreParams);
+    shallowMount(StatisticsCharts, {
+      global: {
+        plugins: [store, i18n],
+      },
+    });
     expect(getStatistics).toHaveBeenCalledTimes(0);
   });
 
@@ -78,8 +83,12 @@ describe('StatisticsCharts page', () => {
         }),
       },
     };
-    const store = new Vuex.Store(adjustedStoreParams);
-    const wrapper = shallowMount(StatisticsCharts, { store, localVue, i18n });
+    const store = createStore(adjustedStoreParams);
+    const wrapper = shallowMount(StatisticsCharts, {
+      global: {
+        plugins: [store, i18n],
+      },
+    });
 
     expect(wrapper.findAllComponents(DataChart).length).toBe(2);
   });
@@ -87,8 +96,12 @@ describe('StatisticsCharts page', () => {
   it('calls getStatistics if active account is changed', () => {
     expect.assertions(1);
 
-    const store = new Vuex.Store(storeParams);
-    const component = shallowMount(StatisticsCharts, { store, localVue, i18n });
+    const store = createStore(storeParams);
+    const component = shallowMount(StatisticsCharts, {
+      global: {
+        plugins: [store, i18n],
+      },
+    });
 
     component.vm.$options.watch.activeAccount.call(component.vm);
 

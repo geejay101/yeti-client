@@ -1,19 +1,14 @@
-import {
-  shallowMount, createLocalVue,
-} from '@vue/test-utils';
-import DateRangePicker from 'vue2-daterange-picker';
-import Vue from 'vue';
-import Vuex from 'vuex';
-import VueI18n from 'vue-i18n';
+import { shallowMount } from '@vue/test-utils';
+import { nextTick } from 'vue';
+import { createStore } from 'vuex';
+import { createI18n } from 'vue-i18n';
 import { Button } from 'ant-design-vue';
+import DateRangePicker from 'vue3-gabe-daterange-picker';
 
-import TimeRangeFilter from '../TimeRangeFilter.vue';
 import { TIME_RANGE_FILTER } from '@/constants';
+import TimeRangeFilter from '../TimeRangeFilter.vue';
 
-const localVue = createLocalVue();
-localVue.use(Vuex);
-localVue.use(VueI18n);
-const i18n = new VueI18n({
+const i18n = createI18n({
   locale: 'en',
   messages: {
     en: {
@@ -26,11 +21,11 @@ const i18n = new VueI18n({
 });
 
 const getStore = ({
-  timeFilterValue = { startDate: '01-01-2019', endDate: '02-02-2019' },
+  timeFilterValue = { startDate: new Date('01-01-2019'), endDate: new Date('02-02-2019') },
   requestIsPending = false,
   filterActionSet = () => null,
   filterActionReset = () => null,
-}) => new Vuex.Store({
+}) => createStore({
   getters: {
     timeFilterValue: () => timeFilterValue,
     requestIsPending: () => requestIsPending,
@@ -52,13 +47,13 @@ describe('TimeRangeFilter', () => {
     const stubs = getStubs();
 
     const wrapper = shallowMount(TimeRangeFilter, {
-      store,
-      localVue,
-      i18n,
-      stubs,
+      global: {
+        plugins: [store, i18n],
+        stubs,
+      },
     });
     expect(wrapper.findAllComponents(DateRangePicker).length).toBe(1);
-    wrapper.destroy();
+    wrapper.unmount();
   });
 
   it('date picker is toggled if request is still loading', async () => {
@@ -69,16 +64,16 @@ describe('TimeRangeFilter', () => {
     const stubs = getStubs();
 
     const wrapper = shallowMount(TimeRangeFilter, {
-      store,
-      localVue,
-      stubs,
-      i18n,
+      global: {
+        plugins: [store, i18n],
+        stubs,
+      },
     });
 
     wrapper.findComponent(DateRangePicker).vm.$emit('toggle');
-    await Vue.nextTick();
+    await nextTick();
     expect(wrapper.vm.$refs.picker.open).toBe(false);
 
-    wrapper.destroy();
+    wrapper.unmount();
   });
 });

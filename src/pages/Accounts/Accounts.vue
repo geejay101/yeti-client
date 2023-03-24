@@ -15,7 +15,7 @@ import VerticalListAnt from '@/components/VerticalListAnt/VerticalListAnt.vue';
 import locale from './locale';
 
 export default {
-  name: 'Account',
+  name: 'AccountPage',
   i18n: locale,
   components: {
     VerticalListAnt,

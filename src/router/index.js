@@ -1,4 +1,4 @@
-import VueRouter from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 
 import Login from '../pages/Login/Login.vue';
 import NotFound from '../pages/NotFound.vue';
@@ -35,7 +35,7 @@ const STATIC_ROUTES = [
     component: NotFound,
   },
   {
-    path: '*',
+    path: '/:pathMatch(.*)*',
     redirect: {
       name: GENERAL_ROUTE_NAMES.NOT_FOUND,
     },
@@ -50,16 +50,7 @@ const STATIC_ROUTES = [
   ...PaymentsRoutes,
 ];
 
-export class Router {
-  instance = new VueRouter();
-
-  constructor() {
-    this.addRoutes(STATIC_ROUTES);
-  }
-
-  addRoutes = (routes) => {
-    this.instance.addRoutes(routes);
-  };
-}
-
-export const router = new Router();
+export const router = createRouter({
+  routes: STATIC_ROUTES,
+  history: createWebHashHistory(),
+});

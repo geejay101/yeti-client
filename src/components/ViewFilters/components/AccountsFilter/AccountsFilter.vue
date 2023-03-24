@@ -4,11 +4,9 @@
     <a-dropdown
       v-if="activeAccount"
       :trigger="['click']"
-      @visibleChange="visibleChange"
+      @visible-change="visibleChange"
     >
-      <template
-        v-slot:overlay
-      >
+      <template #overlay>
         <a-menu
           @click="handleMenuClick"
         >
@@ -28,8 +26,7 @@
           <span>
             {{ activeAccount.name }}
           </span>
-          <a-icon
-            type="down"
+          <down-outlined
             :rotate="bgIconRotate"
           />
         </a-row>
@@ -39,6 +36,7 @@
 </template>
 
 <script>
+import { DownOutlined } from '@ant-design/icons-vue';
 import { mapGetters, mapActions } from 'vuex';
 
 import { ACCOUNTS } from '@/constants';
@@ -47,6 +45,9 @@ import locale from './locale';
 
 export default {
   i18n: locale,
+  components: {
+    DownOutlined,
+  },
   data() {
     return {
       visible: undefined,
@@ -76,9 +77,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.ant-dropdown-trigger {
-  span {
-    margin-right: 8px;
-  }
-}
+// .ant-dropdown-trigger {
+//   span {
+//     margin-right: 8px;
+//   }
+// }
 </style>

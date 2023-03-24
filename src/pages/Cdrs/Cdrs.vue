@@ -23,7 +23,7 @@ import { TABLE_HEADERS_ANT } from './constants';
 import locale from './locale';
 
 export default {
-  name: 'Cdrs',
+  name: 'CdrsPage',
   components: {
     DataTableAnt,
   },

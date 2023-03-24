@@ -72,7 +72,12 @@ describe('cdrs', () => {
       const state = { cdrFilter: {} };
       mockFindAllResources.mockReturnValue(CDRS_SAMPLE);
 
-      await actions[CDRS.ACTIONS.GET_CDRS]({ commit, rootGetters, rootState, state }, page);
+      await actions[CDRS.ACTIONS.GET_CDRS]({
+        commit,
+        rootGetters,
+        rootState,
+        state,
+      }, page);
 
       expect(mockFindAllResources).toHaveBeenCalledWith(
         RESOURCES.CDR, {

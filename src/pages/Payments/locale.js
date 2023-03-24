@@ -4,16 +4,15 @@ export default {
       tableMessage: {
         amount: 'Amount',
         notes: 'Notes',
-        'created-at': 'Created At'
+        'created-at': 'Created At',
       },
     },
     ua: {
       tableMessage: {
         amount: 'Сума',
         notes: 'Примітки',
-        'created-at': 'Створено'
+        'created-at': 'Створено',
       },
     },
   },
 };
-  

@@ -5,16 +5,16 @@
     >
       {{ field.title }}
     </p>
-    <a-form-model
+    <a-form
       ref="form"
       :model="form"
-      @submit.prevent="filter"
+      @finish="filter"
     >
-      <a-form-model-item
-        prop="value"
+      <a-form-item
+        name="value"
       >
         <a-radio-group
-          v-model="form.value"
+          v-model:value="form.value"
         >
           <a-radio :value="true">
             {{ $t('message.yes') }}
@@ -23,16 +23,16 @@
             {{ $t('message.no') }}
           </a-radio>
         </a-radio-group>
-      </a-form-model-item>
-      <a-form-model-item>
+      </a-form-item>
+      <a-form-item>
         <a-button
           type="primary"
           html-type="submit"
         >
           {{ $t('message.applyFilter') }}
         </a-button>
-      </a-form-model-item>
-    </a-form-model>
+      </a-form-item>
+    </a-form>
   </div>
 </template>
 
@@ -50,6 +50,9 @@ export default {
       },
     },
   },
+  emits: [
+    'filterChange',
+  ],
   data() {
     return {
       form: {

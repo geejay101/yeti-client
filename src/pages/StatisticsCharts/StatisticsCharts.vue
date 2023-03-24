@@ -3,16 +3,12 @@
     <data-chart
       v-if="!requestIsPending"
       :chart-data="activeCallsData"
-      :options="chartOptions"
-      :height="chartHeight"
-      :width="null"
+      :chart-options="chartOptions"
     />
     <data-chart
       v-if="!requestIsPending"
       :chart-data="originatedCpsData"
-      :options="chartOptions"
-      :height="chartHeight"
-      :width="null"
+      :chart-options="chartOptions"
     />
   </div>
 </template>
@@ -31,13 +27,12 @@ export default {
   name: 'StatisticsCharts',
   i18n: locale,
   components: {
-    dataChart: DataChart,
+    DataChart,
   },
   data() {
     return {
-      chartOptions: set(CHART_OPTIONS, 'scales.xAxes[0].scaleLabel.labelString', locale.messages[this.$i18n.locale].message.time),
+      chartOptions: set(CHART_OPTIONS, 'scales.x.title.text', locale.messages[this.$i18n.locale].message.time),
       chart: undefined,
-      chartHeight: (document.body.clientHeight - 100) / 2,
     };
   },
   computed: {
@@ -45,18 +40,15 @@ export default {
     derivedCharData() {
       if (this.activeCalls && this.originatedCps) {
         const chartsData = { ...this.activeCalls, ...this.originatedCps };
-
         return Object.entries(INITIAL_DATASETS_SETTINGS).reduce((acc, [key, value]) => {
           acc[key] = {
             ...value,
             label: locale.messages[this.$i18n.locale].message[key],
             data: chartsData[key].map(({ x, y }) => ({ y, x: Date.parse(x) })),
           };
-
           return acc;
         }, {});
       }
-
       return { cps: { data: [] }, activeCalls: { data: [] }, originatedCps: { data: [] } };
     },
     originatedCpsData() {

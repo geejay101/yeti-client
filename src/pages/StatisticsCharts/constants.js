@@ -1,6 +1,5 @@
 export const CHART_OPTIONS = {
-  responsive: true,
-  maintainAspectRatio: false,
+  aspectRatio: 4,
   elements: {
     line: {
       tension: 0,
@@ -9,41 +8,42 @@ export const CHART_OPTIONS = {
       radius: 0, // disable points
     },
   },
+  hitRadius: 10,
   scales: {
-    xAxes: [{
+    x: {
       type: 'time',
-      position: 'bottom',
-      ticks: {
-        major: {
-          enabled: true,
-        },
-        maxRotation: 0,
-        autoSkipPadding: 60,
+      title: {
+        display: true,
+        text: 'Time',
       },
       time: {
         displayFormats: {
           minute: 'HH:mm',
           hour: 'HH:mm',
-          day: 'MM-DD-YY HH:mm',
+          day: 'MM-dd-yy HH:mm',
         },
         round: true,
         stepSize: 1,
       },
-      scaleLabel: {
-        display: true,
-        labelString: 'Time',
+      ticks: {
+        major: {
+          enabled: true,
+        },
       },
-    }],
-    yAxes: [{
-      id: 0,
+    },
+    y: {
       type: 'linear',
       position: 'left',
       ticks: {
         maxRotation: 0,
-        suggestedMin: 0,
-        // suggestedMax: 110,
       },
-    }],
+      suggestedMin: 0,
+    },
+  },
+  interaction: {
+    intersect: false,
+    mode: 'index',
+    position: 'nearest',
   },
   animation: {
     duration: 0,
@@ -54,11 +54,6 @@ export const CHART_OPTIONS = {
 
     auto: true,
     onInit: true,
-  },
-  tooltips: {
-    intersect: false,
-    mode: 'index',
-    position: 'nearest',
   },
 };
 

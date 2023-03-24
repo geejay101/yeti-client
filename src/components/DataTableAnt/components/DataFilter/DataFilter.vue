@@ -12,7 +12,7 @@
     </a-tag>
 
     <a-dropdown
-      v-model="visible"
+      v-model:visible="visible"
       placement="bottomLeft"
       :trigger="['click']"
     >
@@ -20,12 +20,10 @@
         type="dashed"
         class="filter-btn"
       >
-        <a-icon
-          type="plus"
-        />
+        <plus-outlined />
         {{ $t('message.addFilter') }}
       </a-tag>
-      <template v-slot:overlay>
+      <template #overlay>
         <a-menu>
           <a-sub-menu
             v-for="(field, index) in filterFields"
@@ -36,7 +34,7 @@
               :is="getFilterComponent(field.filter)"
               :field="field"
               class="filter"
-              @filterChange="onFilterChange"
+              @filter-change="onFilterChange"
             />
           </a-sub-menu>
         </a-menu>
@@ -47,6 +45,7 @@
 
 <script>
 import { unset } from 'lodash';
+import { PlusOutlined } from '@ant-design/icons-vue';
 
 import BooleanFilter from './components/BooleanFilter/BooleanFilter.vue';
 import StringFilter from './components/StringFilter/StringFilter.vue';
@@ -57,6 +56,7 @@ import locale from './locale';
 export default {
   name: 'DataFilter',
   components: {
+    PlusOutlined,
     BooleanFilter,
     StringFilter,
     IntegerFilter,
@@ -76,6 +76,9 @@ export default {
       },
     },
   },
+  emits: [
+    'filterChange',
+  ],
   data() {
     return {
       visible: false,
@@ -91,12 +94,12 @@ export default {
       return `${type}-filter`;
     },
     onFilterChange(filter) {
+      this.visible = false;
       const key = `${filter.field.key}-${filter.modifier}`;
       this.$emit('filterChange', {
         ...this.activeFilters,
         [key]: filter,
       });
-      this.visible = false;
     },
 
     removeFilter(filter) {
@@ -111,7 +114,7 @@ export default {
 <style lang="scss">
 .filter {
   width: 15rem;
-  padding: 20px 20px 10px 20px;
+  padding: 10px 20px 10px 20px;
 
   .field-desc {
     font-weight: 500;

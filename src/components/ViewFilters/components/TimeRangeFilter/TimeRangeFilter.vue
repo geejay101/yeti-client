@@ -2,7 +2,7 @@
   <div class="time-range-filter">
     <date-range-picker
       ref="picker"
-      :date-range="timeFilterValue"
+      v-model="state"
       :opens="settings.opens"
       :locale-data="settings.localeData"
       :time-picker="settings.timePicker"
@@ -11,12 +11,12 @@
       :linked-calendars="settings.linkedCalendars"
       :ranges="ranges"
       @toggle="toggleIfNotLoading"
-      @update="filterSet"
+      @update:model-value="filterSet"
     >
-      <template v-slot:input="picker">
+      <template #input>
         <div style="min-width: 250px;">
-          <a-icon type="calendar" />
-          {{ picker.startDate | date }} - {{ picker.endDate | date }}
+          <calendar-outlined />
+          {{ date.startDate }} - {{ date.endDate }}
         </div>
       </template>
     </date-range-picker>
@@ -24,7 +24,8 @@
 </template>
 
 <script>
-import DateRangePicker from 'vue2-daterange-picker';
+import DateRangePicker from 'vue3-gabe-daterange-picker';
+import { CalendarOutlined } from '@ant-design/icons-vue';
 import { mapGetters, mapActions } from 'vuex';
 
 import utils from '@/utils';
@@ -34,34 +35,36 @@ import locale from './locale';
 import { DEFAULT_PROPS } from './constants';
 import { getLocalePartOfSettings, getLocaleRanges } from './helpers';
 
-import 'vue2-daterange-picker/dist/vue2-daterange-picker.css';
+import 'vue3-gabe-daterange-picker/dist/vue3-daterange-picker.css';
 
 export default {
   name: 'TimeRangeFilter',
   i18n: locale,
   components: {
     DateRangePicker,
+    CalendarOutlined,
   },
-  filters: {
-    date(dateStr) {
-      return utils.formatDateFromObject(dateStr);
-    },
-  },
-  props: {
-    settings: {
-      type: Object,
-      default() {
-        return {
-          ...DEFAULT_PROPS,
-          localeData: getLocalePartOfSettings(locale, this.$i18n.locale),
-        };
-      },
-    },
+  data() {
+    return {
+      state: utils.getLast24Hours(),
+    };
   },
   computed: {
     ...mapGetters(['timeFilterValue', 'requestIsPending']),
+    settings() {
+      return {
+        ...DEFAULT_PROPS,
+        localeData: getLocalePartOfSettings(locale, this.$i18n.locale),
+      };
+    },
     ranges() {
       return getLocaleRanges(locale, this.$i18n.locale);
+    },
+    date() {
+      return {
+        startDate: utils.formatDateFromObject(this.timeFilterValue.startDate),
+        endDate: utils.formatDateFromObject(this.timeFilterValue.endDate),
+      };
     },
   },
   methods: {

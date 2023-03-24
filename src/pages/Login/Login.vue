@@ -3,12 +3,14 @@
     <div class="background" />
     <a-form
       id="components-form-demo-normal-login"
-      :form="form"
+      ref="form"
+      name="normal_login"
+      :rules="rules"
+      :model="credentials"
       class="login-form"
-      @submit.prevent="onSubmit"
+      @finish="login"
     >
-      <a-icon
-        type="login"
+      <login-outlined
         height="30"
       />
       <a-row>
@@ -16,36 +18,26 @@
           {{ $t('message.loginTitle') }}
         </h1>
       </a-row>
-      <a-form-item>
+      <a-form-item name="login">
         <a-input
-          v-decorator="[
-            'login',
-            { rules: [{ required: true, message: $t('message.userNameError') }] },
-          ]"
+          v-model:value="credentials.login"
           :placeholder="$t('message.userName')"
         >
-          <template
-            v-slot:prefix
-          >
-            <a-icon
-              type="user"
+          <template #prefix>
+            <user-outlined
               style="color: rgba(0,0,0,.25)"
             />
           </template>
         </a-input>
       </a-form-item>
-      <a-form-item>
+      <a-form-item name="password">
         <a-input
-          v-decorator="[
-            'password',
-            { rules: [{ required: true, message: $t('message.passwordError') }] },
-          ]"
+          v-model:value="credentials.password"
           type="password"
           :placeholder="$t('message.password')"
         >
-          <template v-slot:prefix>
-            <a-icon
-              type="lock"
+          <template #prefix>
+            <lock-outlined
               style="color: rgba(0,0,0,.25)"
             />
           </template>
@@ -65,33 +57,51 @@
 </template>
 
 <script>
+import { LoginOutlined, UserOutlined, LockOutlined } from '@ant-design/icons-vue';
 
 import { mapActions } from 'vuex';
-import { AUTH, NOTIFICATION_TYPES } from '@/constants';
+import { AUTH } from '@/constants';
 
 import locale from './locale';
 
 export default {
-  name: 'Login',
+  name: 'LoginPage',
   i18n: locale,
-  beforeCreate() {
-    this.form = this.$form.createForm(this, { name: 'normal_login' });
+  components: {
+    LoginOutlined,
+    UserOutlined,
+    LockOutlined,
+  },
+  data() {
+    return {
+      credentials: {
+        login: '',
+        password: '',
+      },
+      rules: {
+        login: [
+          {
+            required: true,
+            message: this.$t('message.userNameError'),
+            trigger: 'blur',
+          },
+        ],
+        password: [
+          {
+            required: true,
+            message: this.$t('message.passwordError'),
+            trigger: 'blur',
+          },
+        ],
+      },
+    };
   },
   methods: {
     ...mapActions([AUTH.ACTIONS.AUTH_REQUEST]),
-    onSubmit() {
-      this.form.validateFields(async (err, values) => {
-        if (!err) {
-          const { login, password } = values;
-          await this[AUTH.ACTIONS.AUTH_REQUEST]({ login, password });
-
-          await this.$router.push(this.$route.query.redirect || '/');
-          await this.$notify({
-            type: NOTIFICATION_TYPES.SUCCESS,
-            text: 'Login successful',
-          });
-        }
-      });
+    login() {
+      const { login, password } = this.credentials;
+      this[AUTH.ACTIONS.AUTH_REQUEST]({ login, password });
+      this.$router.push(this.$route.query.redirect || '/');
     },
   },
 };
@@ -109,6 +119,11 @@ img {
   display: flex;
   justify-content: flex-end;
   position: relative;
+
+  .login-title {
+    margin: auto;
+    margin-bottom: 1rem;
+  }
 
   .background {
     background: url('https://picsum.photos/1800/900') left top/cover no-repeat;

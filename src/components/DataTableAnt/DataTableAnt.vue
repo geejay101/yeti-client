@@ -15,18 +15,18 @@
           <DataFilter
             :fields="fields"
             :active-filters="activeFilters"
-            @filterChange="onFilterChange"
+            @filter-change="onFilterChange"
           />
         </a-col>
       </a-row>
       <a-table
         :columns="visibleInOverview"
         :data-source="items"
-        :pagination="{ pageSize: 50, total: rows, hideOnSinglePage: true }"
+        :pagination="{ pageSize: 50, total: rows, hideOnSinglePage: true, showSizeChanger: false }"
         :loading="requestIsPending"
         @change="onPaginationChange"
       >
-        <template v-slot:badge="badge">
+        <template #badge="badge">
           <a-tag
             :key="badge"
             :color="badge === 'No' || badge === 'false' ? 'volcano' : 'green'"
@@ -36,7 +36,7 @@
         </template>
         <template
           v-if="expandable"
-          v-slot:expandedRowRender="record"
+          #expandedRowRender="{ record }"
         >
           <a-descriptions>
             <a-descriptions-item
@@ -135,7 +135,10 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+.ant-col {
+  padding: 8px;
+}
 .ant-table {
   td {
     white-space: nowrap;

@@ -1,4 +1,14 @@
 import {
+  UserOutlined,
+  DollarOutlined,
+  BarsOutlined,
+  ClusterOutlined,
+  LineChartOutlined,
+  FileDoneOutlined,
+  CheckCircleOutlined,
+} from '@ant-design/icons-vue';
+
+import {
   ACCOUNT_INFO_PATHS, ACCOUNT_INFO_ROUTE_NAMES,
 } from '@/constants';
 
@@ -26,11 +36,11 @@ export const NAV_ITEMS = [{
 }];
 
 export const ROUTE_TO_ICON_MAPPINGS = {
-  [ACCOUNT_INFO_ROUTE_NAMES.ACCOUNT]: 'user',
-  [ACCOUNT_INFO_ROUTE_NAMES.RATES]: 'dollar',
-  [ACCOUNT_INFO_ROUTE_NAMES.CDRS]: 'bars',
-  [ACCOUNT_INFO_ROUTE_NAMES.NETWORKS]: 'cluster',
-  [ACCOUNT_INFO_ROUTE_NAMES.STATISTICS]: 'line-chart',
-  [ACCOUNT_INFO_ROUTE_NAMES.INVOICES]: 'file-done',
-  [ACCOUNT_INFO_ROUTE_NAMES.PAYMENTS]: 'dollar',
+  [ACCOUNT_INFO_ROUTE_NAMES.ACCOUNT]: UserOutlined,
+  [ACCOUNT_INFO_ROUTE_NAMES.RATES]: DollarOutlined,
+  [ACCOUNT_INFO_ROUTE_NAMES.CDRS]: BarsOutlined,
+  [ACCOUNT_INFO_ROUTE_NAMES.NETWORKS]: ClusterOutlined,
+  [ACCOUNT_INFO_ROUTE_NAMES.STATISTICS]: LineChartOutlined,
+  [ACCOUNT_INFO_ROUTE_NAMES.INVOICES]: FileDoneOutlined,
+  [ACCOUNT_INFO_ROUTE_NAMES.PAYMENTS]: CheckCircleOutlined,
 };

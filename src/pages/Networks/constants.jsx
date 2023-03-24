@@ -5,13 +5,12 @@ export const TABLE_HEADERS_ANT = [
     width: 300,
     visibleInOverview: true,
     filter: 'string',
-    customRender(name, row) {
-      return <a
-      router-link
-      href={`#/network-details/${row.id}`}
+    customRender({ record }) {
+      return <router-link
+      to={`/network-details/${record.id}`}
     >
-      {name}
-    </a>;
+      {record.name}
+    </router-link>;
     },
   },
   {
