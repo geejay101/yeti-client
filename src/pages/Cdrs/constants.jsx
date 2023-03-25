@@ -14,8 +14,10 @@ export const TABLE_HEADERS_ANT = [
     key: 'success',
     dataIndex: 'success',
     visibleInOverview: true,
-    scopedSlots: {
-      customRender: 'badge',
+    customRender({ record }) {
+      return <a-tag color={record.success === 'Yes' ? 'green' : 'red'}>
+        { record.success }
+      </a-tag>;
     },
     filter: 'boolean',
   },

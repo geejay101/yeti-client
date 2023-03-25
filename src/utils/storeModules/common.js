@@ -9,9 +9,13 @@ export const wrapWithAsyncRequestStatus = async (commit, callback) => {
 
 export const constructFilter = (filter) => {
   const apiFilter = {};
+  const isTrue = (yes) => ['Yes', 'yes', 'true', true].includes(yes);
 
-  Object.entries(filter).forEach(([key, { value }]) => {
-    apiFilter[key] = value;
+  Object.entries(filter).forEach(([field, params]) => {
+    if (params.field.filter === 'boolean') {
+      params.value = isTrue(params.value);
+    }
+    apiFilter[field] = params.value;
   });
 
   return apiFilter;

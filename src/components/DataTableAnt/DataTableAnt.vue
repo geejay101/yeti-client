@@ -22,18 +22,16 @@
       <a-table
         :columns="visibleInOverview"
         :data-source="items"
-        :pagination="{ pageSize: 50, total: rows, hideOnSinglePage: true, showSizeChanger: false }"
+        :pagination="{
+          current: currentPage,
+          pageSize: 50,
+          total: rows,
+          hideOnSinglePage: true,
+          showSizeChanger: false,
+        }"
         :loading="requestIsPending"
         @change="onPaginationChange"
       >
-        <template #badge="badge">
-          <a-tag
-            :key="badge"
-            :color="badge === 'No' || badge === 'false' ? 'volcano' : 'green'"
-          >
-            {{ badge }}
-          </a-tag>
-        </template>
         <template
           v-if="expandable"
           #expandedRowRender="{ record }"
@@ -45,6 +43,12 @@
               :label="field.title"
             >
               {{ record[field.key] }}
+              <span class="quick-filter">
+                <ZoomInOutlined
+                  v-if="field.filter"
+                  @click="() => addQuickFilter(field, record[field.key])"
+                />
+              </span>
             </a-descriptions-item>
           </a-descriptions>
         </template>
@@ -55,6 +59,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import { ZoomInOutlined } from '@ant-design/icons-vue';
 
 import locale from './locale';
 import DataFilter from './components/DataFilter/DataFilter.vue';
@@ -63,6 +68,7 @@ export default {
   name: 'DataTableAnt',
   components: {
     DataFilter,
+    ZoomInOutlined,
   },
   i18n: locale,
   props: {
@@ -113,6 +119,7 @@ export default {
   },
   data() {
     return {
+      currentPage: 1,
     };
   },
   computed: {
@@ -126,10 +133,25 @@ export default {
   },
   methods: {
     onFilterChange(filter) {
+      this.currentPage = 1;
       this.setFilter(filter);
     },
     onPaginationChange(page) {
+      this.currentPage = page.current;
       this.getData(page.current);
+    },
+    addQuickFilter(field, value) {
+      const key = `${field.key}-eq`;
+
+      this.currentPage = 1;
+      this.setFilter({
+        ...this.activeFilters,
+        [key]: {
+          modifier: 'eq',
+          value,
+          field,
+        },
+      });
     },
   },
 };
@@ -170,6 +192,12 @@ export default {
   }
   .ant-table-row {
     background-color: #ffffff;
+  }
+
+  .quick-filter {
+    margin-left: 3px;
+    color: #1990ff;
+    font-size: 0.75rem;
   }
 }
 </style>
