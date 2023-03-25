@@ -1,7 +1,7 @@
 <template>
   <a-layout-sider
     v-if="isAuthenticated"
-    v-model="collapsed"
+    v-model:collapsed="collapsed"
     collapsible
   >
     <a

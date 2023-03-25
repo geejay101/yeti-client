@@ -14,6 +14,6 @@ Object.defineProperty(window, 'matchMedia', {
   })),
 });
 
-import { config } from '@vue/test-utils'
+import { config } from '@vue/test-utils';
 
-config.global.renderStubDefaultSlot = true
+config.global.renderStubDefaultSlot = true;
