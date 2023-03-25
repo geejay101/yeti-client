@@ -4,7 +4,7 @@ import {
 import { nextTick } from 'vue';
 import { createStore } from 'vuex';
 import { createI18n } from 'vue-i18n';
-import {
+import AntVue, {
   Layout, Menu,
 } from 'ant-design-vue';
 
@@ -61,14 +61,14 @@ const getStubs = () => ({
   'router-link': RouterLinkStub,
 });
 
-describe('NavBar', () => {
-  it.skip('empty bar will be displayed with no props passed', () => {
+describe.skip('NavBar', () => {
+  it('empty bar will be displayed with no props passed', () => {
     const store = getStore({});
     const stubs = getStubs();
 
     const wrapper = shallowMount(NavBar, {
       global: {
-        plugins: [store, i18n],
+        plugins: [AntVue, store, i18n],
         stubs,
         mocks: { $route },
       },
@@ -77,14 +77,14 @@ describe('NavBar', () => {
     wrapper.unmount();
   });
 
-  it.skip('reacts to route change', async () => {
+  it('reacts to route change', async () => {
     expect.assertions(1);
     const store = getStore({});
     const stubs = getStubs();
 
     const wrapper = shallowMount(NavBar, {
       global: {
-        plugins: [store, i18n],
+        plugins: [AntVue, store, i18n],
         stubs,
         mocks: { $route },
       },
@@ -97,7 +97,7 @@ describe('NavBar', () => {
     wrapper.unmount();
   });
 
-  it.skip('will call store actions on an appropriate events', async () => {
+  it('will call store actions on an appropriate events', async () => {
     expect.assertions(3);
 
     const fakeNavStateAction = jest.fn();
@@ -116,7 +116,7 @@ describe('NavBar', () => {
 
     const wrapper = shallowMount(NavBar, {
       global: {
-        plugins: [store, i18n],
+        plugins: [AntVue, store, i18n],
         stubs,
         mocks: { $route, $router },
       },
