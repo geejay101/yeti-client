@@ -22,7 +22,13 @@
       <a-table
         :columns="visibleInOverview"
         :data-source="items"
-        :pagination="{ pageSize: 50, total: rows, hideOnSinglePage: true, showSizeChanger: false }"
+        :pagination="{
+          current: currentPage,
+          pageSize: 50,
+          total: rows,
+          hideOnSinglePage: true,
+          showSizeChanger: false,
+        }"
         :loading="requestIsPending"
         @change="onPaginationChange"
       >
@@ -119,6 +125,11 @@ export default {
       },
     },
   },
+  data() {
+    return {
+      currentPage: 1,
+    };
+  },
   computed: {
     ...mapGetters(['requestIsPending']),
     hiddenIfLoading() {
@@ -130,13 +141,17 @@ export default {
   },
   methods: {
     onFilterChange(filter) {
+      this.currentPage = 1;
       this.setFilter(filter);
     },
     onPaginationChange(page) {
+      this.currentPage = page.current;
       this.getData(page.current);
     },
     addQuickFilter(field, value) {
       const key = `${field.key}-eq`;
+
+      this.currentPage = 1;
       this.setFilter({
         ...this.activeFilters,
         [key]: {

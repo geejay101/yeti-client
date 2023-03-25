@@ -74,7 +74,6 @@ describe('NavBar', () => {
       },
     });
     expect(wrapper.findAllComponents(Menu).length).toBe(2);
-    console.log('wrap', wrapper.html());
     wrapper.unmount();
   });
 
