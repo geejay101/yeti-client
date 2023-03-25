@@ -1,5 +1,5 @@
 <template>
-  <div id="filterView">
+  <div class="filterView">
     <a-tag
       v-for="(filter, key) in activeFilters"
       :key="key"
@@ -16,13 +16,12 @@
       placement="bottomLeft"
       :trigger="['click']"
     >
-      <a-tag
-        type="dashed"
-        class="filter-btn"
+      <a-button
+        class="ant-tag"
       >
         <plus-outlined />
         {{ $t('message.addFilter') }}
-      </a-tag>
+      </a-button>
       <template #overlay>
         <a-menu>
           <a-sub-menu
@@ -114,7 +113,7 @@ export default {
 <style lang="scss">
 .filter {
   width: 15rem;
-  padding: 10px 20px 10px 20px;
+  padding: 10px 20px;
 
   .field-desc {
     font-weight: 500;

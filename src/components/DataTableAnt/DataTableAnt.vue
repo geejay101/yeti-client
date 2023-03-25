@@ -45,6 +45,12 @@
               :label="field.title"
             >
               {{ record[field.key] }}
+              <span class="quick-filter">
+                <ZoomInOutlined
+                  v-if="field.filter"
+                  @click="() => addQuickFilter(field, record[field.key])"
+                />
+              </span>
             </a-descriptions-item>
           </a-descriptions>
         </template>
@@ -55,6 +61,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import { ZoomInOutlined } from '@ant-design/icons-vue';
 
 import locale from './locale';
 import DataFilter from './components/DataFilter/DataFilter.vue';
@@ -63,6 +70,7 @@ export default {
   name: 'DataTableAnt',
   components: {
     DataFilter,
+    ZoomInOutlined,
   },
   i18n: locale,
   props: {
@@ -111,10 +119,6 @@ export default {
       },
     },
   },
-  data() {
-    return {
-    };
-  },
   computed: {
     ...mapGetters(['requestIsPending']),
     hiddenIfLoading() {
@@ -130,6 +134,17 @@ export default {
     },
     onPaginationChange(page) {
       this.getData(page.current);
+    },
+    addQuickFilter(field, value) {
+      const key = `${field.key}-eq`;
+      this.setFilter({
+        ...this.activeFilters,
+        [key]: {
+          modifier: 'eq',
+          value,
+          field,
+        },
+      });
     },
   },
 };
@@ -170,6 +185,12 @@ export default {
   }
   .ant-table-row {
     background-color: #ffffff;
+  }
+
+  .quick-filter {
+    margin-left: 3px;
+    color: #1990ff;
+    font-size: 0.75rem;
   }
 }
 </style>
