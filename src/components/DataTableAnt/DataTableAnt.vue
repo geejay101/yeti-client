@@ -32,14 +32,6 @@
         :loading="requestIsPending"
         @change="onPaginationChange"
       >
-        <template #badge="badge">
-          <a-tag
-            :key="badge"
-            :color="badge === 'No' || badge === 'false' ? 'volcano' : 'green'"
-          >
-            {{ badge }}
-          </a-tag>
-        </template>
         <template
           v-if="expandable"
           #expandedRowRender="{ record }"
