@@ -22,15 +22,14 @@
         </a-menu>
       </template>
       <div>
-        <span>
-          {{ activeAccount.name }}
-        </span>
         <a-button
-          shape="circle"
           type="text"
           style="margin-left: 5px"
         >
           <user-outlined />
+          <span>
+            {{ activeAccount.name }}
+          </span>
           <down-outlined
             :rotate="bgIconRotate"
             class="dropdown-icon"

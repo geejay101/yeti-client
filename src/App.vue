@@ -19,7 +19,7 @@
             <router-view :name="filtersRouteName" />
             <router-view />
           </div>
-      </a-layout-content>
+        </a-layout-content>
       </a-layout>
     </main>
   </div>

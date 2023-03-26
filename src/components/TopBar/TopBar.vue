@@ -2,15 +2,17 @@
   <a-layout-header class="top-bar">
     <TimeRangeFilter v-if="isTimeRangeEnabled" />
     <AccountsFilter />
-    <a-tooltip placement="bottomRight" :title="$t('message.logout')">
-        <a-button
-          shape="circle"
-          type="text"
-          class="logout-btn"
-          @click="logoutHandler"
-        >
-          <LogoutOutlined />
-        </a-button>
+    <a-tooltip
+      :title="$t('message.logout')"
+      placement="bottomRight"
+    >
+      <a-button
+        type="text"
+        class="logout-btn"
+        @click="logoutHandler"
+      >
+        <LogoutOutlined />
+      </a-button>
     </a-tooltip>
   </a-layout-header>
 </template>
@@ -54,16 +56,14 @@ export default {
     margin-right: 10px;
   }
   .top-bar {
-    color: #777b82;
+    color: #4f5258;
     display: flex;
     justify-content: flex-end;
     height: 3rem;
-    box-shadow: 3px 3px 5px 6px #ccc;;
     align-items: center;
-    background-color: transparent;
     padding: 0;
     gap: 10px;
     border-bottom: 1px solid #dee2e6;
-    background: #ffffff;
+    background: #fafafa;
   }
 </style>
