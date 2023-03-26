@@ -14,7 +14,6 @@ export default {
         [ACCOUNT_INFO_ROUTE_NAMES.STATISTICS]: capitalize(ACCOUNT_INFO_ROUTE_NAMES.STATISTICS),
         [ACCOUNT_INFO_ROUTE_NAMES.INVOICES]: capitalize(ACCOUNT_INFO_ROUTE_NAMES.INVOICES),
         [ACCOUNT_INFO_ROUTE_NAMES.PAYMENTS]: capitalize(ACCOUNT_INFO_ROUTE_NAMES.PAYMENTS),
-        logout: 'Logout',
       },
     },
     ua: {
@@ -26,7 +25,6 @@ export default {
         [ACCOUNT_INFO_ROUTE_NAMES.STATISTICS]: 'Статистика',
         [ACCOUNT_INFO_ROUTE_NAMES.INVOICES]: 'Інвойси',
         [ACCOUNT_INFO_ROUTE_NAMES.PAYMENTS]: 'Транзакції',
-        logout: 'Вийти',
       },
     },
   },

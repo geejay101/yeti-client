@@ -25,6 +25,8 @@
 
 <script>
 import DateRangePicker from 'vue3-gabe-daterange-picker';
+import 'vue3-gabe-daterange-picker/dist/vue3-daterange-picker.css';
+
 import { CalendarOutlined } from '@ant-design/icons-vue';
 import { mapGetters, mapActions } from 'vuex';
 
@@ -34,8 +36,6 @@ import { TIME_RANGE_FILTER } from '@/constants';
 import locale from './locale';
 import { DEFAULT_PROPS } from './constants';
 import { getLocalePartOfSettings, getLocaleRanges } from './helpers';
-
-import 'vue3-gabe-daterange-picker/dist/vue3-daterange-picker.css';
 
 export default {
   name: 'TimeRangeFilter',
@@ -81,7 +81,9 @@ export default {
 <style lang="scss">
 .time-range-filter {
   text-align: left;
-  padding: 0 0 10px 15px;
+  display: flex;
+  flex-grow: 1;
+  margin-left: 10px;
 
   .calendars {
     display: flex;

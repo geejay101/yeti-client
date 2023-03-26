@@ -1,6 +1,9 @@
 <template>
-  <div>
-    {{ $t('message.account') }}
+  <div class="accounts-filter">
+    <span v-if="activeAccount">
+      <dollar-outlined />
+      {{ $t('message.balance') }} {{ balance }}
+    </span>
     <a-dropdown
       v-if="activeAccount"
       :trigger="['click']"
@@ -18,25 +21,28 @@
           </a-menu-item>
         </a-menu>
       </template>
-      <a-button style="margin-left: 8px">
-        <a-row
-          type="flex"
-          align="middle"
+      <div>
+        <span>
+          {{ activeAccount.name }}
+        </span>
+        <a-button
+          shape="circle"
+          type="text"
+          style="margin-left: 5px"
         >
-          <span>
-            {{ activeAccount.name }}
-          </span>
+          <user-outlined />
           <down-outlined
             :rotate="bgIconRotate"
+            class="dropdown-icon"
           />
-        </a-row>
-      </a-button>
+        </a-button>
+      </div>
     </a-dropdown>
   </div>
 </template>
 
 <script>
-import { DownOutlined } from '@ant-design/icons-vue';
+import { UserOutlined, DownOutlined, DollarOutlined } from '@ant-design/icons-vue';
 import { mapGetters, mapActions } from 'vuex';
 
 import { ACCOUNTS } from '@/constants';
@@ -46,7 +52,9 @@ import locale from './locale';
 export default {
   i18n: locale,
   components: {
+    UserOutlined,
     DownOutlined,
+    DollarOutlined,
   },
   data() {
     return {
@@ -57,6 +65,9 @@ export default {
     ...mapGetters(['activeAccount', 'accounts']),
     bgIconRotate() {
       return this.visible ? 180 : 0;
+    },
+    balance() {
+      return Number(this.activeAccount?.balance).toFixed(2);
     },
   },
   created() {
@@ -77,9 +88,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// .ant-dropdown-trigger {
-//   span {
-//     margin-right: 8px;
-//   }
-// }
+.accounts-filter {
+  display: flex;
+  gap: 10px
+}
+
+.dropdown-icon {
+  font-size: 0.6rem;
+}
 </style>

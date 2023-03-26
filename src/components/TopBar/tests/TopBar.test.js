@@ -5,7 +5,7 @@ import {
 import { createI18n } from 'vue-i18n';
 import { ACCOUNT_INFO_ROUTE_NAMES } from '@/constants';
 
-import ViewFilters from '../ViewFilters.vue';
+import TopBar from '../TopBar.vue';
 import TimeRangeFilter from '../components/TimeRangeFilter/TimeRangeFilter.vue';
 import AccountsFilter from '../components/AccountsFilter/AccountsFilter.vue';
 
@@ -25,7 +25,7 @@ const getStubs = () => ({
   'a-layout-header': Layout.Header,
 });
 
-describe('ViewFilters', () => {
+describe('TopBar', () => {
   it('show AccountsFilter, and TimeRangeFilter if on condition is met', () => {
     const $route = {
       name: ACCOUNT_INFO_ROUTE_NAMES.CDRS,
@@ -33,7 +33,7 @@ describe('ViewFilters', () => {
 
     const stubs = getStubs();
 
-    const wrapper = shallowMount(ViewFilters, {
+    const wrapper = shallowMount(TopBar, {
       global: {
         stubs,
         plugins: [i18n],

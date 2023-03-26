@@ -2,12 +2,12 @@ export default {
   messages: {
     en: {
       message: {
-        account: 'Account:',
+        balance: 'Balance:',
       },
     },
     ua: {
       message: {
-        account: 'Акаунт:',
+        balance: 'Баланс:',
       },
     },
   },

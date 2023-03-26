@@ -1,5 +1,5 @@
 export const DEFAULT_PROPS = {
-  opens: 'left',
+  opens: 'right',
   timePicker: true,
   linkedCalendars: false,
   dateUtil: 'moment',

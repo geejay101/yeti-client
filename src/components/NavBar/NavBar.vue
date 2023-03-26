@@ -36,28 +36,12 @@
         </router-link>
       </a-menu-item>
     </a-menu>
-    <a-menu
-      class="logout-wrapper"
-      theme="dark"
-      mode="vertical"
-    >
-      <a-menu-item
-        v-if="isAuthenticated"
-        href="#"
-        @click="logoutHandler"
-      >
-        <logout-outlined />
-        <span>{{ $t('message.logout') }}</span>
-      </a-menu-item>
-    </a-menu>
   </a-layout-sider>
 </template>
 
 <script>
-import { LogoutOutlined } from '@ant-design/icons-vue';
-
 import { mapGetters, mapActions } from 'vuex';
-import { AUTH, UI_STATE } from '@/constants';
+import { UI_STATE } from '@/constants';
 
 import { NAV_ITEMS, ROUTE_TO_ICON_MAPPINGS } from './constants';
 import locale from './locale';
@@ -65,9 +49,6 @@ import locale from './locale';
 export default {
   name: 'NavBar',
   i18n: locale,
-  components: {
-    LogoutOutlined,
-  },
   data() {
     return {
       selectedKeys: [''],
@@ -96,10 +77,7 @@ export default {
     this.selectedKeys = [this.$route.name];
   },
   methods: {
-    ...mapActions([UI_STATE.ACTIONS.SET_NAV_STATE, AUTH.ACTIONS.LOGOUT]),
-    logoutHandler() {
-      this[AUTH.ACTIONS.LOGOUT]().then(() => this.$router.push('/login'));
-    },
+    ...mapActions([UI_STATE.ACTIONS.SET_NAV_STATE]),
     isNavItemVisible({ routename }) {
       return !this.blockedPages.has(routename);
     },
@@ -157,17 +135,5 @@ export default {
 .ant-menu-item > a {
   display: flex;
   align-items: center;
-}
-
-.logout-wrapper {
-  position: absolute;
-  left: 0;
-  bottom: 60px;
-  width: 100%;
-
-  .ant-menu-item {
-    display: flex;
-    align-items: center;
-  }
 }
 </style>

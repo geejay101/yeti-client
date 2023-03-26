@@ -14,7 +14,7 @@ export const RESOURCES = {
 };
 
 export const SPARSE_FIELDS = {
-  [RESOURCES.ACCOUNTS]: 'name',
+  [RESOURCES.ACCOUNTS]: ['name', 'balance'].join(),
   [RESOURCES.CDR]: [
     'time-start',
     'time-connect',

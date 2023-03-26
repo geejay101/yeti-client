@@ -11,11 +11,16 @@
     </div>
     <main>
       <NavBar />
-      <div class="working-area-wrapper">
-        <router-view :name="loginRouteName" />
-        <router-view :name="filtersRouteName" />
-        <router-view />
-      </div>
+      <a-layout>
+        <top-bar v-if="isAuthenticated" />
+        <a-layout-content>
+          <div class="working-area-wrapper">
+            <router-view :name="loginRouteName" />
+            <router-view :name="filtersRouteName" />
+            <router-view />
+          </div>
+      </a-layout-content>
+      </a-layout>
     </main>
   </div>
 </template>
@@ -29,12 +34,14 @@ import {
   AUTH, NOTIFICATION_TYPES, GENERAL_ROUTE_NAMES,
 } from './constants';
 import api from './api';
+import TopBar from './components/TopBar/TopBar.vue';
 
 export default {
   name: 'App',
   components: {
     NavBar,
     LoadingOutlined,
+    TopBar,
   },
   data() {
     return {
