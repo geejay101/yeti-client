@@ -1,4 +1,5 @@
 import * as cdrs from './cdrs';
+import * as cdrExports from './cdrExports';
 import * as rates from './rates';
 import * as account from './account';
 import * as networks from './networks';
@@ -9,6 +10,7 @@ import * as payments from './payments';
 
 export default {
   ...cdrs,
+  ...cdrExports,
   ...rates,
   ...account,
   ...networks,

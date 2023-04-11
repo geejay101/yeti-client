@@ -1,6 +1,7 @@
 export const RESOURCES = {
   RATE: 'rates',
   CDR: 'cdrs',
+  CDR_EXPORTS: 'cdr-exports',
   AUTH_ORIGIN_TRANSPORT_PROTOCOL: 'auth-orig-transport-protocol',
   ACCOUNTS: 'accounts',
   NETWORKS: 'networks',
@@ -103,6 +104,17 @@ export const RELATIONSHIPS = {
     'lega-rx-no-buf-errs': '',
     'lega-rx-parse-errs': '',
     'destination-prefix': '',
+  },
+  [RESOURCES.CDR_EXPORTS]: {
+    status: '',
+    'rows-count': '',
+    'created-at': '',
+    'updated-at': '',
+    // These fields are not used in the table
+    filters: '',
+    account: {
+      jsonApi: 'hasOne',
+    },
   },
   [RESOURCES.AUTH_ORIGIN_TRANSPORT_PROTOCOL]: {
     'auth-orig-transport-protocol': 'auth-orig-transport-protocol',

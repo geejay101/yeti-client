@@ -49,6 +49,7 @@ import { PlusOutlined } from '@ant-design/icons-vue';
 import BooleanFilter from './components/BooleanFilter/BooleanFilter.vue';
 import StringFilter from './components/StringFilter/StringFilter.vue';
 import IntegerFilter from './components/IntegerFilter/IntegerFilter.vue';
+import EnumFilter from './components/EnumFilter/EnumFilter.vue';
 
 import locale from './locale';
 
@@ -59,6 +60,7 @@ export default {
     BooleanFilter,
     StringFilter,
     IntegerFilter,
+    EnumFilter,
   },
   i18n: locale,
   props: {
@@ -85,7 +87,7 @@ export default {
   },
   computed: {
     filterFields() {
-      return this.fields.filter((field) => ['boolean', 'integer', 'string'].includes(field.filter));
+      return this.fields.filter((field) => ['boolean', 'integer', 'string', 'enum'].includes(field.filter));
     },
   },
   methods: {

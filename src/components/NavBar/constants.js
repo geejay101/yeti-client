@@ -2,6 +2,7 @@ import {
   UserOutlined,
   DollarOutlined,
   BarsOutlined,
+  SaveOutlined,
   ClusterOutlined,
   LineChartOutlined,
   FileDoneOutlined,
@@ -22,6 +23,9 @@ export const NAV_ITEMS = [{
   routePath: ACCOUNT_INFO_PATHS.CDRS,
   routeName: ACCOUNT_INFO_ROUTE_NAMES.CDRS,
 }, {
+  routePath: ACCOUNT_INFO_PATHS.CDR_EXPORTS,
+  routeName: ACCOUNT_INFO_ROUTE_NAMES.CDR_EXPORTS,
+}, {
   routePath: ACCOUNT_INFO_PATHS.NETWORKS,
   routeName: ACCOUNT_INFO_ROUTE_NAMES.NETWORKS,
 }, {
@@ -39,6 +43,7 @@ export const ROUTE_TO_ICON_MAPPINGS = {
   [ACCOUNT_INFO_ROUTE_NAMES.ACCOUNT]: UserOutlined,
   [ACCOUNT_INFO_ROUTE_NAMES.RATES]: DollarOutlined,
   [ACCOUNT_INFO_ROUTE_NAMES.CDRS]: BarsOutlined,
+  [ACCOUNT_INFO_ROUTE_NAMES.CDR_EXPORTS]: SaveOutlined,
   [ACCOUNT_INFO_ROUTE_NAMES.NETWORKS]: ClusterOutlined,
   [ACCOUNT_INFO_ROUTE_NAMES.STATISTICS]: LineChartOutlined,
   [ACCOUNT_INFO_ROUTE_NAMES.INVOICES]: FileDoneOutlined,

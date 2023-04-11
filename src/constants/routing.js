@@ -1,5 +1,6 @@
 export const ACCOUNT_INFO_PATHS = {
   CDRS: '/cdrs',
+  CDR_EXPORTS: '/cdr-exports',
   ACCOUNT: '/account',
   RATES: '/rates',
   NETWORKS: '/networks',
@@ -10,6 +11,7 @@ export const ACCOUNT_INFO_PATHS = {
 
 export const ACCOUNT_INFO_ROUTE_NAMES = {
   CDRS: 'cdrs',
+  CDR_EXPORTS: 'cdr-exports',
   ACCOUNT: 'account',
   RATES: 'rates',
   NETWORKS: 'networks',

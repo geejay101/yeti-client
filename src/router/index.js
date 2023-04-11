@@ -3,6 +3,7 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 import Login from '../pages/Login/Login.vue';
 import NotFound from '../pages/NotFound.vue';
 import { routes as CdrsRoutes } from '../pages/Cdrs/routes';
+import { routes as CdrExportsRoutes } from '../pages/CdrExports/routes';
 import { routes as RatesRoutes } from '../pages/Rates/routes';
 import { routes as AccountsRoutes } from '../pages/Accounts/routes';
 import { routes as NetworksRoutes } from '../pages/Networks/routes';
@@ -42,6 +43,7 @@ const STATIC_ROUTES = [
   },
   ...RatesRoutes,
   ...CdrsRoutes,
+  ...CdrExportsRoutes,
   ...AccountsRoutes,
   ...NetworksRoutes,
   ...StatisticsChartsRoutes,

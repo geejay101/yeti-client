@@ -6,6 +6,7 @@ import rates from './modules/rates';
 import accounts from './modules/accounts';
 import errors from './modules/errors';
 import cdrs from './modules/cdrs';
+import cdrExports from './modules/cdrExports';
 import networks from './modules/networks';
 import invoices from './modules/invoices';
 import payments from './modules/payments';
@@ -28,6 +29,7 @@ export default createStore({
     accounts,
     errors,
     cdrs,
+    cdrExports,
     networks,
     invoices,
     payments,

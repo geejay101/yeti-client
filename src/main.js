@@ -13,6 +13,7 @@ import store from './store/store';
 sync(store, router);
 
 const i18n = createI18n();
+export const { t } = i18n.global;
 
 const app = createApp(App);
 
