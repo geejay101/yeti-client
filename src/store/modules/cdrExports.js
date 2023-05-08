@@ -27,6 +27,21 @@ export const actions = {
 
       commit(CDR_EXPORTS.MUTATIONS.SET_CDR_EXPORTS, cdrExports);
     }),
+  [CDR_EXPORTS.ACTIONS.CREATE_CDR_EXPORT]: ({
+    commit,
+    rootGetters,
+    dispatch,
+  }, params) =>
+    utils.wrapWithAsyncRequestStatus(commit, async () => {
+      const { id } = rootGetters.activeAccount;
+      await api.apiInstance.createResource(RESOURCES.CDR_EXPORTS, {
+        filters: { ...params },
+        account: {
+          id,
+        },
+      });
+      dispatch(CDR_EXPORTS.ACTIONS.GET_CDR_EXPORTS);
+    }),
   [CDR_EXPORTS.ACTIONS.SET_CDR_EXPORTS_FILTER]: ({ commit, dispatch }, filter) => {
     if (filter) {
       commit(CDR_EXPORTS.MUTATIONS.SAVE_CDR_EXPORTS_FILTER, filter);

@@ -4,7 +4,9 @@ export default {
       message: {
         eq: 'equals',
         lt: 'less than',
+        lteq: 'less than or equal',
         gt: 'greater than',
+        gteq: 'greater than or equal',
         start: 'starts with',
         in: 'includes',
         cont: 'contains',
@@ -20,7 +22,9 @@ export default {
       message: {
         eq: 'дорівнює',
         lt: 'менше ніж',
+        lteq: 'менше ніж або дорівнює',
         gt: 'більше ніж',
+        gteq: 'більше ніж або дорівнює',
         start: 'починається на',
         in: 'включає',
         cont: 'містить',

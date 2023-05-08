@@ -114,6 +114,8 @@ export const RELATIONSHIPS = {
     filters: '',
     account: {
       jsonApi: 'hasOne',
+      type: 'accounts',
+      id: '',
     },
   },
   [RESOURCES.AUTH_ORIGIN_TRANSPORT_PROTOCOL]: {

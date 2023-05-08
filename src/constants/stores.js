@@ -31,6 +31,7 @@ export const CDR_EXPORTS = {
   },
   ACTIONS: {
     GET_CDR_EXPORTS: 'getCdrExports',
+    CREATE_CDR_EXPORT: 'createCdrExport',
     SET_CDR_EXPORTS_FILTER: 'setCdrExportsFilter',
   },
 };

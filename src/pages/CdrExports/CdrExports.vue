@@ -1,13 +1,16 @@
 <template>
-  <DataTableAnt
-    :fields="tableFields"
-    :items="formattedCdrExports"
-    :rows="rows"
-    :get-data="getCdrExports"
-    :active-filters="cdrExportsFilter"
-    :set-filter="setCdrExportsFilter"
-    filterable
-  />
+  <div class="cdr-exports-page">
+    <CdrExportCreateModal />
+    <DataTableAnt
+      :fields="tableFields"
+      :items="formattedCdrExports"
+      :rows="rows"
+      :get-data="getCdrExports"
+      :active-filters="cdrExportsFilter"
+      :set-filter="setCdrExportsFilter"
+      filterable
+    />
+  </div>
 </template>
 
 <script>
@@ -17,6 +20,7 @@ import utils from '@/utils';
 
 import { CDR_EXPORTS } from '@/constants';
 import DataTableAnt from '@/components/DataTableAnt/DataTableAnt.vue';
+import CdrExportCreateModal from './components/CdrExportCreateModal.vue';
 
 import { TABLE_HEADERS_ANT } from './constants.jsx';
 import locale from './locale';
@@ -25,6 +29,12 @@ export default {
   name: 'CdrExportsPage',
   components: {
     DataTableAnt,
+    CdrExportCreateModal,
+  },
+  data() {
+    return {
+      pollInteval: 0,
+    };
   },
   computed: {
     ...mapGetters(['activeAccount', 'cdrExports', 'cdrExportsFilter']),
@@ -51,7 +61,12 @@ export default {
   created() {
     if (this.activeAccount) {
       this[CDR_EXPORTS.ACTIONS.GET_CDR_EXPORTS]();
+
+      this.pollInteval = setInterval(() => this[CDR_EXPORTS.ACTIONS.GET_CDR_EXPORTS](), 30 * 1000);
     }
+  },
+  beforeUnmount() {
+    clearInterval(this.pollInteval);
   },
   methods: {
     ...mapActions([CDR_EXPORTS.ACTIONS.GET_CDR_EXPORTS,
@@ -59,3 +74,9 @@ export default {
   },
 };
 </script>
+
+<style>
+.cdr-exports-page {
+  position: relative;
+}
+</style>
