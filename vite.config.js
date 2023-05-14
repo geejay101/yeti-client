@@ -1,8 +1,8 @@
 import { defineConfig } from 'vite';
 import vuePlugin from '@vitejs/plugin-vue';
 import { env } from 'process';
-import vueJsx from '@vitejs/plugin-vue-jsx'
-import eslint from 'vite-plugin-eslint'
+import vueJsx from '@vitejs/plugin-vue-jsx';
+import eslint from 'vite-plugin-eslint';
 import path from 'path';
 import * as dotenv from 'dotenv';
 
@@ -20,27 +20,34 @@ export default defineConfig({
     port: 8080,
     proxy: {
       '/api': {
-           target: env.API_URL,
-           changeOrigin: true,
-           rewrite: (path) => path.replace(/^\/api/, ''),
-           secure: false,      
-           ws: true,
-       }
+        target: env.API_URL,
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+        secure: false,
+        ws: true,
+      },
     },
   },
   resolve: {
     alias: [
       {
         find: '@',
-        replacement: path.resolve(__dirname, 'src')
-      }
-    ]
+        replacement: path.resolve(__dirname, 'src'),
+      },
+    ],
   },
   build: {
     chunkSizeWarningLimit: 600,
     cssCodeSplit: false,
     commonjsOptions: {
-      transformMixedEsModules: true
-    }
-  }
+      transformMixedEsModules: true,
+    },
+    rollupOptions: {
+      output: {
+        assetFileNames: (asset) => (asset.name.includes('logo.png') || asset.name.includes('yeti.svg')
+          ? 'assets/[name][extname]'
+          : 'assets/[name]-[hash][extname]'),
+      },
+    },
+  },
 });
