@@ -10,7 +10,7 @@
     </a-button>
     <a
       ref="linkRef"
-      :href="`${apiUrl}/api/rest/customer/v1/cdr-exports/${id}/download`"
+      :href="`${apiBaseUrl}/api/rest/customer/v1/cdr-exports/${id}/download`"
     />
   </div>
 </template>
