@@ -3,6 +3,7 @@ export default {
     en: {
       tableMessage: {
         'rows-count': 'Rows Count',
+        'time-range': 'Time Range',
         'created-at': 'Created At',
         'updated-at': 'Updated At',
         status: 'Status',
@@ -18,6 +19,8 @@ export default {
         notification: 'New CDR export was created',
         cancel: 'Cancel',
         submit: 'Submit',
+        yes: 'Yes',
+        no: 'No',
         triggerButton: 'Create CDR Export',
         modalTitle: 'CDR Export Parameters',
         range: 'Selected range',
@@ -31,6 +34,7 @@ export default {
     ua: {
       tableMessage: {
         'rows-count': 'Кількість записів',
+        'time-range': 'Інтервал',
         'created-at': 'Час створення',
         'updated-at': 'Час оновлення',
         status: 'Статус',
@@ -46,6 +50,8 @@ export default {
         notification: 'Новий запит створено',
         cancel: 'Відмінити',
         submit: 'Створити',
+        yes: 'Так',
+        no: 'Ні',
         triggerButton: 'Створити новий запит',
         modalTitle: 'Параметри нового запиту',
         range: 'Вибраний інтервал',

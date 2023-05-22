@@ -45,7 +45,22 @@
       :label="$t('exportCreate.success')"
       name="success_eq"
     >
-      <a-switch v-model:checked="formState.success_eq" />
+      <a-select
+        ref="select"
+        v-model:value="formState.success_eq"
+      >
+        <a-select-option :value="undefined">
+          ---
+        </a-select-option>
+        <a-select-option :value="true">
+          {{ $t('exportCreate.yes') }}
+        </a-select-option>
+        <a-select-option
+          :value="false"
+        >
+          {{ $t('exportCreate.no') }}
+        </a-select-option>
+      </a-select>
     </a-form-item>
   </a-form>
 </template>
@@ -68,7 +83,7 @@ export default {
         duration: { modifier: 'eq', duration: 0 },
         src_prefix_routing_eq: '',
         dst_prefix_routing_eq: '',
-        success_eq: false,
+        success_eq: undefined,
       },
       rules: {
         range: [{

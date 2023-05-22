@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { get, flow } from 'lodash';
+import { get, flow, orderBy } from 'lodash';
 import { mapGetters, mapActions } from 'vuex';
 import utils from '@/utils';
 
@@ -39,7 +39,7 @@ export default {
   computed: {
     ...mapGetters(['activeAccount', 'cdrExports', 'cdrExportsFilter']),
     formattedCdrExports() {
-      return flow(utils.formatCdrExports)(this.cdrExports.items);
+      return flow(utils.formatCdrExports, (arr) => orderBy(arr, ['created-at'], ['desc']))(this.cdrExports.items);
     },
     rows() {
       return get(this.cdrExports, ['meta', 'total-count'], 0);

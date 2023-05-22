@@ -18,22 +18,6 @@ const getStatusColor = (status) => {
 
 export const TABLE_HEADERS_ANT = [
   {
-    key: 'rows-count',
-    dataIndex: 'rows-count',
-    visibleInOverview: true,
-    filter: 'integer',
-  },
-  {
-    key: 'created-at',
-    dataIndex: 'created-at',
-    visibleInOverview: true,
-  },
-  {
-    key: 'updated-at',
-    dataIndex: 'updated-at',
-    visibleInOverview: true,
-  },
-  {
     key: 'status',
     dataIndex: 'status',
     visibleInOverview: true,
@@ -58,5 +42,27 @@ export const TABLE_HEADERS_ANT = [
     customRender(props) {
       return props.record.status === 'Completed' ? <DownloadCell id={props.record.id} /> : '---';
     },
+  },
+  {
+    key: 'created-at',
+    dataIndex: 'created-at',
+    visibleInOverview: true,
+  },
+  {
+    key: 'rows-count',
+    dataIndex: 'rows-count',
+    visibleInOverview: true,
+    filter: 'integer',
+  },
+  {
+    key: 'time-range',
+    dataIndex: 'time-range',
+    visibleInOverview: true,
+    filter: 'integer',
+  },
+  {
+    key: 'updated-at',
+    dataIndex: 'updated-at',
+    visibleInOverview: true,
   },
 ];
