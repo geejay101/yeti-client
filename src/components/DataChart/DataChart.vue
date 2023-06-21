@@ -1,5 +1,6 @@
 <template>
   <UplotVue
+    ref="plot"
     :data="chartData"
     :options="chartOptions"
   />
@@ -25,6 +26,32 @@ export default {
         return {};
       },
     },
+    responsive: {
+      type: Boolean,
+      default() {
+        return true;
+      },
+    },
+  },
+  created() {
+    if (!this.responsive) {
+      return;
+    }
+
+    const parent = this.$parent.$el;
+    const resizer = new ResizeObserver((e) => {
+      e.forEach((entry) => {
+        if (this.$refs.plot) {
+          // eslint-disable-next-line
+          this.$refs.plot._chart.setSize({
+            width: entry.contentRect.width,
+            height: this.chartOptions.height,
+          });
+        }
+      });
+    });
+
+    resizer.observe(parent);
   },
 };
 </script>

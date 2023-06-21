@@ -1,5 +1,4 @@
 export const COMMON_CHART_OPTIONS = {
-  width: 1200,
   height: 280,
   cursor: {
     sync: {
