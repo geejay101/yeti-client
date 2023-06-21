@@ -1,4 +1,4 @@
-import DownloadCell from './components/DownloadCell.vue';
+import DownloadCell from '@/components/DataTableAnt/components/DownloadCell.vue';
 import locale from './locale';
 
 const getStatusColor = (status) => {
@@ -40,7 +40,7 @@ export const TABLE_HEADERS_ANT = [
     dataIndex: 'id',
     visibleInOverview: true,
     customRender(props) {
-      return props.record.status === 'Completed' ? <DownloadCell id={props.record.id} /> : '---';
+      return <DownloadCell resource={props.record.links.self} disabled={props.record.status !== 'Completed'}/>;
     },
   },
   {

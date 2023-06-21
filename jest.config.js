@@ -6,7 +6,9 @@ module.exports = {
     '\\.[jt]sx?$': '<rootDir>/node_modules/babel-jest',
     '.+\\.(css|styl|less|sass|scss|png|jpg|svg|ttf|woff|woff2)$': 'jest-transform-stub',
   },
-  transformIgnorePatterns: ["/node_modules/(?!chartjs-adapter-date-fns)"],
+  transformIgnorePatterns: [
+    "<rootDir>/node_modules/(?!lodash-es)"
+  ],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
     '^vue$': 'vue/dist/vue.cjs.js',

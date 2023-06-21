@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { get, flow } from 'lodash';
+import { get, flow } from 'lodash-es';
 import { mapGetters, mapActions } from 'vuex';
 import { INVOICES } from '@/constants';
 import utils from '@/utils';

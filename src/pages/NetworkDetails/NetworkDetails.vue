@@ -7,7 +7,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import { flow } from 'lodash';
+import { flow } from 'lodash-es';
 
 import { NETWORKS, COMMON_TABLE_ENTITY_EXCLUDED_FIELDS } from '@/constants';
 import utils from '@/utils';
@@ -45,7 +45,7 @@ export default {
 <style lang="scss" scoped>
 .network-details-page {
   h5 {
-    padding: 30px 0 30px 0;
+    padding: 15px 0 15px 0;
     text-align: left;
     font-size: 1.25rem;
   }

@@ -1,5 +1,5 @@
 import { format, subDays } from 'date-fns';
-import { isNil } from 'lodash';
+import { isNil } from 'lodash-es';
 
 const appendZero = (val) => (val > 9 ? val : `0${val}`);
 export const createDateForTestResult = (val) => {

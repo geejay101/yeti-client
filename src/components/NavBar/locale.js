@@ -1,4 +1,4 @@
-import { capitalize } from 'lodash';
+import { capitalize } from 'lodash-es';
 import {
   ACCOUNT_INFO_ROUTE_NAMES,
 } from '@/constants';

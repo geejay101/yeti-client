@@ -6,7 +6,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import { flow } from 'lodash';
+import { flow } from 'lodash-es';
 
 import { COMMON_TABLE_ENTITY_EXCLUDED_FIELDS, ACCOUNTS } from '@/constants';
 import utils from '@/utils';

@@ -8,14 +8,14 @@
 </template>
 
 <script>
-import { flow, get } from 'lodash';
+import { flow, get } from 'lodash-es';
 import { mapGetters, mapActions } from 'vuex';
 
 import utils from '@/utils';
 import { RATES } from '@/constants';
 import DataTableAnt from '@/components/DataTableAnt/DataTableAnt.vue';
 
-import { TABLE_HEADERS_ANT } from './constants';
+import { TABLE_HEADERS_ANT } from './constants.jsx';
 
 import locale from './locale';
 

@@ -2,7 +2,6 @@ import { createApp } from 'vue';
 import { sync } from 'vuex-router-sync';
 import AntVue from 'ant-design-vue';
 import { createI18n } from 'vue-i18n';
-import Notifications from '@kyvg/vue3-notification';
 import * as Sentry from '@sentry/vue';
 import 'ant-design-vue/dist/antd.min.css';
 
@@ -27,7 +26,6 @@ Sentry.init({
 });
 
 app.use(AntVue)
-  .use(Notifications)
   .use(router)
   .use(store)
   .use(i18n)

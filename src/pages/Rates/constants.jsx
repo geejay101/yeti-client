@@ -8,8 +8,10 @@ export const TABLE_HEADERS_ANT = [
     key: 'reject-calls',
     dataIndex: 'reject-calls',
     visibleInOverview: true,
-    scopedSlots: {
-      customRender: 'badge',
+    customRender({ record }) {
+      return <a-tag color={record['reject-calls'] === 'Allow' ? 'green' : 'red'}>
+        { record['reject-calls'] }
+      </a-tag>;
     },
   },
   {

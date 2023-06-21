@@ -1,9 +1,12 @@
 <template>
   <a-button
     type="primary"
+    ghost
+    size="small"
     class="cdr-exports-modal-anchor-button"
     @click="showModal"
   >
+    <PlusOutlined />
     {{ $t('exportCreate.triggerButton') }}
   </a-button>
   <a-modal
@@ -18,6 +21,7 @@
 </template>
 <script>
 import { notification } from 'ant-design-vue';
+import { PlusOutlined } from '@ant-design/icons-vue';
 import { mapActions } from 'vuex';
 import { CDR_EXPORTS } from '@/constants';
 import CdrExportForm from './CdrExportForm.vue';
@@ -27,6 +31,7 @@ export default {
   name: 'CdrExportModal',
   components: {
     CdrExportForm,
+    PlusOutlined,
   },
   i18n: locale,
   data() {
@@ -85,11 +90,3 @@ export default {
 };
 
 </script>
-<style>
-.cdr-exports-modal-anchor-button {
-  position: absolute;
-  right: 0;
-  z-index: 1;
-}
-</style>
-

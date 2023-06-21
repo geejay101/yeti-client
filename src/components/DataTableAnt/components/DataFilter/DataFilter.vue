@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { unset } from 'lodash';
+import { unset } from 'lodash-es';
 import { PlusOutlined } from '@ant-design/icons-vue';
 
 import BooleanFilter from './components/BooleanFilter/BooleanFilter.vue';

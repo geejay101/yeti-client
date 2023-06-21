@@ -1,6 +1,5 @@
 <template>
   <a-list
-    bordered
     :data-source="dataSource"
     item-layout="vertical"
   >
@@ -35,7 +34,9 @@ export default {
 
 <style lang="scss">
   .ant-list {
-    background-color: #ffffff;
+    background-color: rgb(250 250 250);
+    padding: 1rem;
+    border-radius: 2px;
   }
   .ant-col {
     text-align: left;

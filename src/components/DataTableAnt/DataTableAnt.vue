@@ -19,6 +19,14 @@
           />
         </a-col>
       </a-row>
+      <a-row>
+        <a-col
+          :span="24"
+          class="action-bar"
+        >
+          <slot name="action-bar" />
+        </a-col>
+      </a-row>
       <a-table
         :columns="visibleInOverview"
         :data-source="items"
@@ -199,5 +207,13 @@ export default {
     color: #1990ff;
     font-size: 0.75rem;
   }
+}
+.action-bar {
+  display: flex;
+  gap: 5px;
+  background: #fafafa;
+}
+.action-bar:empty {
+  display: none;
 }
 </style>

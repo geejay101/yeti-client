@@ -35,13 +35,14 @@ export default class JsonApi {
     },
   };
 
-  static getNetworkErrorMiddleware = (notify, storeDispatch) => ({
+  static getNetworkErrorMiddleware = (notification, storeDispatch) => ({
     name: 'error-notify',
     error: (payload) => {
-      notify({
+      notification.open({
         type: NOTIFICATION_TYPES.ERROR,
-        title: payload[0].title,
-        text: payload[0].detail,
+        message: payload[0].title,
+        description: payload[0].detail,
+        duration: 3,
       });
 
       storeDispatch(NETWORK_SERVICE.ACTIONS.SWITCH_PENDING_STATE, false);

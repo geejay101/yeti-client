@@ -2,6 +2,8 @@
   <div>
     <a-button
       type="secondary"
+      size="small"
+      :disabled="disabled"
       @click="clickHandler"
     >
       <template #icon>
@@ -10,27 +12,33 @@
     </a-button>
     <a
       ref="linkRef"
-      :href="`${apiBaseUrl}/api/rest/customer/v1/cdr-exports/${id}/download`"
+      download
+      :href="link"
     />
   </div>
 </template>
 
 <script>
 import { DownloadOutlined } from '@ant-design/icons-vue';
-import { mapGetters } from 'vuex';
 
 export default {
   components: {
     DownloadOutlined,
   },
   props: {
-    id: {
+    resource: {
       type: String,
       default: '',
     },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
-    ...mapGetters(['apiBaseUrl']),
+    link() {
+      return `${(new URL(this.resource)).pathname}/download`;
+    },
   },
   methods: {
     clickHandler() {

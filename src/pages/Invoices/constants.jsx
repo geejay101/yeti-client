@@ -1,4 +1,4 @@
-import { DownloadOutlined } from '@ant-design/icons-vue';
+import DownloadCell from '@/components/DataTableAnt/components/DownloadCell.vue';
 
 export const TABLE_HEADERS_ANT = [
   {
@@ -6,13 +6,7 @@ export const TABLE_HEADERS_ANT = [
     dataIndex: 'has-pdf',
     visibleInOverview: true,
     customRender({ record }) {
-      return <a
-        download
-        disabled={!record['has-pdf'] ?? null }
-        href={`${record.links.self}/download`}
-      >
-        <DownloadOutlined />
-      </a>;
+      return <DownloadCell disabled={!record['has-pdf'] ?? false } resource={`${record.links.self}`} />;
     },
   },
   {

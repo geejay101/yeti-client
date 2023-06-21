@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { flow, get } from 'lodash';
+import { flow, get } from 'lodash-es';
 import { mapGetters, mapActions } from 'vuex';
 
 import utils from '@/utils';

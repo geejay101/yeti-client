@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <notifications />
     <div
       v-if="isApplicationLoading"
       class="loadmask"
@@ -26,6 +25,7 @@
 </template>
 
 <script>
+import { notification } from 'ant-design-vue';
 import { LoadingOutlined } from '@ant-design/icons-vue';
 
 import { mapGetters } from 'vuex';
@@ -63,7 +63,7 @@ export default {
   },
   async beforeCreate() {
     await this.$store.dispatch(AUTH.ACTIONS.LOCAL_AUTH);
-    api.apiInstance.insertNetworkErrorMiddleware(this.$notify, this.$store.dispatch);
+    api.apiInstance.insertNetworkErrorMiddleware(notification, this.$store.dispatch);
     api.apiInstance.insertNetworkAuthErrorMiddleware(this.$router, this.$store.dispatch);
   },
   created() {
@@ -73,8 +73,11 @@ export default {
 </script>
 
 <style>
+body {
+  font-family: "Source Sans 3", Helvetica, Arial, sans-serif;
+}
+
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
   text-align: center;
   margin-top: 00px;
 }
@@ -87,7 +90,7 @@ a[disabled] {
   width: 100vw;
   height: 100vh;
   position: fixed;
-  background: #a3a3a3aa;
+  background: #fafafa;
   z-index: 2;
 }
 

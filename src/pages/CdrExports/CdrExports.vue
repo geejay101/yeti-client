@@ -1,6 +1,5 @@
 <template>
   <div class="cdr-exports-page">
-    <CdrExportCreateModal />
     <DataTableAnt
       :fields="tableFields"
       :items="formattedCdrExports"
@@ -9,12 +8,16 @@
       :active-filters="cdrExportsFilter"
       :set-filter="setCdrExportsFilter"
       filterable
-    />
+    >
+      <template #action-bar>
+        <CdrExportCreateModal />
+      </template>
+    </DataTableAnt>
   </div>
 </template>
 
 <script>
-import { get, flow, orderBy } from 'lodash';
+import { get, flow, orderBy } from 'lodash-es';
 import { mapGetters, mapActions } from 'vuex';
 import utils from '@/utils';
 
@@ -74,9 +77,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.cdr-exports-page {
-  position: relative;
-}
-</style>
