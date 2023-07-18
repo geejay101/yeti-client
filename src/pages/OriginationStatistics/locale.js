@@ -1,0 +1,40 @@
+export default {
+  messages: {
+    en: {
+      message: {
+        acd: 'ACD',
+        asr: 'ASR',
+        time: 'Time',
+        failedCalls: 'Failed Calls',
+        successfulCalls: 'Successful Calls',
+        totalCalls: 'Total Calls',
+        totalDuration: 'Total Duration',
+        totalPrice: 'Total Price',
+        minute: 'Minute',
+        fiveMinutes: '5 Minutes',
+        hour: 'Hour',
+        day: 'Day',
+        week: 'Week',
+        month: 'Month',
+      },
+    },
+    ua: {
+      message: {
+        acd: 'ACD',
+        asr: 'ASR',
+        time: 'Час',
+        failedCalls: 'Невдалі дзвінки',
+        successfulCalls: 'Вдалі дзвінки',
+        totalCalls: 'Усього дзвінків',
+        totalDuration: 'Загальна довжина дзвінків',
+        totalPrice: 'Загальна ціна',
+        minute: 'Хвилина',
+        fiveMinutes: '5 хвилин',
+        hour: 'Година',
+        day: 'Доба',
+        week: 'Тиждень',
+        month: 'Місяць',
+      },
+    },
+  },
+};

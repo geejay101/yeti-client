@@ -5,6 +5,7 @@ export const ACCOUNT_INFO_PATHS = {
   RATES: '/rates',
   NETWORKS: '/networks',
   STATISTICS: '/statistics',
+  ORIGINATION_STATISTICS: '/origination-statistics',
   INVOICES: '/invoices',
   PAYMENTS: '/payments',
 };
@@ -16,8 +17,10 @@ export const ACCOUNT_INFO_ROUTE_NAMES = {
   RATES: 'rates',
   NETWORKS: 'networks',
   STATISTICS: 'statistics',
+  ORIGINATION_STATISTICS: 'origination-statistics',
   INVOICES: 'invoices',
   PAYMENTS: 'payments',
+  DASHBOARD: 'dashboard',
 };
 
 export const NETWORK_DETAILS_PATH = '/network-details/:id';

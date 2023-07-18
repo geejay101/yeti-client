@@ -1,5 +1,5 @@
 import {
-  ACCOUNT_INFO_ROUTE_NAMES, CDRS, TIME_RANGE_FILTER, STATISTICS, PAYMENTS,
+  ACCOUNT_INFO_ROUTE_NAMES, CDRS, TIME_RANGE_FILTER, STATISTICS, PAYMENTS, ORIGINATION_STATISTICS,
 } from '@/constants';
 
 export const timeRangeWatcher = (store) => {
@@ -14,6 +14,9 @@ export const timeRangeWatcher = (store) => {
           break;
         case ACCOUNT_INFO_ROUTE_NAMES.PAYMENTS:
           store.dispatch(PAYMENTS.ACTIONS.GET_PAYMENTS);
+          break;
+        case ACCOUNT_INFO_ROUTE_NAMES.ORIGINATION_STATISTICS:
+          store.dispatch(ORIGINATION_STATISTICS.ACTIONS.GET_ORIGINATION_STATISTICS);
           break;
         default:
       }

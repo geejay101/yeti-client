@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <div id="statistics-charts-page">
     <data-chart
-      v-if="!requestIsPending"
+      :loading="requestIsPending"
       :chart-data="activeCallsData"
       :chart-options="activeCallsOptions"
     />
     <data-chart
-      v-if="!requestIsPending"
+      :loading="requestIsPending"
       :chart-data="originatedCpsData"
       :chart-options="originatedCpsOptions"
     />
@@ -33,29 +33,6 @@ export default {
   },
   computed: {
     ...mapGetters(['requestIsPending', 'activeAccount', 'activeCalls', 'originatedCps']),
-    activeCallsOptions() {
-      return {
-        ...COMMON_CHART_OPTIONS,
-        series: [
-          {
-            label: locale.messages[this.$i18n.locale].message.time,
-            value: '{YYYY}-{MM}-{DD} {HH}:{mm}:{ss}',
-          },
-          {
-            label: locale.messages[this.$i18n.locale].message.originatedCalls,
-            points: { show: false },
-            stroke: 'lightgreen',
-            fill: 'lightgreen',
-          },
-          {
-            label: locale.messages[this.$i18n.locale].message.terminatedCalls,
-            points: { show: false },
-            stroke: 'lightblue',
-            fill: 'lightblue',
-          },
-        ],
-      };
-    },
     originatedCpsOptions() {
       return {
         ...COMMON_CHART_OPTIONS,
@@ -67,7 +44,6 @@ export default {
           {
             label: locale.messages[this.$i18n.locale].message.cps,
             points: { show: false },
-            stroke: 'orange',
             fill: 'orange',
           },
         ],
@@ -81,6 +57,27 @@ export default {
         xValues,
         yValues1,
       ];
+    },
+    activeCallsOptions() {
+      return {
+        ...COMMON_CHART_OPTIONS,
+        series: [
+          {
+            label: locale.messages[this.$i18n.locale].message.time,
+            value: '{YYYY}-{MM}-{DD} {HH}:{mm}:{ss}',
+          },
+          {
+            label: locale.messages[this.$i18n.locale].message.originatedCalls,
+            points: { show: false },
+            fill: 'lightgreen',
+          },
+          {
+            label: locale.messages[this.$i18n.locale].message.terminatedCalls,
+            points: { show: false },
+            fill: 'lightblue',
+          },
+        ],
+      };
     },
     activeCallsData() {
       const xValues = this.activeCalls.originatedCalls.map(({ x }) => Date.parse(x) / 1000);
@@ -109,8 +106,10 @@ export default {
   },
 };
 </script>
-<style>
-.uplot {
-  margin: auto;
+<style scoped>
+#statistics-charts-page {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 </style>

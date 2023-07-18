@@ -55,7 +55,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['isAuthenticated', 'linkOnLogo', 'navCollapsed', 'blockedPages']),
+    ...mapGetters(['isAuthenticated', 'linkOnLogo', 'navCollapsed', 'blockedPages', 'features']),
     collapsed: {
       get() {
         return this.navCollapsed;
@@ -78,8 +78,9 @@ export default {
   },
   methods: {
     ...mapActions([UI_STATE.ACTIONS.SET_NAV_STATE]),
-    isNavItemVisible({ routename }) {
-      return !this.blockedPages.has(routename);
+    isNavItemVisible(route) {
+      return !this.blockedPages.has(route.routeName)
+      && (route.experimental ? this.features.has(route.routeName) : true);
     },
     getIconType(routeName) {
       return ROUTE_TO_ICON_MAPPINGS[routeName];

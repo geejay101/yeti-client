@@ -35,6 +35,22 @@ export default class JsonApi {
     },
   };
 
+  static originationStatsDataResTransformationMiddleware = {
+    name: 'origination-stats-data-transformation-res',
+    res: (payload) => {
+      if (payload.req.model === RESOURCES.ORIGINATION_STATISTICS) {
+        payload.res.data = {
+          data: {
+            type: RESOURCES.ORIGINATION_STATISTICS,
+            attributes: payload.res.data,
+          },
+        };
+      }
+
+      return payload;
+    },
+  };
+
   static getNetworkErrorMiddleware = (notification, storeDispatch) => ({
     name: 'error-notify',
     error: (payload) => {
@@ -84,6 +100,7 @@ export default class JsonApi {
     this.initializeResources();
     this.instance.insertMiddlewareBefore('axios-request', JsonApi.authDataReqTransformationMiddleware);
     this.instance.insertMiddlewareBefore('response', JsonApi.authDataResTransformationMiddleware);
+    this.instance.insertMiddlewareBefore('response', JsonApi.originationStatsDataResTransformationMiddleware);
   }
 
   initializeResources() {

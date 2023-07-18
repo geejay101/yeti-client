@@ -1,9 +1,15 @@
 <template>
-  <UplotVue
-    ref="plot"
-    :data="chartData"
-    :options="chartOptions"
-  />
+  <a-card
+    class="chart-card"
+    :title="title"
+    :loading="loading"
+  >
+    <UplotVue
+      ref="plot"
+      :data="chartData"
+      :options="chartOptions"
+    />
+  </a-card>
 </template>
 
 <script>
@@ -17,7 +23,7 @@ export default {
   },
   props: {
     chartData: {
-      type: Object,
+      type: Array,
       required: true,
     },
     chartOptions: {
@@ -32,26 +38,55 @@ export default {
         return true;
       },
     },
+    title: {
+      type: String,
+      default() {
+        return '';
+      },
+    },
+    loading: {
+      type: Boolean,
+      default: false,
+    },
   },
-  created() {
-    if (!this.responsive) {
-      return;
-    }
+  data() {
+    return {
+      resizer: null,
+    };
+  },
+  watch: {
+    loading() {
+      if (!this.responsive) {
+        return;
+      }
 
-    const parent = this.$parent.$el;
-    const resizer = new ResizeObserver((e) => {
-      e.forEach((entry) => {
-        if (this.$refs.plot) {
-          // eslint-disable-next-line
-          this.$refs.plot._chart.setSize({
-            width: entry.contentRect.width,
-            height: this.chartOptions.height,
-          });
-        }
+      if (this.loading) {
+        return;
+      }
+
+      if (this.resizer) {
+        return;
+      }
+
+      this.resizer = new ResizeObserver((e) => {
+        e.forEach((entry) => {
+          if (this.$refs.plot) {
+            // eslint-disable-next-line
+            this.$refs.plot._chart.setSize({
+              width: entry.contentRect.width - 25,
+              height: this.chartOptions.height,
+            });
+          }
+        });
       });
-    });
-
-    resizer.observe(parent);
+      this.resizer.observe(this.$parent.$el);
+    },
   },
 };
 </script>
+<style scoped>
+.chart-card {
+  width: 100%;
+  padding: 0;
+}
+</style>

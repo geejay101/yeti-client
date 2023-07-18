@@ -58,6 +58,18 @@ export const STATISTICS = {
   },
 };
 
+export const ORIGINATION_STATISTICS = {
+  MUTATIONS: {
+    SET_ORIGINATION_STATISTICS: 'setOriginationStatistics',
+    SET_SAMPLING: 'setSampling',
+  },
+  ACTIONS: {
+    GET_ORIGINATION_STATISTICS: 'getOriginationStatistics',
+    GET_SAMPLING: 'getSampling',
+    SET_SAMPLING: 'setSampling',
+  },
+};
+
 export const INVOICES = {
   MUTATIONS: {
     SET_INVOICES: 'setInvoices',

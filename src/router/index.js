@@ -11,6 +11,7 @@ import { routes as NetworkDetailsRoutes } from '../pages/NetworkDetails/routes';
 import { routes as StatisticsChartsRoutes } from '../pages/StatisticsCharts/routes';
 import { routes as InvoicesRoutes } from '../pages/Invoices/routes';
 import { routes as PaymentsRoutes } from '../pages/Payments/routes';
+import { routes as OriginationStatisticsRoutes } from '../pages/OriginationStatistics/routes';
 
 import { requiresNotAuth, beforeGuardEnchancer } from './helpers';
 import { GENERAL_ROUTE_NAMES, GENERAL_PATHS, ACCOUNT_INFO_ROUTE_NAMES } from '../constants/routing';
@@ -50,6 +51,7 @@ const STATIC_ROUTES = [
   ...NetworkDetailsRoutes,
   ...InvoicesRoutes,
   ...PaymentsRoutes,
+  ...OriginationStatisticsRoutes,
 ];
 
 export const router = createRouter({

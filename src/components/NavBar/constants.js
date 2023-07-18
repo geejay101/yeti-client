@@ -7,6 +7,7 @@ import {
   LineChartOutlined,
   FileDoneOutlined,
   CheckCircleOutlined,
+  DashboardOutlined,
 } from '@ant-design/icons-vue';
 
 import {
@@ -32,6 +33,10 @@ export const NAV_ITEMS = [{
   routePath: ACCOUNT_INFO_PATHS.STATISTICS,
   routeName: ACCOUNT_INFO_ROUTE_NAMES.STATISTICS,
 }, {
+  routePath: ACCOUNT_INFO_PATHS.ORIGINATION_STATISTICS,
+  routeName: ACCOUNT_INFO_ROUTE_NAMES.ORIGINATION_STATISTICS,
+  experimental: true,
+}, {
   routePath: ACCOUNT_INFO_PATHS.INVOICES,
   routeName: ACCOUNT_INFO_ROUTE_NAMES.INVOICES,
 }, {
@@ -48,4 +53,5 @@ export const ROUTE_TO_ICON_MAPPINGS = {
   [ACCOUNT_INFO_ROUTE_NAMES.STATISTICS]: LineChartOutlined,
   [ACCOUNT_INFO_ROUTE_NAMES.INVOICES]: FileDoneOutlined,
   [ACCOUNT_INFO_ROUTE_NAMES.PAYMENTS]: CheckCircleOutlined,
+  [ACCOUNT_INFO_ROUTE_NAMES.ORIGINATION_STATISTICS]: DashboardOutlined,
 };

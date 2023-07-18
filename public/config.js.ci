@@ -6,6 +6,7 @@ const YETI_CONFIG = {
     linkOnLogo: 'https://yeti-switch.org/',
     pageTitle: 'Yeti switch web client',
     locale: 'ua',
+    features: new Set([]),
   },
 };
 

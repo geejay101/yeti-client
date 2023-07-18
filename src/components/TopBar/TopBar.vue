@@ -39,6 +39,7 @@ export default {
         ACCOUNT_INFO_ROUTE_NAMES.CDRS,
         ACCOUNT_INFO_ROUTE_NAMES.STATISTICS,
         ACCOUNT_INFO_ROUTE_NAMES.PAYMENTS,
+        ACCOUNT_INFO_ROUTE_NAMES.ORIGINATION_STATISTICS,
       ].includes(this.$route.name);
     },
   },

@@ -21,6 +21,11 @@ export const filterBlockedPages = (to) => ({
   nextRouteInfo: '/',
 });
 
+export const experimenalFeature = (to) => ({
+  allowed: store.getters.features.has(to.name),
+  nextRouteInfo: '/',
+});
+
 export const beforeGuardEnchancer = (guardsArray) => (to, from, next) => {
   const guardsResult = guardsArray.find((guard) => !guard(to, from).allowed);
 

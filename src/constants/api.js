@@ -10,6 +10,7 @@ export const RESOURCES = {
   NETWORK_TYPES: 'network-types',
   ACTIVE_CALLS: 'chart-active-calls',
   ORIGINATED_CPS: 'chart-originated-cps',
+  ORIGINATION_STATISTICS: 'origination-statistics',
   INVOICES: 'invoices',
   PAYMENTS: 'payments',
 };
@@ -207,5 +208,15 @@ export const RELATIONSHIPS = {
       x: null,
       y: '',
     },
+  },
+  [RESOURCES.ORIGINATION_STATISTICS]: {
+    t: '',
+    acd: '',
+    asr: '',
+    failed_calls: '',
+    successful_calls: '',
+    total_calls: '',
+    total_duration: '',
+    total_price: '',
   },
 };
