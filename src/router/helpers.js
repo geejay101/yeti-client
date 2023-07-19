@@ -21,7 +21,7 @@ export const filterBlockedPages = (to) => ({
   nextRouteInfo: '/',
 });
 
-export const experimenalFeature = (to) => ({
+export const optionalFeature = (to) => ({
   allowed: store.getters.features.has(to.name),
   nextRouteInfo: '/',
 });

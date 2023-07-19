@@ -13,6 +13,7 @@ export const RESOURCES = {
   ORIGINATION_STATISTICS: 'origination-statistics',
   INVOICES: 'invoices',
   PAYMENTS: 'payments',
+  CRYPTOMUS_PAYMENTS: 'cryptomus-payments',
 };
 
 export const SPARSE_FIELDS = {
@@ -188,7 +189,17 @@ export const RELATIONSHIPS = {
   [RESOURCES.PAYMENTS]: {
     amount: '',
     notes: '',
+    status: '',
     'created-at': '',
+    account: {
+      jsonApi: 'hasOne',
+      type: 'accounts',
+      id: '',
+    },
+  },
+  [RESOURCES.CRYPTOMUS_PAYMENTS]: {
+    amount: '',
+    url: '',
     account: {
       jsonApi: 'hasOne',
       type: 'accounts',

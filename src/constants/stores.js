@@ -87,6 +87,7 @@ export const PAYMENTS = {
   ACTIONS: {
     GET_PAYMENTS: 'getPayments',
     SET_PAYMENTS_FILTER: 'setPaymentsFilter',
+    CREATE_PAYMENT: 'createPayment',
   },
 };
 

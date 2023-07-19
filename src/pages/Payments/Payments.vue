@@ -7,7 +7,13 @@
     :active-filters="paymentsFilter"
     :set-filter="setPaymentsFilter"
     filterable
-  />
+  >
+    <template #action-bar>
+      <PaymentCreateModal
+        v-if="features.has('cryptomus')"
+      />
+    </template>
+  </DataTableAnt>
 </template>
 
 <script>
@@ -17,17 +23,19 @@ import { mapGetters, mapActions } from 'vuex';
 import utils from '@/utils';
 import { PAYMENTS } from '@/constants';
 import DataTableAnt from '@/components/DataTableAnt/DataTableAnt.vue';
+import PaymentCreateModal from './components/PaymentCreateModal.vue';
 
-import { TABLE_HEADERS_ANT } from './constants';
+import { TABLE_HEADERS_ANT } from './constants.jsx';
 import locale from './locale';
 
 export default {
   name: 'PaymentsPage',
   components: {
     DataTableAnt,
+    PaymentCreateModal,
   },
   computed: {
-    ...mapGetters(['activeAccount', 'payments', 'paymentsFilter']),
+    ...mapGetters(['activeAccount', 'payments', 'paymentsFilter', 'features']),
     formattedPayments() {
       return flow(utils.formatPayments)(this.payments.items);
     },

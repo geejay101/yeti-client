@@ -2,7 +2,7 @@ import {
   requiresAuth,
   filterBlockedPages,
   beforeGuardEnchancer,
-  experimenalFeature,
+  optionalFeature,
 } from '@/router/helpers';
 import {
   ACCOUNT_INFO_ROUTE_NAMES,
@@ -18,6 +18,6 @@ export const routes = [
     components: {
       default: OriginationStatistics,
     },
-    beforeEnter: beforeGuardEnchancer([requiresAuth, filterBlockedPages, experimenalFeature]),
+    beforeEnter: beforeGuardEnchancer([requiresAuth, filterBlockedPages, optionalFeature]),
   },
 ];

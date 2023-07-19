@@ -35,7 +35,7 @@ export const NAV_ITEMS = [{
 }, {
   routePath: ACCOUNT_INFO_PATHS.ORIGINATION_STATISTICS,
   routeName: ACCOUNT_INFO_ROUTE_NAMES.ORIGINATION_STATISTICS,
-  experimental: true,
+  optional: true,
 }, {
   routePath: ACCOUNT_INFO_PATHS.INVOICES,
   routeName: ACCOUNT_INFO_ROUTE_NAMES.INVOICES,

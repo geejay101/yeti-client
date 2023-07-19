@@ -32,6 +32,7 @@ export const actions = {
       const payments = await api.apiInstance.findAllResources(RESOURCES.PAYMENTS, {
         filter,
         page,
+        sort: '-created-at',
       });
 
       commit(PAYMENTS.MUTATIONS.SET_PAYMENTS, payments);
@@ -42,6 +43,18 @@ export const actions = {
       dispatch(PAYMENTS.ACTIONS.GET_PAYMENTS, 1);
     }
   },
+  [PAYMENTS.ACTIONS.CREATE_PAYMENT]: ({ commit, rootGetters }, { amount }) =>
+    utils.wrapWithAsyncRequestStatus(commit, async () => {
+      const { id } = rootGetters.activeAccount;
+      const res = await api.apiInstance.createResource(RESOURCES.CRYPTOMUS_PAYMENTS, {
+        amount,
+        account: {
+          id,
+        },
+      });
+
+      window.location = res.data.url;
+    }),
 };
 export const mutations = {
   [PAYMENTS.MUTATIONS.SET_PAYMENTS]: (currentState, payments) => {
