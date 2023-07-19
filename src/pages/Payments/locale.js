@@ -16,7 +16,7 @@ export default {
         title: 'Charge account',
         submit: 'Submit',
         cancel: 'Cancel',
-        amount: 'Amount',
+        amount: 'Amount (USDT)',
         placeholder: 'Enter the amount of money (5-1000)',
       },
       actions: {
@@ -42,7 +42,7 @@ export default {
       newPaymentModal: {
         title: 'Поповнити рахунок',
         submit: 'Створити',
-        amount: 'Сума',
+        amount: 'Сума (USDT)',
         cancel: 'Відміна',
         placeholder: 'Уведіть суму (5-1000)',
       },

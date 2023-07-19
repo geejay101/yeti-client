@@ -17,7 +17,7 @@ export const TABLE_HEADERS_ANT = [
   {
     key: 'status',
     dataIndex: 'status',
-    visibleInOverview: YETI_CONFIG.yeti.features.has('cryptomus'),
+    visibleInOverview: YETI_CONFIG.yeti.features?.has('cryptomus'),
     customRender(props) {
       return <a-tag color={getStatusColor(props.record.status)}>
         { locale.messages[YETI_CONFIG.yeti.locale]

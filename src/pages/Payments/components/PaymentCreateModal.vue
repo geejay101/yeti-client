@@ -21,8 +21,8 @@
       ref="formRef"
       :model="formState"
       autocomplete="off"
-      :label-col="{ span: 4 }"
-      :wrapper-col="{ span: 20 }"
+      :label-col="{ span: 6 }"
+      :wrapper-col="{ span: 18 }"
       :rules="rules"
     >
       <a-form-item
