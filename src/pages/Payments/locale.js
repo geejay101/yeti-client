@@ -20,6 +20,7 @@ export default {
         cancel: 'Cancel',
         amount: 'Amount (USDT)',
         placeholder: 'Enter the amount of money (5-1000)',
+        feeNotification: 'Payment gateway may charge additional commission fee',
       },
       actions: {
         newPayment: 'New payment',
@@ -49,6 +50,7 @@ export default {
         amount: 'Сума (USDT)',
         cancel: 'Відміна',
         placeholder: 'Уведіть суму (5-1000)',
+        feeNotification: 'Платіжна система може стягувати додаткову комісію',
       },
       actions: {
         newPayment: 'Створити платіж',

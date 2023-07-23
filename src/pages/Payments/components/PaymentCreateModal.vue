@@ -38,6 +38,7 @@
         />
       </a-form-item>
     </a-form>
+    <i>{{ $t('newPaymentModal.feeNotification') }}</i>
   </a-modal>
 </template>
 <script>
