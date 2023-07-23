@@ -191,6 +191,7 @@ export const RELATIONSHIPS = {
     notes: '',
     status: '',
     'created-at': '',
+    'type-name': '',
     account: {
       jsonApi: 'hasOne',
       type: 'accounts',

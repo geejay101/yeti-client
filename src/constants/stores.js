@@ -86,6 +86,7 @@ export const PAYMENTS = {
   },
   ACTIONS: {
     GET_PAYMENTS: 'getPayments',
+    GET_CRYPTOMUS_PAYMENT: 'getCryptomusPayment',
     SET_PAYMENTS_FILTER: 'setPaymentsFilter',
     CREATE_PAYMENT: 'createPayment',
   },

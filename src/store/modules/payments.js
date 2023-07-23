@@ -55,6 +55,12 @@ export const actions = {
 
       window.location = res.data.url;
     }),
+  [PAYMENTS.ACTIONS.GET_CRYPTOMUS_PAYMENT]: ({ commit }, id) => {
+    utils.wrapWithAsyncRequestStatus(commit, async () => {
+      const { data } = await api.apiInstance.findOneResource(RESOURCES.CRYPTOMUS_PAYMENTS, id);
+      window.location = data.url;
+    });
+  },
 };
 export const mutations = {
   [PAYMENTS.MUTATIONS.SET_PAYMENTS]: (currentState, payments) => {

@@ -5,7 +5,9 @@ export default {
         status: 'Status',
         amount: 'Amount',
         notes: 'Notes',
+        completePayment: 'Complete payment',
         'created-at': 'Created At',
+        'type-name': 'Type',
         statuses: {
           completed: 'Completed',
           canceled: 'Canceled',
@@ -32,7 +34,9 @@ export default {
         status: 'Статус',
         amount: 'Сума',
         notes: 'Примітки',
+        completePayment: 'Завершити платіж',
         'created-at': 'Створено',
+        'type-name': 'Тип',
         statuses: {
           completed: 'Виконано',
           canceled: 'Скасовано',
