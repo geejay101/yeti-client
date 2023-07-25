@@ -65,7 +65,7 @@ export default {
           type: 'number',
           required: true,
           min: 5,
-          max: 1000,
+          max: 5000,
           message: this.$t('paymentCreate.amountError'),
         }],
       },
