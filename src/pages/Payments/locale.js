@@ -19,7 +19,7 @@ export default {
         submit: 'Submit',
         cancel: 'Cancel',
         amount: 'Amount (USDT)',
-        placeholder: 'Enter the amount of money (5-1000)',
+        placeholder: 'Enter the amount of money (5-5000)',
         feeNotification: 'Payment gateway may charge additional commission fee',
       },
       actions: {
@@ -27,7 +27,7 @@ export default {
       },
       paymentCreate: {
         errorNotification: 'Failed to create payment',
-        amountError: 'Invalid amount (5-1000)',
+        amountError: 'Invalid amount (5-5000)',
       },
     },
     ua: {
@@ -49,7 +49,7 @@ export default {
         submit: 'Створити',
         amount: 'Сума (USDT)',
         cancel: 'Відміна',
-        placeholder: 'Уведіть суму (5-1000)',
+        placeholder: 'Уведіть суму (5-5000)',
         feeNotification: 'Платіжна система може стягувати додаткову комісію',
       },
       actions: {
@@ -57,7 +57,7 @@ export default {
       },
       paymentCreate: {
         errorNotification: 'Виникла помилка при створенні платежу',
-        amountError: 'Сума некоректна (5-1000)',
+        amountError: 'Сума некоректна (5-5000)',
       },
     },
   },
