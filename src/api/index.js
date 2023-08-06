@@ -42,7 +42,10 @@ export default class JsonApi {
         payload.res.data = {
           data: {
             type: RESOURCES.ORIGINATION_STATISTICS,
-            attributes: payload.res.data,
+            attributes: {
+              series: payload.res.data.data,
+              totals: payload.res.data.totals,
+            },
           },
         };
       }

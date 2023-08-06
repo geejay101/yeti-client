@@ -10,6 +10,23 @@
         @change="handleSamplingChange"
       />
     </div>
+      <a-card
+        class="totals-bar"
+      >
+      <a-row justify="space-between">
+        <a-col
+          v-for="(stat, title) in summary" :key="title"
+        >
+        <a-statistic
+          :title="$t(`message.${title}`)"
+          :precision="2"
+          group-separator=" "
+          :suffix="$t(`units.${title}`)"
+          :value="stat"
+        />
+        </a-col>
+      </a-row>
+    </a-card>
     <data-chart
       :loading="requestIsPending"
       :chart-data="successfulCallsData"
@@ -109,22 +126,23 @@ export default {
       'totalPrice',
       'totalDuration',
       'sampling',
+      'summary',
     ]),
     successfulCallsOptions() {
       return {
         ...COMMON_CHART_OPTIONS,
         series: [
           {
-            label: locale.messages[this.$i18n.locale].message.time,
+            label: this.$t('message.time'),
             value: '{YYYY}-{MM}-{DD} {HH}:{mm}:{ss}',
           },
           {
-            label: locale.messages[this.$i18n.locale].message.successfulCalls,
+            label: this.$t('message.successfulCalls'),
             fill: '#5a935b',
-            points: {
-              show: false,
-            },
             paths: uPlot.paths.bars(),
+            points: {
+              fill: '#5a935b',
+            },
           },
         ],
       };
@@ -140,13 +158,16 @@ export default {
         ...COMMON_CHART_OPTIONS,
         series: [
           {
-            label: locale.messages[this.$i18n.locale].message.time,
+            label: this.$t('message.time'),
             value: '{YYYY}-{MM}-{DD} {HH}:{mm}:{ss}',
           },
           {
-            label: locale.messages[this.$i18n.locale].message.failedCalls,
+            label: this.$t('message.failedCalls'),
             fill: 'rgb(210 53 53)',
             paths: uPlot.paths.bars(),
+            points: {
+              fill: 'rgb(210 53 53)',
+            },
           },
         ],
       };
@@ -162,14 +183,15 @@ export default {
         ...COMMON_CHART_OPTIONS,
         series: [
           {
-            label: locale.messages[this.$i18n.locale].message.time,
+            label: this.$t('message.time'),
             value: '{YYYY}-{MM}-{DD} {HH}:{mm}:{ss}',
           },
           {
-            label: locale.messages[this.$i18n.locale].message.acd,
-            points: { show: false },
+            label: `${this.$t('message.acd')}, ${this.$t('units.acd')}`,
             fill: '#4343d1',
-            paths: uPlot.paths.bars(),
+            points: {
+              fill: '#4343d1',
+            },
           },
         ],
       };
@@ -185,13 +207,16 @@ export default {
         ...COMMON_CHART_OPTIONS,
         series: [
           {
-            label: locale.messages[this.$i18n.locale].message.time,
+            label: this.$t('message.time'),
             value: '{YYYY}-{MM}-{DD} {HH}:{mm}:{ss}',
           },
           {
-            label: locale.messages[this.$i18n.locale].message.asr,
+            label: `${this.$t('message.asr')}, ${this.$t('units.asr')}`,
             fill: 'orange',
             paths: uPlot.paths.bars(),
+            points: {
+              fill: 'orange',
+            },
           },
         ],
       };
@@ -207,13 +232,16 @@ export default {
         ...COMMON_CHART_OPTIONS,
         series: [
           {
-            label: locale.messages[this.$i18n.locale].message.time,
+            label: this.$t('message.time'),
             value: '{YYYY}-{MM}-{DD} {HH}:{mm}:{ss}',
           },
           {
-            label: locale.messages[this.$i18n.locale].message.totalCalls,
+            label: this.$t('message.totalCalls'),
             fill: '#175446',
             paths: uPlot.paths.bars(),
+            points: {
+              fill: '#175446',
+            },
           },
         ],
       };
@@ -229,13 +257,16 @@ export default {
         ...COMMON_CHART_OPTIONS,
         series: [
           {
-            label: locale.messages[this.$i18n.locale].message.time,
+            label: this.$t('message.time'),
             value: '{YYYY}-{MM}-{DD} {HH}:{mm}:{ss}',
           },
           {
-            label: locale.messages[this.$i18n.locale].message.totalDuration,
+            label: `${this.$t('message.totalDuration')}, ${this.$t('units.acd')}`,
             fill: '#3198c4',
             paths: uPlot.paths.bars(),
+            points: {
+              fill: '#3198c4',
+            },
           },
         ],
       };
@@ -251,13 +282,16 @@ export default {
         ...COMMON_CHART_OPTIONS,
         series: [
           {
-            label: locale.messages[this.$i18n.locale].message.time,
+            label: this.$t('message.time'),
             value: '{YYYY}-{MM}-{DD} {HH}:{mm}:{ss}',
           },
           {
-            label: locale.messages[this.$i18n.locale].message.totalPrice,
+            label: this.$t('message.totalPrice'),
             fill: '#8a335c',
             paths: uPlot.paths.bars(),
+            points: {
+              fill: '#8a335c',
+            },
           },
         ],
       };
@@ -305,11 +339,15 @@ export default {
     width: 130px;
   }
 
-  .action-bar{
+  .action-bar {
     width: 100%;
     display: flex;
     align-items: center;
     gap: 5px;
+  }
+
+  .totals-bar {
+    width: 100%;
   }
 }
 </style>

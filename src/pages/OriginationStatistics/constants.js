@@ -1,5 +1,11 @@
 export const COMMON_CHART_OPTIONS = {
   height: 280,
+  cursor: {
+    sync: {
+      key: 'key',
+    },
+  },
+  plugins: [],
   scales: { x: { time: true } },
   axes: [
     {
