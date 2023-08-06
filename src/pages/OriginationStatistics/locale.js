@@ -17,6 +17,15 @@ export default {
         week: 'Week',
         month: 'Month',
       },
+      units: {
+        acd: 'min',
+        asr: '%',
+        failedCalls: '',
+        successfulCalls: '',
+        totalCalls: '',
+        totalDuration: 'min',
+        totalPrice: '',
+      },
     },
     ua: {
       message: {
@@ -34,6 +43,15 @@ export default {
         day: 'Доба',
         week: 'Тиждень',
         month: 'Місяць',
+      },
+      units: {
+        acd: 'хв',
+        asr: '%',
+        failedCalls: '',
+        successfulCalls: '',
+        totalCalls: '',
+        totalDuration: 'хв',
+        totalPrice: '',
       },
     },
   },

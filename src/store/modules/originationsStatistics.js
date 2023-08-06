@@ -12,6 +12,13 @@ const state = {
   totalCalls: null,
   totalDuration: null,
   totalPrice: null,
+  summaryAcd: '',
+  summaryAsr: '',
+  summaryFailedCalls: '',
+  summarySuccessfulCalls: '',
+  summaryTotalCalls: '',
+  summaryTotalDuration: '',
+  summaryTotalPrice: '',
 };
 const getters = {
   sampling: (currentState) => currentState.sampling,
@@ -23,6 +30,15 @@ const getters = {
   totalCalls: (currentState) => currentState.totalCalls,
   totalDuration: (currentState) => currentState.totalDuration,
   totalPrice: (currentState) => currentState.totalPrice,
+  summary: (currentState) => ({
+    acd: currentState.summaryAcd,
+    asr: currentState.summaryAsr,
+    failedCalls: currentState.summaryFailedCalls,
+    successfulCalls: currentState.summarySuccessfulCalls,
+    totalCalls: currentState.summaryTotalCalls,
+    totalDuration: currentState.summaryTotalDuration,
+    totalPrice: currentState.summaryTotalPrice,
+  }),
 };
 export const actions = {
   [ORIGINATION_STATISTICS.ACTIONS.GET_ORIGINATION_STATISTICS]: ({
@@ -57,15 +73,22 @@ export const mutations = {
     currentState,
     originationStatistics,
   ) => {
-    currentState.originationStatistics = originationStatistics.data;
-    currentState.timestamps = originationStatistics.data.t;
-    currentState.acd = originationStatistics.data.acd;
-    currentState.asr = originationStatistics.data.asr;
-    currentState.failedCalls = originationStatistics.data.failed_calls;
-    currentState.successfulCalls = originationStatistics.data.successful_calls;
-    currentState.totalCalls = originationStatistics.data.total_calls;
-    currentState.totalDuration = originationStatistics.data.total_duration;
-    currentState.totalPrice = originationStatistics.data.total_price;
+    currentState.timestamps = originationStatistics.data.series.t;
+    currentState.acd = originationStatistics.data.series.acd;
+    currentState.asr = originationStatistics.data.series.asr;
+    currentState.failedCalls = originationStatistics.data.series.failed_calls;
+    currentState.successfulCalls = originationStatistics.data.series.successful_calls;
+    currentState.totalCalls = originationStatistics.data.series.total_calls;
+    currentState.totalDuration = originationStatistics.data.series.total_duration;
+    currentState.totalPrice = originationStatistics.data.series.total_price;
+
+    currentState.summaryAcd = originationStatistics.data.totals.acd;
+    currentState.summaryAsr = originationStatistics.data.totals.asr;
+    currentState.summaryFailedCalls = originationStatistics.data.totals.failed_calls;
+    currentState.summarySuccessfulCalls = originationStatistics.data.totals.successful_calls;
+    currentState.summaryTotalCalls = originationStatistics.data.totals.total_calls;
+    currentState.summaryTotalDuration = originationStatistics.data.totals.total_duration;
+    currentState.summaryTotalPrice = originationStatistics.data.totals.total_price;
   },
   [ORIGINATION_STATISTICS.MUTATIONS.SET_SAMPLING]: (currentState, sampling) => {
     currentState.sampling = sampling;
