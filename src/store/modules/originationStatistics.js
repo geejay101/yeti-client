@@ -3,7 +3,7 @@ import { RESOURCES, ORIGINATION_STATISTICS } from '@/constants';
 import utils from '@/utils';
 
 const state = {
-  sampling: 'hour',
+  sampling: 'day',
   timestamps: null,
   acd: null,
   asr: null,
@@ -21,15 +21,27 @@ const state = {
   summaryTotalPrice: '',
 };
 const getters = {
-  sampling: (currentState) => currentState.sampling,
-  timestamps: (currentState) => currentState.timestamps,
-  acd: (currentState) => currentState.acd,
-  asr: (currentState) => currentState.asr,
-  failedCalls: (currentState) => currentState.failedCalls,
-  successfulCalls: (currentState) => currentState.successfulCalls,
-  totalCalls: (currentState) => currentState.totalCalls,
-  totalDuration: (currentState) => currentState.totalDuration,
-  totalPrice: (currentState) => currentState.totalPrice,
+  statisticsSampling: (currentState) => currentState.sampling,
+  failedCalls: (currentState) => [
+    currentState.timestamps,
+    currentState.failedCalls,
+  ],
+  successfulCalls: (currentState) => [
+    currentState.timestamps,
+    currentState.successfulCalls,
+  ],
+  totalCalls: (currentState) => [
+    currentState.timestamps,
+    currentState.totalCalls,
+  ],
+  totalDuration: (currentState) => [
+    currentState.timestamps,
+    currentState.totalDuration,
+  ],
+  totalPrice: (currentState) => [
+    currentState.timestamps,
+    currentState.totalPrice,
+  ],
   summary: (currentState) => ({
     acd: currentState.summaryAcd,
     asr: currentState.summaryAsr,

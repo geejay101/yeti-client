@@ -2,6 +2,7 @@ export default {
   messages: {
     en: {
       message: {
+        activeCalls: 'Active Calls',
         acd: 'ACD',
         asr: 'ASR',
         time: 'Time',
@@ -12,6 +13,7 @@ export default {
         totalPrice: 'Total Price',
         minute: 'Minute',
         fiveMinutes: '5 Minutes',
+        fifteenMinutes: '15 Minutes',
         hour: 'Hour',
         day: 'Day',
         week: 'Week',
@@ -29,6 +31,7 @@ export default {
     },
     ua: {
       message: {
+        activeCalls: 'Активні дзвінки',
         acd: 'ACD',
         asr: 'ASR',
         time: 'Час',
@@ -39,6 +42,7 @@ export default {
         totalPrice: 'Загальна ціна',
         minute: 'Хвилина',
         fiveMinutes: '5 хвилин',
+        fifteenMinutes: '15 хвилин',
         hour: 'Година',
         day: 'Доба',
         week: 'Тиждень',

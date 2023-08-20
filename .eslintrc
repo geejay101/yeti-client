@@ -16,7 +16,7 @@
       },
       "alias": {
         "map": [
-          ["@", "./src"],
+          ["@", "./src"]
         ],
         "extensions": [".vue", ".js", ".json"]
       }

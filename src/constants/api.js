@@ -11,6 +11,8 @@ export const RESOURCES = {
   ACTIVE_CALLS: 'chart-active-calls',
   ORIGINATED_CPS: 'chart-originated-cps',
   ORIGINATION_STATISTICS: 'origination-statistics',
+  ORIGINATION_STATISTICS_QUALITY: 'origination-statistics-quality',
+  ORIGINATION_ACTIVE_CALLS: 'origination-active-calls',
   INVOICES: 'invoices',
   PAYMENTS: 'payments',
   CRYPTOMUS_PAYMENTS: 'cryptomus-payments',
@@ -221,6 +223,10 @@ export const RELATIONSHIPS = {
       y: '',
     },
   },
+  [RESOURCES.ORIGINATION_ACTIVE_CALLS]: {
+    t: '',
+    calls: '',
+  },
   [RESOURCES.ORIGINATION_STATISTICS]: {
     series: {
       t: '',
@@ -233,7 +239,6 @@ export const RELATIONSHIPS = {
       total_price: '',
     },
     totals: {
-      t: '',
       acd: '',
       asr: '',
       failed_calls: '',
@@ -241,6 +246,19 @@ export const RELATIONSHIPS = {
       total_calls: '',
       total_duration: '',
       total_price: '',
+    },
+  },
+  [RESOURCES.ORIGINATION_STATISTICS_QUALITY]: {
+    series: {
+      t: '',
+      acd: '',
+      asr: '',
+      cps: '',
+    },
+    totals: {
+      acd: '',
+      asr: '',
+      cps: '',
     },
   },
 };

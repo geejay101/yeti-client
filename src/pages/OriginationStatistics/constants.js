@@ -1,5 +1,6 @@
 export const COMMON_CHART_OPTIONS = {
   height: 280,
+  width: 1000, // TODO FIXME
   cursor: {
     sync: {
       key: 'key',
