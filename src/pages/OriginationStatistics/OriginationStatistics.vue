@@ -1,67 +1,85 @@
 <template>
   <div id="origination-statistics-page">
-    <div
-      class="action-bar"
+    <a-card
+      class="totals-bar"
     >
-      <a-select
-        :value="sampling"
-        :options="samplingOptions"
-        class="sampling-select"
-        @change="handleSamplingChange"
-      />
-    </div>
-      <a-card
-        class="totals-bar"
-      >
       <a-row justify="space-between">
         <a-col
-          v-for="(stat, title) in summary" :key="title"
+          v-for="(stat, title) in summary"
+          :key="title"
         >
-        <a-statistic
-          :title="$t(`message.${title}`)"
-          :precision="2"
-          group-separator=" "
-          :suffix="$t(`units.${title}`)"
-          :value="stat"
-        />
+          <a-statistic
+            :title="$t(`message.${title}`)"
+            :precision="calculateSummaryPresicion(stat)"
+            :suffix="$t(`units.${title}`)"
+            :value="stat"
+            group-separator=" "
+          />
         </a-col>
       </a-row>
     </a-card>
-    <data-chart
-      :loading="requestIsPending"
-      :chart-data="successfulCallsData"
-      :chart-options="successfulCallsOptions"
-    />
-    <data-chart
-      :loading="requestIsPending"
-      :chart-data="failedCallsData"
-      :chart-options="failedCallsOptions"
-    />
-    <data-chart
-      :loading="requestIsPending"
-      :chart-data="acdData"
-      :chart-options="acdOptions"
-    />
-    <data-chart
-      :loading="requestIsPending"
-      :chart-data="asrData"
-      :chart-options="asrOptions"
-    />
-    <data-chart
-      :loading="requestIsPending"
-      :chart-data="totalCallsData"
-      :chart-options="totalCallsOptions"
-    />
-    <data-chart
-      :loading="requestIsPending"
-      :chart-data="totalDurationData"
-      :chart-options="totalDurationOptions"
-    />
-    <data-chart
-      :loading="requestIsPending"
-      :chart-data="totalPriceData"
-      :chart-options="totalPriceOptions"
-    />
+    <a-card class="chart-block">
+      <data-chart
+        :loading="requestIsPending"
+        :chart-data="originationActiveCalls"
+        :chart-options="activeCallsOptions"
+      />
+    </a-card>
+    <a-card class="chart-block">
+      <div class="chart-settings">
+        <a-select
+          :value="statisticsSampling"
+          :options="statisticsSamplingOptions"
+          class="sampling-select"
+          @change="handleStatisticsSamplingChange"
+        />
+      </div>
+      <data-chart
+        :loading="requestIsPending"
+        :chart-data="successfulCalls"
+        :chart-options="successfulCallsOptions"
+      />
+      <data-chart
+        :loading="requestIsPending"
+        :chart-data="failedCalls"
+        :chart-options="failedCallsOptions"
+      />
+      <data-chart
+        :loading="requestIsPending"
+        :chart-data="totalCalls"
+        :chart-options="totalCallsOptions"
+      />
+      <data-chart
+        :loading="requestIsPending"
+        :chart-data="totalDuration"
+        :chart-options="totalDurationOptions"
+      />
+      <data-chart
+        :loading="requestIsPending"
+        :chart-data="totalPrice"
+        :chart-options="totalPriceOptions"
+      />
+    </a-card>
+    <a-card class="chart-block">
+      <div class="chart-settings">
+        <a-select
+          :value="qualitySampling"
+          :options="qualitySamplingOptions"
+          class="sampling-select"
+          @change="handleQualitySamplingChange"
+        />
+      </div>
+      <data-chart
+        :loading="requestIsPending"
+        :chart-data="acd"
+        :chart-options="acdOptions"
+      />
+      <data-chart
+        :loading="requestIsPending"
+        :chart-data="asr"
+        :chart-options="asrOptions"
+      />
+    </a-card>
   </div>
 </template>
 <script>
@@ -69,7 +87,11 @@ import uPlot from 'uplot';
 import { mapGetters, mapActions } from 'vuex';
 
 import DataChart from '@/components/DataChart/DataChart.vue';
-import { ORIGINATION_STATISTICS } from '@/constants';
+import {
+  ORIGINATION_STATISTICS,
+  ORIGINATION_ACTIVE_CALLS,
+  ORIGINATION_STATISTICS_QUALITY,
+} from '@/constants';
 
 import { COMMON_CHART_OPTIONS } from './constants';
 import locale from './locale';
@@ -85,30 +107,44 @@ export default {
   ],
   data() {
     return {
-      samplingOptions: [
+      statisticsSamplingOptions: [
         {
           value: 'minute',
-          label: locale.messages[this.$i18n.locale].message.minute,
+          label: this.$t('message.minute'),
         },
         {
           value: '5minutes',
-          label: locale.messages[this.$i18n.locale].message.fiveMinutes,
+          label: this.$t('message.fiveMinutes'),
         },
         {
           value: 'hour',
-          label: locale.messages[this.$i18n.locale].message.hour,
+          label: this.$t('message.hour'),
         },
         {
           value: 'day',
-          label: locale.messages[this.$i18n.locale].message.day,
+          label: this.$t('message.day'),
         },
         {
           value: 'week',
-          label: locale.messages[this.$i18n.locale].message.week,
+          label: this.$t('message.week'),
         },
         {
           value: 'month',
-          label: locale.messages[this.$i18n.locale].message.month,
+          label: this.$t('message.month'),
+        },
+      ],
+      qualitySamplingOptions: [
+        {
+          value: 'minute',
+          label: this.$t('message.minute'),
+        },
+        {
+          value: '5minutes',
+          label: this.$t('message.fiveMinutes'),
+        },
+        {
+          value: '15minutes',
+          label: this.$t('message.fifteenMinutes'),
         },
       ],
     };
@@ -117,7 +153,7 @@ export default {
     ...mapGetters([
       'requestIsPending',
       'activeAccount',
-      'timestamps',
+      'originationActiveCalls',
       'acd',
       'asr',
       'successfulCalls',
@@ -125,9 +161,25 @@ export default {
       'totalCalls',
       'totalPrice',
       'totalDuration',
-      'sampling',
+      'qualitySampling',
+      'statisticsSampling',
       'summary',
     ]),
+    activeCallsOptions() {
+      return {
+        ...COMMON_CHART_OPTIONS,
+        series: [
+          {
+            label: this.$t('message.time'),
+            value: '{YYYY}-{MM}-{DD} {HH}:{mm}:{ss}',
+          },
+          {
+            label: this.$t('message.activeCalls'),
+            fill: '#409495',
+          },
+        ],
+      };
+    },
     successfulCallsOptions() {
       return {
         ...COMMON_CHART_OPTIONS,
@@ -146,12 +198,6 @@ export default {
           },
         ],
       };
-    },
-    successfulCallsData() {
-      return [
-        this.timestamps,
-        this.successfulCalls,
-      ];
     },
     failedCallsOptions() {
       return {
@@ -172,12 +218,6 @@ export default {
         ],
       };
     },
-    failedCallsData() {
-      return [
-        this.timestamps,
-        this.failedCalls,
-      ];
-    },
     acdOptions() {
       return {
         ...COMMON_CHART_OPTIONS,
@@ -196,12 +236,6 @@ export default {
         ],
       };
     },
-    acdData() {
-      return [
-        this.timestamps,
-        this.acd,
-      ];
-    },
     asrOptions() {
       return {
         ...COMMON_CHART_OPTIONS,
@@ -213,19 +247,12 @@ export default {
           {
             label: `${this.$t('message.asr')}, ${this.$t('units.asr')}`,
             fill: 'orange',
-            paths: uPlot.paths.bars(),
             points: {
               fill: 'orange',
             },
           },
         ],
       };
-    },
-    asrData() {
-      return [
-        this.timestamps,
-        this.asr,
-      ];
     },
     totalCallsOptions() {
       return {
@@ -246,12 +273,6 @@ export default {
         ],
       };
     },
-    totalCallsData() {
-      return [
-        this.timestamps,
-        this.totalCalls,
-      ];
-    },
     totalDurationOptions() {
       return {
         ...COMMON_CHART_OPTIONS,
@@ -270,12 +291,6 @@ export default {
           },
         ],
       };
-    },
-    totalDurationData() {
-      return [
-        this.timestamps,
-        this.totalDuration,
-      ];
     },
     totalPriceOptions() {
       return {
@@ -296,33 +311,44 @@ export default {
         ],
       };
     },
-    totalPriceData() {
-      return [
-        this.timestamps,
-        this.totalPrice,
-      ];
-    },
   },
   watch: {
     activeAccount() {
+      this.getData();
+    },
+    statisticsSampling() {
       this[ORIGINATION_STATISTICS.ACTIONS.GET_ORIGINATION_STATISTICS]();
     },
-    sampling() {
-      this[ORIGINATION_STATISTICS.ACTIONS.GET_ORIGINATION_STATISTICS]();
+    qualitySampling() {
+      this[ORIGINATION_STATISTICS_QUALITY.ACTIONS.GET_ORIGINATION_STATISTICS_QUALITY]();
     },
   },
   created() {
     if (this.activeAccount) {
-      this[ORIGINATION_STATISTICS.ACTIONS.GET_ORIGINATION_STATISTICS]();
+      this.getData();
     }
   },
   methods: {
     ...mapActions([
       ORIGINATION_STATISTICS.ACTIONS.GET_ORIGINATION_STATISTICS,
       ORIGINATION_STATISTICS.ACTIONS.SET_SAMPLING,
+      ORIGINATION_STATISTICS_QUALITY.ACTIONS.GET_ORIGINATION_STATISTICS_QUALITY,
+      ORIGINATION_STATISTICS_QUALITY.ACTIONS.SET_SAMPLING,
+      ORIGINATION_ACTIVE_CALLS.ACTIONS.GET_ACTIVE_CALLS,
     ]),
-    handleSamplingChange(sampling) {
+    handleStatisticsSamplingChange(sampling) {
       this[ORIGINATION_STATISTICS.ACTIONS.SET_SAMPLING](sampling);
+    },
+    handleQualitySamplingChange(sampling) {
+      this[ORIGINATION_STATISTICS_QUALITY.ACTIONS.SET_SAMPLING](sampling);
+    },
+    calculateSummaryPresicion(data) {
+      return Number.isInteger(data) ? 0 : 2;
+    },
+    getData() {
+      this[ORIGINATION_STATISTICS.ACTIONS.GET_ORIGINATION_STATISTICS]();
+      this[ORIGINATION_ACTIVE_CALLS.ACTIONS.GET_ACTIVE_CALLS]();
+      this[ORIGINATION_STATISTICS_QUALITY.ACTIONS.GET_ORIGINATION_STATISTICS_QUALITY]();
     },
   },
 };
@@ -335,6 +361,10 @@ export default {
   gap: 10px;
   padding-bottom: 10px;
 
+  .chart-block {
+    width: 100%;
+  }
+
   .sampling-select {
     width: 130px;
   }
@@ -344,6 +374,11 @@ export default {
     display: flex;
     align-items: center;
     gap: 5px;
+  }
+
+  .chart-settings {
+    display: flex;
+    margin-bottom: 10px;
   }
 
   .totals-bar {

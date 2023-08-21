@@ -61,12 +61,33 @@ export const STATISTICS = {
 export const ORIGINATION_STATISTICS = {
   MUTATIONS: {
     SET_ORIGINATION_STATISTICS: 'setOriginationStatistics',
-    SET_SAMPLING: 'setSampling',
+    SET_SAMPLING: 'setStatisticsSampling',
   },
   ACTIONS: {
     GET_ORIGINATION_STATISTICS: 'getOriginationStatistics',
-    GET_SAMPLING: 'getSampling',
-    SET_SAMPLING: 'setSampling',
+    GET_SAMPLING: 'getStatisticsSampling',
+    SET_SAMPLING: 'setStatisticsSampling',
+  },
+};
+
+export const ORIGINATION_STATISTICS_QUALITY = {
+  MUTATIONS: {
+    SET_ORIGINATION_STATISTICS_QUALITY: 'setOriginationStatisticsQuality',
+    SET_SAMPLING: 'setQualitySampling',
+  },
+  ACTIONS: {
+    GET_ORIGINATION_STATISTICS_QUALITY: 'getOriginationStatisticsQuality',
+    GET_SAMPLING: 'getQualitySampling',
+    SET_SAMPLING: 'setQualitySampling',
+  },
+};
+
+export const ORIGINATION_ACTIVE_CALLS = {
+  MUTATIONS: {
+    SET_ACTIVE_CALLS: 'setOriginationActiveCalls',
+  },
+  ACTIONS: {
+    GET_ACTIVE_CALLS: 'getOriginationActiveCalls',
   },
 };
 

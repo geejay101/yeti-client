@@ -14,7 +14,9 @@ import networkDetails from './modules/networkDetails';
 import config from './modules/config';
 import networkServices from './modules/networkServices';
 import statisticsCharts from './modules/statisticsCharts';
-import originationsStatistics from './modules/originationsStatistics';
+import originationStatistics from './modules/originationStatistics';
+import originationStatisticsQuality from './modules/originationStatisticsQuality';
+import originationActiveCalls from './modules/originationActiveCalls';
 import uiState from './modules/ui-state';
 
 import { timeRangeWatcher } from './plugins/timeRangeWatcher';
@@ -38,7 +40,9 @@ export default createStore({
     timeRangeFilter,
     networkServices,
     statisticsCharts,
-    originationsStatistics,
+    originationStatistics,
+    originationStatisticsQuality,
+    originationActiveCalls,
     networkDetails,
     uiState,
   },

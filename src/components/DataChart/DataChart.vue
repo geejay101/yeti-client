@@ -79,7 +79,7 @@ export default {
           }
         });
       });
-      this.resizer.observe(this.$parent.$el);
+      this.resizer.observe(this.$el);
     },
   },
 };
@@ -88,5 +88,6 @@ export default {
 .chart-card {
   width: 100%;
   padding: 0;
+  margin: 10px 0;
 }
 </style>

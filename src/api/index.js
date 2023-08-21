@@ -38,13 +38,28 @@ export default class JsonApi {
   static originationStatsDataResTransformationMiddleware = {
     name: 'origination-stats-data-transformation-res',
     res: (payload) => {
-      if (payload.req.model === RESOURCES.ORIGINATION_STATISTICS) {
+      if ([
+        RESOURCES.ORIGINATION_STATISTICS,
+        RESOURCES.ORIGINATION_STATISTICS_QUALITY,
+      ].includes(payload.req.model)) {
         payload.res.data = {
           data: {
-            type: RESOURCES.ORIGINATION_STATISTICS,
+            type: payload.req.model,
             attributes: {
               series: payload.res.data.data,
               totals: payload.res.data.totals,
+            },
+          },
+        };
+      }
+
+      if (payload.req.model === RESOURCES.ORIGINATION_ACTIVE_CALLS) {
+        payload.res.data = {
+          data: {
+            type: RESOURCES.ORIGINATION_ACTIVE_CALLS,
+            attributes: {
+              t: payload.res.data.data.t,
+              calls: payload.res.data.data.calls,
             },
           },
         };
