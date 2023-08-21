@@ -18,51 +18,57 @@
         </a-col>
       </a-row>
     </a-card>
-    <a-card
-      :loading="requestIsPending"
-    >
+    <a-card class="chart-block">
       <data-chart
+        :loading="requestIsPending"
         :chart-data="originationActiveCalls"
         :chart-options="activeCallsOptions"
       />
     </a-card>
-    <a-card
-      :loading="requestIsPending"
-    >
-      <a-select
-        :value="statisticsSampling"
-        :options="statisticsSamplingOptions"
-        class="sampling-select"
-        @change="handleStatisticsSamplingChange"
-      />
+    <a-card class="chart-block">
+      <div class="chart-settings">
+        <a-select
+          :value="statisticsSampling"
+          :options="statisticsSamplingOptions"
+          class="sampling-select"
+          @change="handleStatisticsSamplingChange"
+        />
+      </div>
       <data-chart
+        :loading="requestIsPending"
         :chart-data="successfulCalls"
         :chart-options="successfulCallsOptions"
       />
       <data-chart
+        :loading="requestIsPending"
         :chart-data="failedCalls"
         :chart-options="failedCallsOptions"
       />
       <data-chart
+        :loading="requestIsPending"
         :chart-data="totalCalls"
         :chart-options="totalCallsOptions"
       />
       <data-chart
+        :loading="requestIsPending"
         :chart-data="totalDuration"
         :chart-options="totalDurationOptions"
       />
       <data-chart
+        :loading="requestIsPending"
         :chart-data="totalPrice"
         :chart-options="totalPriceOptions"
       />
     </a-card>
-    <a-card>
-      <a-select
-        :value="qualitySampling"
-        :options="qualitySamplingOptions"
-        class="sampling-select"
-        @change="handleQualitySamplingChange"
-      />
+    <a-card class="chart-block">
+      <div class="chart-settings">
+        <a-select
+          :value="qualitySampling"
+          :options="qualitySamplingOptions"
+          class="sampling-select"
+          @change="handleQualitySamplingChange"
+        />
+      </div>
       <data-chart
         :loading="requestIsPending"
         :chart-data="acd"
@@ -355,6 +361,10 @@ export default {
   gap: 10px;
   padding-bottom: 10px;
 
+  .chart-block {
+    width: 100%;
+  }
+
   .sampling-select {
     width: 130px;
   }
@@ -364,6 +374,11 @@ export default {
     display: flex;
     align-items: center;
     gap: 5px;
+  }
+
+  .chart-settings {
+    display: flex;
+    margin-bottom: 10px;
   }
 
   .totals-bar {

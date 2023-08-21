@@ -1,9 +1,15 @@
 <template>
-  <UplotVue
-    ref="plot"
-    :data="chartData"
-    :options="chartOptions"
-  />
+  <a-card
+    class="chart-card"
+    :title="title"
+    :loading="loading"
+  >
+    <UplotVue
+      ref="plot"
+      :data="chartData"
+      :options="chartOptions"
+    />
+  </a-card>
 </template>
 
 <script>
@@ -65,7 +71,6 @@ export default {
       this.resizer = new ResizeObserver((e) => {
         e.forEach((entry) => {
           if (this.$refs.plot) {
-            console.log('event fired', this.$parent.$el);
             // eslint-disable-next-line
             this.$refs.plot._chart.setSize({
               width: entry.contentRect.width - 25,
@@ -74,7 +79,7 @@ export default {
           }
         });
       });
-      // this.resizer.observe(this.$parent.$el);
+      this.resizer.observe(this.$el);
     },
   },
 };
@@ -83,5 +88,6 @@ export default {
 .chart-card {
   width: 100%;
   padding: 0;
+  margin: 10px 0;
 }
 </style>
